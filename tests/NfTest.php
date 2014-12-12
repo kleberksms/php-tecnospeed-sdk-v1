@@ -38,7 +38,7 @@ class NfTest extends PHPUnit_Framework_TestCase{
             'Class does not have method getDataInicio');
     }
 
-    public function test
+
 
 
 } 

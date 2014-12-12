@@ -1,14 +1,11 @@
 Tecnospeed SDK for PHP
 ====================
 
-This repository contains the open source PHP SDK that allows you to access Facebook
-Platform from your PHP app.
-
 
 Usage
 -----
 
-This version of the Facebook SDK for PHP requires PHP 5.4 or greater.
+This version of the Tecnospeed SDK for PHP requires PHP 5.3 or greater.
 
 Minimal example:
 
