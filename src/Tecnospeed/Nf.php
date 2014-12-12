@@ -108,22 +108,6 @@ class Nf extends ManagerNf
     /**
      * @return mixed
      */
-    public function getIdLote()
-    {
-        return $this->idLote;
-    }
-
-    /**
-     * @param mixed $idLote
-     */
-    public function setIdLote($idLote)
-    {
-        $this->idLote = $idLote;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getAliquotaCONFIS()
     {
         return $this->aliquotaCONFIS;
@@ -643,10 +627,35 @@ class Nf extends ManagerNf
 
     /**
      * @param mixed $exigibilidadeISS
+     *
+     * Informação referente ao pagamento de ISS :
+     * 1 - Exigível
+     * 2 - Não incidência
+     * 3 - Isenção
+     * 4 - Exportação
+     * 5 - Imunidade
+     * 6 - Exigibilidade Suspensa por Decisão Judicial
+     * 7 - Exigibilidade Suspensa por Processo Administrativo.
      */
     public function setExigibilidadeISS($exigibilidadeISS)
     {
         $this->exigibilidadeISS = $exigibilidadeISS;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdLote()
+    {
+        return $this->idLote;
+    }
+
+    /**
+     * @param mixed $idLote
+     */
+    public function setIdLote($idLote)
+    {
+        $this->idLote = $idLote;
     }
 
     /**
@@ -1352,6 +1361,5 @@ class Nf extends ManagerNf
     {
         $this->valorTotalServicos = $valorTotalServicos;
     }
-
-
+    
 } 
