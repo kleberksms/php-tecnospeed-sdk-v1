@@ -1,19 +1,20 @@
 <?php
 
+namespace Tecnospeed\Entity;
 
-class NfTest extends PHPUnit_Framework_TestCase{
+class SendTest extends \PHPUnit_Framework_TestCase{
 
 
     public $nf;
 
     public function setUp()
     {
-        $this->nf = new Tecnospeed\Nf();
+        $this->nf = new Send();
     }
 
     public function testInstanceOf()
     {
-        $this->assertInstanceOf('Tecnospeed\Nf',$this->nf);
+        $this->assertInstanceOf('Tecnospeed\Entity\Send',$this->nf);
     }
 
     public function testIfExistGetsAndSetsMethodsIdLote()

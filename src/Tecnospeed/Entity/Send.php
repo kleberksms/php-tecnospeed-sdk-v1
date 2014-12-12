@@ -1,10 +1,10 @@
 <?php
+namespace Tecnospeed\Entity;
+
+use Tecnospeed\ManagerNf;
 
 
-namespace Tecnospeed;
-
-
-class Nf extends ManagerNf
+class Send extends ManagerNf
 {
 
     /**
@@ -1361,5 +1361,5 @@ class Nf extends ManagerNf
     {
         $this->valorTotalServicos = $valorTotalServicos;
     }
-    
+
 } 
