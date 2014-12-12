@@ -1,9 +1,6 @@
 Tecnospeed SDK for PHP
 ====================
 
-[![Latest Stable Version](http://img.shields.io/badge/Latest%20Stable-4.0.12-blue.svg)](https://packagist.org/packages/facebook/php-sdk-v4)
-
-
 This repository contains the open source PHP SDK that allows you to access Facebook
 Platform from your PHP app.
 
