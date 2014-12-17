@@ -502,6 +502,9 @@ class Send extends ManagerNf
      */
     public function setDddTomador($dddTomador)
     {
+        if (strlen($dddTomador) != 2) {
+    throw new \InvalidArgumentException('Invalid ddd number');
+        }
         $this->dddTomador = $dddTomador;
     }
 
@@ -639,6 +642,9 @@ class Send extends ManagerNf
      */
     public function setExigibilidadeISS($exigibilidadeISS)
     {
+        if (!in_array( $exigibilidadeISS , range( 1 , 7 ) )) {
+            throw new \InvalidArgumentException('Invalid Argument, choice between 1 and 7');
+        }
         $this->exigibilidadeISS = $exigibilidadeISS;
     }
 
@@ -655,7 +661,11 @@ class Send extends ManagerNf
      */
     public function setIdLote($idLote)
     {
+        if (!is_numeric($idLote)) {
+            throw new \InvalidArgumentException('Invalid Argument');
+        }
         $this->idLote = $idLote;
+
     }
 
     /**

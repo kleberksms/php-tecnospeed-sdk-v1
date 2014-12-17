@@ -39,6 +39,63 @@ class SendTest extends \PHPUnit_Framework_TestCase{
             'Class does not have method getDataInicio');
     }
 
+    public function testIfIdLoteIsANumber()
+    {
+        $send = new Send();
+        $send->setIdLote(1);
+        $this->assertTrue(true, is_numeric($send->getIdLote()));
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Invalid Argument
+     */
+    public function testIfIdLoteReciveNotANumber()
+    {
+        $send = new Send();
+        $send->setIdLote('teste');
+    }
+
+    public function testIfIsAValidNumberOnExigibilidadeISS()
+    {
+        $send = new Send();
+        $send->setExigibilidadeISS(2);
+        $this->assertEquals(2,$send->getExigibilidadeISS());
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Invalid Argument, choice between 1 and 7
+     * 1 - Exigível
+     * 2 - Não incidência
+     * 3 - Isenção
+     * 4 - Exportação
+     * 5 - Imunidade
+     * 6 - Exigibilidade Suspensa por Decisão Judicial
+     * 7 - Exigibilidade Suspensa por Processo Administrativo.
+     */
+    public function testExceptionExigibilidadeISS()
+    {
+        $send = new Send();
+        $send->setExigibilidadeISS(8);
+    }
+
+    public function testDddTomador()
+    {
+        $send = new Send();
+        $send->setDddTomador('41');
+        $this->assertEquals('41', $send->getDddTomador());
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Invalid ddd number
+     */
+    public function testIfDDDTomadorExpectedTwoNumbers()
+    {
+        $send = new Send();
+        $send->setDddTomador('1234');
+    }
 
 
 
