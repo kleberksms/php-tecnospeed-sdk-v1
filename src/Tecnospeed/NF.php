@@ -41,7 +41,7 @@ class NF {
             throw new \InvalidArgumentException('Invalid Arguments');
         }
 
-        
+
 
         return true;
     }

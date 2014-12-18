@@ -14,7 +14,7 @@ Minimal example:
 
 // Skip these two lines if you're using Composer
 define('TECNOSPEED_SDK_V1_SRC_DIR', '/path/to/tecnospeed-php-sdk-v1/src/Tecnospeed/');
-require __DIR__ . '/path/to/facebook-php-sdk-v4/autoload.php';
+require __DIR__ . '/path/to/tecnospeed-php-sdk-v1/autoload.php';
 
 use Tecnospeed\ManagerNf;
 use Tecnospeed\Nf;
