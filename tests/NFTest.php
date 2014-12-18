@@ -2,6 +2,9 @@
 
 use Tecnospeed\NF;
 
+use Tecnospeed\Assets\SendParams;
+
+
 class NFTest extends PHPUnit_Framework_TestCase
 {
     public $nf;
@@ -19,6 +22,22 @@ class NFTest extends PHPUnit_Framework_TestCase
     {
         $this->nf = new NF();
         $this->nf->content(array());
+    }
+
+    public function testArrayContentExist()
+    {
+        $nf = new NF();
+        $this->assertTrue($nf->content(array('ValorCOFINS', 'DescontoCondicionado')),'nao passou');
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage Invalid Argument
+     */
+    public function testIfNotExistParamsContentInDefaultParams()
+    {
+        $nf = new NF();
+        $nf->content(array('Valor Nao Existente', 'DescontoCondicionado'));
     }
 
 } 

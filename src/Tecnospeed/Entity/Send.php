@@ -108,6 +108,39 @@ class Send extends ManagerNf
     /**
      * @return mixed
      */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getPattern()
+    {
+        return $this->pattern;
+    }
+
+    /**
+     * @param mixed $pattern
+     */
+    public function setPattern($pattern)
+    {
+        $this->pattern = $pattern;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getAliquotaCONFIS()
     {
         return $this->aliquotaCONFIS;
@@ -342,6 +375,9 @@ class Send extends ManagerNf
      */
     public function setCodigoTributacaoMunicipio($codigoTributacaoMunicipio)
     {
+        if (!is_numeric($codigoTributacaoMunicipio)) {
+            throw new \InvalidArgumentException('this value is not a number');
+        }
         $this->codigoTributacaoMunicipio = $codigoTributacaoMunicipio;
     }
 

@@ -2,8 +2,9 @@
 
 namespace Tecnospeed;
 
-use Mockery\CountValidator\Exception;
 use Tecnospeed\Entity\Send;
+
+use Tecnospeed\Assets\SendParams;
 
 class NF {
 
@@ -32,12 +33,17 @@ class NF {
      */
     public function content($content = array())
     {
-
-        if (empty($content)) {
-
+        if ( empty($content) ) {
+            throw new \InvalidArgumentException('Empty array');
         }
-        throw new \InvalidArgumentException('Empty array');
 
+        if( ! empty(array_diff($content,SendParams::params()))) {
+            throw new \InvalidArgumentException('Invalid Arguments');
+        }
+
+        
+
+        return true;
     }
 
 

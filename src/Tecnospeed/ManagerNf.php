@@ -4,9 +4,9 @@ namespace Tecnospeed;
 
 class ManagerNf {
 
-    private $type;
-    private $pattern;
-    private $defaultCity;
+    protected $type;
+    protected $pattern;
+    protected $defaultCity;
 
     /**
      * @return mixed

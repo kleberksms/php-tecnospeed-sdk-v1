@@ -43,7 +43,7 @@ class SendTest extends \PHPUnit_Framework_TestCase{
     {
         $send = new Send();
         $send->setIdLote(1);
-        $this->assertTrue(true, is_numeric($send->getIdLote()));
+        $this->assertTrue(is_numeric($send->getIdLote()),'not is a number');
     }
 
     /**
@@ -96,6 +96,27 @@ class SendTest extends \PHPUnit_Framework_TestCase{
         $send = new Send();
         $send->setDddTomador('1234');
     }
+
+    public function testIfSetCodigoTributacaoMunicipioIsANumber()
+    {
+        $send = new Send();
+        $send->setCodigoTributacaoMunicipio(12);
+        $this->assertTrue(is_numeric($send->getCodigoTributacaoMunicipio()),'not is a number');
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage this value is not a number
+     */
+    public function testExceptionSetCodigoTributacaoMunicipioreciviedAString()
+    {
+        $send = new Send();
+        $send->setCodigoTributacaoMunicipio('String');
+    }
+
+
+
+
 
 
 
