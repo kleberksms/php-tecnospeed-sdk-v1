@@ -3,10 +3,12 @@
 namespace Tecnospeed;
 
 use Tecnospeed\Entity\Send;
-
+use GeneratedHydrator\Configuration;
 use Tecnospeed\Assets\SendParams;
 
 class NF {
+
+    public $send;
 
 
     public function __construct()
@@ -28,8 +30,8 @@ class NF {
     }
 
     /**
-     * @param $content
-     * @return bool
+     * @param array $content
+     * @return Send
      */
     public function content($content = array())
     {
@@ -37,13 +39,22 @@ class NF {
             throw new \InvalidArgumentException('Empty array');
         }
 
-        if( ! empty(array_diff($content,SendParams::params()))) {
+        $haveDifference = array_diff_key($content,SendParams::params());
+        if( !empty($haveDifference)) {
             throw new \InvalidArgumentException('Invalid Arguments');
         }
 
+        $config = new Configuration('Tecnospeed\Entity\Send');
 
+        $hydratorClass = $config->createFactory()->getHydratorClass();
+        $hydrator      = new $hydratorClass();
 
-        return true;
+        $this->send = new Send();
+
+        $hydrator->hydrate($content,$this->send);
+
+        return $this->send;
+        
     }
 
 

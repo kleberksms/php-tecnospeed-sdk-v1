@@ -26,8 +26,18 @@ class NFTest extends PHPUnit_Framework_TestCase
 
     public function testArrayContentExist()
     {
+
+        $content = array(
+            'ValorCOFINS' => '123',
+            'DescontoCondicionado' => '123'
+        );
+
         $nf = new NF();
-        $this->assertTrue($nf->content(array('ValorCOFINS', 'DescontoCondicionado')),'nao passou');
+        $return = $nf->content($content);
+
+        $this->assertInstanceOf('Tecnospeed\Entity\Send',$return);
+        $this->assertEquals('123',$return->getValorCONFIS());
+        $this->assertEquals('123',$return->getDescontoCondicionado());
     }
 
     /**
@@ -37,7 +47,12 @@ class NFTest extends PHPUnit_Framework_TestCase
     public function testIfNotExistParamsContentInDefaultParams()
     {
         $nf = new NF();
-        $nf->content(array('Valor Nao Existente', 'DescontoCondicionado'));
+        $nf->content(
+            array(
+                'Valor Nao Existente' => '123',
+                'DescontoCondicionado'=> '123'
+            )
+        );
     }
 
 } 
