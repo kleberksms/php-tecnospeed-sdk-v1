@@ -52,8 +52,11 @@ class NF {
 
         $this->sendNf = new Send();
 
+        if( $hydrator->hydrate($content,$this->sendNf)) {
+            return $this->sendNf;
+        }
 
-        return $hydrator->hydrate($content,$this->sendNf);
+        throw new \Exception('Error undefined');
 
     }
 
