@@ -263,31 +263,6 @@ class SendTest extends \PHPUnit_Framework_TestCase{
         $this->assertEquals(1,$send->getSituacaoNota());
     }
 
-    /**
-     * testes de getter and setter
-     */
-
-    public function testType()
-    {
-        $manager = new Send();
-        $manager->setType('tx2');
-        $this->assertEquals('tx2',$manager->getType());
-    }
-
-
-    public function testPattern()
-    {
-        $manager = new Send();
-        $manager->setPattern('doc');
-        $this->assertEquals('doc',$manager->getPattern());
-    }
-
-    public function testDefaultCity()
-    {
-        $manager = new Send();
-        $manager->setDefaultCity('Curitiba');
-        $this->assertEquals('Curitiba',$manager->getDefaultCity());
-    }
 
 
 

@@ -16,7 +16,7 @@ class Send extends ManagerNf
     private $quantidadeRPS;
     private $transacao;
     private $metodoEnvio;
-    private $cpfCnpjRmetente;
+    private $cpfCnpjRemetente;
     private $inscricaoMunicipalRemetente;
     private $razaoSocialRemetente;
     private $codigoCidadeRemetente;
@@ -70,7 +70,6 @@ class Send extends ManagerNf
     private $emailTomador;
 
     private $codigoItemListaServico;
-    private $codigoTributacaoServico;
     private $codigoTributacaoMunicipio;
     private $codigoCnae;
     private $discriminacaoServico;
@@ -81,7 +80,7 @@ class Send extends ManagerNf
 
 
     private $aliquotaPIS;
-    private $aliquotaCONFIS;
+    private $aliquotaCOFINS;
     private $aliquotaINSS;
     private $aliquotaIR;
     private $aliquotaCSLL;
@@ -89,11 +88,11 @@ class Send extends ManagerNf
 
     private $valorServicos;
     private $valorPIS;
-    private $valorCONFIS;
+    private $valorCOFINS;
     private $valorINSS;
     private $valorIR;
     private $valorCSLL;
-    private $valorISS;
+    private $valorIss;
 
     private $outrasRetencoes;
     private $descontoIncondicionado;
@@ -106,53 +105,21 @@ class Send extends ManagerNf
     private $valorISSRetido;
     private $valorLiquidoNFse;
 
-    /**
-     * @return mixed
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param mixed $type
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
-
 
     /**
      * @return mixed
      */
-    public function getPattern()
+    public function getAliquotaCOFINS()
     {
-        return $this->pattern;
+        return $this->aliquotaCOFINS;
     }
 
     /**
-     * @param mixed $pattern
+     * @param mixed $aliquotaCOFINS
      */
-    public function setPattern($pattern)
+    public function setAliquotaCOFINS($aliquotaCOFINS)
     {
-        $this->pattern = $pattern;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAliquotaCONFIS()
-    {
-        return $this->aliquotaCONFIS;
-    }
-
-    /**
-     * @param mixed $aliquotaCONFIS
-     */
-    public function setAliquotaCONFIS($aliquotaCONFIS)
-    {
-        $this->aliquotaCONFIS = $aliquotaCONFIS;
+        $this->aliquotaCOFINS = $aliquotaCOFINS;
     }
 
     /**
@@ -382,21 +349,6 @@ class Send extends ManagerNf
         $this->codigoTributacaoMunicipio = $codigoTributacaoMunicipio;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCodigoTributacaoServico()
-    {
-        return $this->codigoTributacaoServico;
-    }
-
-    /**
-     * @param mixed $codigoTributacaoServico
-     */
-    public function setCodigoTributacaoServico($codigoTributacaoServico)
-    {
-        $this->codigoTributacaoServico = $codigoTributacaoServico;
-    }
 
     /**
      * @return mixed
@@ -449,17 +401,17 @@ class Send extends ManagerNf
     /**
      * @return mixed
      */
-    public function getCpfCnpjRmetente()
+    public function getCpfCnpjRemetente()
     {
-        return $this->cpfCnpjRmetente;
+        return $this->cpfCnpjRemetente;
     }
 
     /**
-     * @param mixed $cpfCnpjRmetente
+     * @param mixed $cpfCnpjRemetente
      */
-    public function setCpfCnpjRmetente($cpfCnpjRmetente)
+    public function setCpfCnpjRemetente($cpfCnpjRemetente)
     {
-        $this->cpfCnpjRmetente = $cpfCnpjRmetente;
+        $this->cpfCnpjRemetente = $cpfCnpjRemetente;
     }
 
     /**
@@ -1252,17 +1204,17 @@ class Send extends ManagerNf
     /**
      * @return mixed
      */
-    public function getValorCONFIS()
+    public function getValorCOFINS()
     {
-        return $this->valorCONFIS;
+        return $this->valorCONFINS;
     }
 
     /**
-     * @param mixed $valorCONFIS
+     * @param mixed $valorCOFINS
      */
-    public function setValorCONFIS($valorCONFIS)
+    public function setValorCOFINS($valorCOFINS)
     {
-        $this->valorCONFIS = $valorCONFIS;
+        $this->valorCOFINS = $valorCOFINS;
     }
 
     /**
@@ -1332,17 +1284,17 @@ class Send extends ManagerNf
     /**
      * @return mixed
      */
-    public function getValorISS()
+    public function getValorIss()
     {
-        return $this->valorISS;
+        return $this->valorIss;
     }
 
     /**
-     * @param mixed $valorISS
+     * @param mixed $valorIss
      */
-    public function setValorISS($valorISS)
+    public function setValorIss($valorIss)
     {
-        $this->valorISS = $valorISS;
+        $this->valorIss = $valorIss;
     }
 
     /**

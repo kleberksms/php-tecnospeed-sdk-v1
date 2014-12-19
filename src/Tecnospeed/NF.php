@@ -8,7 +8,7 @@ use Tecnospeed\Assets\SendParams;
 
 class NF {
 
-    public $send;
+    public $sendNf;
 
 
     public function __construct()
@@ -39,19 +39,21 @@ class NF {
             throw new \InvalidArgumentException('Empty array');
         }
 
-        $haveDifference = array_diff_key($content,SendParams::params());
-        if( !empty($haveDifference)) {
-            throw new \InvalidArgumentException('Invalid Arguments');
+        $haveDifferences = array_diff_key($content,SendParams::params());
+        if( !empty($haveDifferences)) {
+            throw new \InvalidArgumentException(sprintf("Invalid Arguments"));
         }
 
         $config = new Configuration('Tecnospeed\Entity\Send');
 
         $hydratorClass = $config->createFactory()->getHydratorClass();
-        $hydrator      = new $hydratorClass();
 
-        $this->send = new Send();
-        
-        return $hydrator->hydrate($content,$this->send);
+        $hydrator  = new $hydratorClass();
+
+        $this->sendNf = new Send();
+
+
+        return $hydrator->hydrate($content,$this->sendNf);
 
     }
 
