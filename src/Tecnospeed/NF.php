@@ -50,7 +50,7 @@ class NF {
         $hydrator      = new $hydratorClass();
 
         $this->send = new Send();
-        die(print_r($hydrator->hydrate($content,$this->send)));
+        
         return $hydrator->hydrate($content,$this->send);
 
     }
