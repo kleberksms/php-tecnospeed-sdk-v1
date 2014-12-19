@@ -1,7 +1,8 @@
 <?php
 
 
-class ManagerNfTest extends PHPUnit_Framework_TestCase{
+
+class ManagerNfTest extends \PHPUnit_Framework_TestCase{
 
     public $managerNf;
 
@@ -48,6 +49,28 @@ class ManagerNfTest extends PHPUnit_Framework_TestCase{
             'Class does not have method setDefaultCity'
         );
 
+    }
+
+    public function testType()
+    {
+        $manager = new \Tecnospeed\ManagerNf();
+        $manager->setType('tx2');
+        $this->assertEquals('tx2',$manager->getType());
+    }
+
+
+    public function testPattern()
+    {
+        $manager = new \Tecnospeed\ManagerNf();
+        $manager->setPattern('doc');
+        $this->assertEquals('doc',$manager->getPattern());
+    }
+
+    public function testDefaultCity()
+    {
+        $manager = new \Tecnospeed\ManagerNf();
+        $manager->setDefaultCity('Curitiba');
+        $this->assertEquals('Curitiba',$manager->getDefaultCity());
     }
 
 

@@ -2,6 +2,7 @@
 namespace Tecnospeed\Entity;
 
 use Tecnospeed\ManagerNf;
+use Zend\Stdlib\Exception\InvalidArgumentException;
 
 
 class Send extends ManagerNf
@@ -23,7 +24,7 @@ class Send extends ManagerNf
     private $dataFim;
     private $valorTotalServicos;
     private $valorTotalDeducoes;
-    private $valorTotalBasseCalculo;
+    private $valorTotalBaseCalculo;
 
     /**
      * Dados do RPS
@@ -41,7 +42,7 @@ class Send extends ManagerNf
     private $razaoSocialPrestador;
     private $codigoCidadePrestador;
     private $descricaoCidadePrestador;
-    private $optantesSimplesNascional;
+    private $optantesSimplesNacional;
     private $incentivadorCultural;
     private $regimeEspecialTributacao;
     private $naturezaTributacao;
@@ -693,9 +694,10 @@ class Send extends ManagerNf
     }
 
     /**
-     * @param mixed $idLote
+     * @param int $idLote
+     * 1 - é um controle interno da tecnospeed
      */
-    public function setIdLote($idLote)
+    public function setIdLote($idLote = 1)
     {
         if (!is_numeric($idLote)) {
             throw new \InvalidArgumentException('Invalid Argument');
@@ -714,9 +716,13 @@ class Send extends ManagerNf
 
     /**
      * @param mixed $idRps
+     * 1 - controle interno da tecnospeed
      */
-    public function setIdRps($idRps)
+    public function setIdRps($idRps = 1)
     {
+        if (!is_numeric($idRps)) {
+            throw new \InvalidArgumentException('Invalid Argument');
+        }
         $this->idRps = $idRps;
     }
 
@@ -730,9 +736,20 @@ class Send extends ManagerNf
 
     /**
      * @param mixed $incentivadorCultural
+     * 1 - para sim
+     * 2 - para não
+     * padrão tecnospeed
      */
     public function setIncentivadorCultural($incentivadorCultural)
     {
+        if ( !is_numeric($incentivadorCultural)) {
+            throw new InvalidArgumentException('Invalid Argument');
+        }
+
+        $condition = (1 == $incentivadorCultural || 2 == $incentivadorCultural);
+        if ( !$condition) {
+            throw new InvalidArgumentException('Invalid Number');
+        }
         $this->incentivadorCultural = $incentivadorCultural;
     }
 
@@ -749,6 +766,15 @@ class Send extends ManagerNf
      */
     public function setIncentivoFiscal($incentivoFiscal)
     {
+        if ( !is_numeric($incentivoFiscal)) {
+            throw new InvalidArgumentException('Invalid Argument');
+        }
+
+        $condition = (1 == $incentivoFiscal || 2 == $incentivoFiscal);
+        if ( !$condition) {
+            throw new InvalidArgumentException('Invalid Number');
+        }
+
         $this->incentivoFiscal = $incentivoFiscal;
     }
 
@@ -931,17 +957,26 @@ class Send extends ManagerNf
     /**
      * @return mixed
      */
-    public function getOptantesSimplesNascional()
+    public function getOptantesSimplesNacional()
     {
-        return $this->optantesSimplesNascional;
+        return $this->optantesSimplesNacional;
     }
 
     /**
-     * @param mixed $optantesSimplesNascional
+     * @param mixed $optantesSimplesNacional
+     * 1 - optante - valor padrão tecnospeed
+     * 2 - não optante - valor padrão da tecnospeed
      */
-    public function setOptantesSimplesNascional($optantesSimplesNascional)
+    public function setOptantesSimplesNacional($optantesSimplesNacional)
     {
-        $this->optantesSimplesNascional = $optantesSimplesNascional;
+        if ( !is_numeric($optantesSimplesNacional)) {
+            throw new InvalidArgumentException('Invalid Argument');
+        }
+        $condition = (1 == $optantesSimplesNacional || 2 == $optantesSimplesNacional);
+        if ( !$condition) {
+            throw new InvalidArgumentException('Invalid Number');
+        }
+        $this->optantesSimplesNacional = $optantesSimplesNacional;
     }
 
     /**
@@ -1082,9 +1117,22 @@ class Send extends ManagerNf
 
     /**
      * @param mixed $situacaoNota
+     * 1 - situação normal - padrão da tecnospeed
+     * 2 - situação cancelada - padrão da tecnospeed
      */
     public function setSituacaoNota($situacaoNota)
     {
+        if (!is_numeric($situacaoNota)) {
+            throw new InvalidArgumentException('Invalid Argument');
+        }
+
+        $condition = (1 == $situacaoNota || 2 == $situacaoNota);
+
+        if ( !$condition) {
+            throw new InvalidArgumentException('Invalid Number');
+        }
+
+
         $this->situacaoNota = $situacaoNota;
     }
 
@@ -1146,8 +1194,9 @@ class Send extends ManagerNf
 
     /**
      * @param mixed $tipoRps
+     * 1 - valor padrão tecnospeed
      */
-    public function setTipoRps($tipoRps)
+    public function setTipoRps($tipoRps = 1)
     {
         $this->tipoRps = $tipoRps;
     }
@@ -1363,17 +1412,17 @@ class Send extends ManagerNf
     /**
      * @return mixed
      */
-    public function getValorTotalBasseCalculo()
+    public function getValorTotalBaseCalculo()
     {
-        return $this->valorTotalBasseCalculo;
+        return $this->valorTotalBaseCalculo;
     }
 
     /**
      * @param mixed $valorTotalBasseCalculo
      */
-    public function setValorTotalBasseCalculo($valorTotalBasseCalculo)
+    public function setValorTotalBaseCalculo($valorTotalBaseCalculo)
     {
-        $this->valorTotalBasseCalculo = $valorTotalBasseCalculo;
+        $this->valorTotalBaseCalculo = $valorTotalBaseCalculo;
     }
 
     /**

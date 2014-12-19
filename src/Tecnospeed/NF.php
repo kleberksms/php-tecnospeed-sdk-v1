@@ -54,7 +54,7 @@ class NF {
         $hydrator->hydrate($content,$this->send);
 
         return $this->send;
-        
+
     }
 
 
