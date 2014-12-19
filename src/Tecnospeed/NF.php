@@ -31,7 +31,7 @@ class NF {
 
     /**
      * @param array $content
-     * @return Send
+     * @return mixed
      */
     public function content($content = array())
     {
@@ -50,10 +50,8 @@ class NF {
         $hydrator      = new $hydratorClass();
 
         $this->send = new Send();
-
-        $hydrator->hydrate($content,$this->send);
-
-        return $this->send;
+        die(print_r($hydrator->hydrate($content,$this->send)));
+        return $hydrator->hydrate($content,$this->send);
 
     }
 

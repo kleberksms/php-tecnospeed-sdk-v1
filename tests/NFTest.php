@@ -33,11 +33,9 @@ class NFTest extends PHPUnit_Framework_TestCase
         );
 
         $nf = new NF();
-        $return = $nf->content($content);
+        $this->assertTrue($nf->content($content),'Error to hydrate');
 
-        $this->assertInstanceOf('Tecnospeed\Entity\Send',$return);
-        $this->assertEquals('123',$return->getValorCONFIS());
-        $this->assertEquals('123',$return->getDescontoCondicionado());
+
     }
 
     /**
@@ -54,5 +52,6 @@ class NFTest extends PHPUnit_Framework_TestCase
             )
         );
     }
+
 
 } 
