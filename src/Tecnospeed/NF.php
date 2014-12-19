@@ -6,6 +6,7 @@ use Tecnospeed\Entity\Send;
 use GeneratedHydrator\Configuration;
 use Tecnospeed\Assets\SendParams;
 
+
 class NF {
 
     public $sendNf;
@@ -52,11 +53,9 @@ class NF {
 
         $this->sendNf = new Send();
 
-        if( $hydrator->hydrate($content,$this->sendNf)) {
-            return $this->sendNf;
-        }
+        $hydrator->hydrate($content,$this->sendNf);
 
-        throw new \Exception('Error undefined');
+        return $this->sendNf;
 
     }
 

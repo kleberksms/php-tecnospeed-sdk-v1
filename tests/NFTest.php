@@ -8,26 +8,13 @@ use Tecnospeed\Assets\SendParams;
 class NFTest extends PHPUnit_Framework_TestCase
 {
     public $nf;
+    public $contentArray;
 
     public function setUp()
     {
         $this->nf = new NF();
-    }
 
-    /**
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage Empty array
-     */
-    public function testContentMethodException()
-    {
-        $this->nf = new NF();
-        $this->nf->content(array());
-    }
-
-    public function testArrayContentExist()
-    {
-
-        $content = array(
+        $this->contentArray = array(
             'type'=>'tx2',
             'pattern'=>'TecnoNFSe',
             'defaultCity'=>'OSASCO',
@@ -109,11 +96,24 @@ class NFTest extends PHPUnit_Framework_TestCase
             'valorISSRetido'=>0.00,
             'valorLiquidoNFse'=>1.00,
         );
-
-        $nf = new NF();
-        $nf->content($content);
-
     }
+
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage Empty array
+     */
+    public function testContentMethodException()
+    {
+        $this->nf = new NF();
+        $this->nf->content(array());
+    }
+
+    public function testArrayContentExist()
+    {
+        $nf = new NF();
+        $nf->content($this->contentArray);
+    }
+
 
     /**
      * @expectedException InvalidArgumentException
