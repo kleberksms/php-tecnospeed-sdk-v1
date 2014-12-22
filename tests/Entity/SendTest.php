@@ -1,6 +1,6 @@
 <?php
 
-namespace Tecnospeed\Entity;
+use Tecnospeed\Entity\Send;
 
 class SendTest extends \PHPUnit_Framework_TestCase{
 

@@ -1,5 +1,5 @@
 <?php
-namespace Tecnospeed\Assets;
+use Tecnospeed\Assets\SendParams;
 
 class SendParamsTest extends  \PHPUnit_Framework_TestCase
 {

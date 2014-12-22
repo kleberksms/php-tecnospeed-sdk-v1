@@ -2,7 +2,7 @@
 namespace Tecnospeed\Entity;
 
 use Tecnospeed\ManagerNf;
-use Zend\Stdlib\Exception\InvalidArgumentException;
+use \InvalidArgumentException;
 
 
 class Send extends ManagerNf
