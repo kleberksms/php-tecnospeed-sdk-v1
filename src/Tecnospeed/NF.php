@@ -4,6 +4,7 @@ namespace Tecnospeed;
 
 use GeneratedHydrator\Configuration;
 use Tecnospeed\Assets\SendParams;
+use Tecnospeed\HttpClient\TecnospeedCurlHttpClient;
 
 
 class NF {
@@ -28,11 +29,36 @@ class NF {
 
     }
 
-    public function send()
+    public function send($config = array())
     {
         if (!is_object($this->entity)) {
             throw new \Exception('is not a entity object');
         }
+
+        $url = '';
+        if (isset($config['url'])) {
+            $url = $config['url'];
+            unset($config['url']);
+        }
+
+        $method = 'POST';
+        if (isset($config['method'])) {
+            $method = $config['method'];
+            unset($method);
+        }
+
+        $parameters = $this->hydrator->extract($this->entity);
+
+        $send = new TecnospeedCurlHttpClient();
+
+        return $send->send($url, $method, $parameters);
+
+    }
+
+    private function arrayToXML($data = array()){
+        $data = new SimpleXMLElement('<root/>');
+        array_walk_recursive($test_array, array ($data, 'addChild'));
+        return $data->asXML();
     }
 
 
