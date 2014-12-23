@@ -15,10 +15,14 @@ class NF {
     public $hydratorClass;
     public $hydrator;
 
-    public function __construct(String $entityManager = null)
+    public function __construct($entityManager = null)
     {
         if (!is_null($entityManager)) {
             $this->entityManager = $entityManager;
+        }
+
+        if (!class_exists($this->entityManager)) {
+            throw new \InvalidArgumentException('Class do not exist');
         }
 
         $this->config = new Configuration($this->entityManager);

@@ -118,7 +118,7 @@ class NFTest extends PHPUnit_Framework_TestCase
         $nf->content($this->contentArray);
     }
 
-    public function testShouldReciveGetsMethodsWithHydrator()
+    public function testShouldReceivedGetsMethodsWithHydrator()
     {
         $nf = new NF();
         $return = $nf->content($this->contentArray);
@@ -141,6 +141,21 @@ class NFTest extends PHPUnit_Framework_TestCase
             )
         );
     }
+
+    public function testWhenSendEntityToConstructNF()
+    {
+        new NF('Tecnospeed\Entity\Send');
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage Class do not exist
+     */
+    public function testIfNotExistClassInEMConstructNF()
+    {
+        new NF('Tecnospeed\Entity\SendOps');
+    }
+
 
 
 
