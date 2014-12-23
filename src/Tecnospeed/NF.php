@@ -51,15 +51,19 @@ class NF {
             unset($method);
         }
 
-        $parameters = $this->hydrator->extract($this->entity);
+        $parameters['xmlRequest'] = $this->arrayToXML(
+            $this->hydrator->extract(
+                $this->entity
+            )
+        );
 
         $send = new TecnospeedCurlHttpClient();
 
-        return $send->send($url, $method, $parameters);
+        return $send->send($url, $method,$parameters);
 
     }
 
-    private function arrayToXML($data = array()){
+    private function arrayToXML($data){
         $data = new SimpleXMLElement('<root/>');
         array_walk_recursive($test_array, array ($data, 'addChild'));
         return $data->asXML();
