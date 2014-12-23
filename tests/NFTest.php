@@ -10,6 +10,10 @@ class NFTest extends PHPUnit_Framework_TestCase
     public $nf;
     public $contentArray;
 
+    protected function tearDown() {
+        \Mockery::close();
+    }
+
     public function setUp()
     {
         $this->nf = new NF();
@@ -129,5 +133,7 @@ class NFTest extends PHPUnit_Framework_TestCase
             )
         );
     }
+
+
 
 }

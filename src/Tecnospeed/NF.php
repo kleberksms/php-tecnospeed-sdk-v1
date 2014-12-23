@@ -9,7 +9,27 @@ use Tecnospeed\Assets\SendParams;
 
 class NF {
 
-    public $sendNf;
+    public $entity;
+    public $entityManager = 'Tecnospeed\Entity\Send';
+    public $config;
+    public $hydratorClass;
+    public $hydrator;
+
+    public function __construct($entity = null)
+    {
+        if (empty($entity) || is_null($entity)) {
+            $this->entity = $entity;
+        }
+
+        $this->config = new Configuration($this->entityManager);
+
+        $this->hydratorClass = $this->config->createFactory()->getHydratorClass();
+
+        $this->hydrator  = new $this->hydratorClass();
+
+    }
+
+
 
     /**
      * @param array $content
@@ -26,17 +46,11 @@ class NF {
             throw new \InvalidArgumentException(sprintf("Invalid Arguments"));
         }
 
-        $config = new Configuration('Tecnospeed\Entity\Send');
+        $this->entity = new $this->entityManager;
 
-        $hydratorClass = $config->createFactory()->getHydratorClass();
+        $this->hydrator->hydrate($content,$this->entity);
 
-        $hydrator  = new $hydratorClass();
-
-        $this->sendNf = new Send();
-
-        $hydrator->hydrate($content,$this->sendNf);
-
-        return $this->sendNf;
+        return $this->entity;
 
     }
 
