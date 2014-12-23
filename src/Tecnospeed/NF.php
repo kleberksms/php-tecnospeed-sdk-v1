@@ -2,7 +2,6 @@
 
 namespace Tecnospeed;
 
-use Tecnospeed\Entity\Send;
 use GeneratedHydrator\Configuration;
 use Tecnospeed\Assets\SendParams;
 
@@ -15,10 +14,10 @@ class NF {
     public $hydratorClass;
     public $hydrator;
 
-    public function __construct($entity = null)
+    public function __construct(String $entityManager = null)
     {
-        if (empty($entity) || is_null($entity)) {
-            $this->entity = $entity;
+        if (!is_null($entityManager)) {
+            $this->entityManager = $entityManager;
         }
 
         $this->config = new Configuration($this->entityManager);
@@ -29,6 +28,12 @@ class NF {
 
     }
 
+    public function send()
+    {
+        if (!is_object($this->entity)) {
+            throw new \Exception('is not a entity object');
+        }
+    }
 
 
     /**

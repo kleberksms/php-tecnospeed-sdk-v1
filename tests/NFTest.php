@@ -118,6 +118,14 @@ class NFTest extends PHPUnit_Framework_TestCase
         $nf->content($this->contentArray);
     }
 
+    public function testShouldReciveGetsMethodsWithHydrator()
+    {
+        $nf = new NF();
+        $return = $nf->content($this->contentArray);
+        $this->assertEquals('08187168000160',$return->getCpfCnpjRemetente(),'Occurred error with hydrator');
+
+    }
+
 
     /**
      * @expectedException InvalidArgumentException
