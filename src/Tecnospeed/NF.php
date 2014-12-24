@@ -2,9 +2,9 @@
 
 namespace Tecnospeed;
 
-use GeneratedHydrator\Configuration;
 use Tecnospeed\Assets\SendParams;
 use Tecnospeed\HttpClient\TecnospeedCurlHttpClient;
+use Zend\Stdlib\Hydrator;
 
 
 class NF {
@@ -25,11 +25,29 @@ class NF {
             throw new \InvalidArgumentException('Class do not exist');
         }
 
-        $this->config = new Configuration($this->entityManager);
+        $this->entity = new $this->entityManager;
 
-        $this->hydratorClass = $this->config->createFactory()->getHydratorClass();
+    }
 
-        $this->hydrator  = new $this->hydratorClass();
+    /**
+     * @param array $content
+     * @return mixed
+     */
+    public function content($content = array())
+    {
+        if ( empty($content) ) {
+            throw new \InvalidArgumentException('Empty array');
+        }
+
+        $haveDifferences = array_diff_key($content,SendParams::params());
+        if( !empty($haveDifferences)) {
+            throw new \InvalidArgumentException(sprintf("Invalid Arguments"));
+        }
+
+        $hydrator = new Hydrator\ClassMethods();
+        $hydrator->hydrate($content, $this->entity);
+
+        return $this->entity;
 
     }
 
@@ -70,28 +88,7 @@ class NF {
     }
 
 
-    /**
-     * @param array $content
-     * @return mixed
-     */
-    public function content($content = array())
-    {
-        if ( empty($content) ) {
-            throw new \InvalidArgumentException('Empty array');
-        }
 
-        $haveDifferences = array_diff_key($content,SendParams::params());
-        if( !empty($haveDifferences)) {
-            throw new \InvalidArgumentException(sprintf("Invalid Arguments"));
-        }
-
-        $this->entity = new $this->entityManager;
-
-        $this->hydrator->hydrate($content,$this->entity);
-
-        return $this->entity;
-
-    }
 
 
 

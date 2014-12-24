@@ -104,6 +104,17 @@ class NFTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException InvalidArgumentException
+     */
+    public function testContentWrongArray()
+    {
+        $content = $this->contentArray;
+        $content['exigibilidadeISS'] = 8;
+        $nf = new NF('Tecnospeed\Entity\Send');
+        $nf->content($content);
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
      * @expectedExceptionMessage Empty array
      */
     public function testContentMethodException()
