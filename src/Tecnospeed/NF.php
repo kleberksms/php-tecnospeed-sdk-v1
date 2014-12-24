@@ -27,6 +27,8 @@ class NF {
 
         $this->entity = new $this->entityManager;
 
+        $this->hydrator = new Hydrator\ClassMethods();
+
     }
 
     /**
@@ -44,8 +46,7 @@ class NF {
             throw new \InvalidArgumentException(sprintf("Invalid Arguments"));
         }
 
-        $hydrator = new Hydrator\ClassMethods();
-        $hydrator->hydrate($content, $this->entity);
+        $this->hydrator->hydrate($content, $this->entity);
 
         return $this->entity;
 
@@ -53,10 +54,6 @@ class NF {
 
     public function send($config = array())
     {
-        if (!is_object($this->entity)) {
-            throw new \Exception('is not a entity object');
-        }
-
         $url = '';
         if (isset($config['url'])) {
             $url = $config['url'];
@@ -66,7 +63,7 @@ class NF {
         $method = 'POST';
         if (isset($config['method'])) {
             $method = $config['method'];
-            unset($method);
+            unset($config['method']);
         }
 
         $parameters['xmlRequest'] = $this->arrayToXML(
@@ -82,9 +79,9 @@ class NF {
     }
 
     private function arrayToXML($data){
-        $data = new SimpleXMLElement('<root/>');
-        array_walk_recursive($test_array, array ($data, 'addChild'));
-        return $data->asXML();
+        $xml = new \SimpleXMLElement('<root/>');
+        array_walk_recursive($data, array($xml, 'addChild'));
+        return $xml->asXML();
     }
 
 

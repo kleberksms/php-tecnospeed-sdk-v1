@@ -168,6 +168,17 @@ class NFTest extends PHPUnit_Framework_TestCase
     }
 
 
+    public function testConfigSend()
+    {
+        $nf = new NF();
+        $nf->content($this->contentArray);
+        $nf->send(array(
+            'url'=>"http:\\foo.bar",
+            'method'=>'GET',
+        ));
+    }
+
+
 
 
 }

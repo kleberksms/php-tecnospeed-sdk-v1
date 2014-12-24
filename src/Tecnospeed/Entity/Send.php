@@ -1206,7 +1206,7 @@ class Send extends ManagerNf
      */
     public function getValorCOFINS()
     {
-        return $this->valorCONFINS;
+        return $this->valorCOFINS;
     }
 
     /**
