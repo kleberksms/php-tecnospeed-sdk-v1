@@ -37,7 +37,7 @@ class NF {
      */
     public function content($content = array())
     {
-        if ( empty($content) ) {
+        if ( empty($content)) {
             throw new \InvalidArgumentException('Empty array');
         }
 
@@ -78,7 +78,8 @@ class NF {
 
     }
 
-    private function arrayToXML($data){
+    private function arrayToXML($data)
+    {
         $xml = new \SimpleXMLElement('<root/>');
         array_walk_recursive($data, array($xml, 'addChild'));
         return $xml->asXML();
