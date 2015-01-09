@@ -19,9 +19,9 @@ class NFTest extends PHPUnit_Framework_TestCase
         $this->nf = new NF();
 
         $this->contentArray = array(
-            'type'=>'tx2',
-            'pattern'=>'TecnoNFSe',
-            'defaultCity'=>'OSASCO',
+            'formato'=>'tx2',
+            'padrao'=>'TecnoNFSe',
+            'nomeCidade'=>'OSASCO',
             'idLote'=>1,
             'numeroLote'=>1,
             'quantidadeRPS'=>1,
@@ -46,9 +46,9 @@ class NFTest extends PHPUnit_Framework_TestCase
             'cpfCnpjPrestador'=>'08187168000160',
             'inscricaoMunicipalPrestador'=>'1234',
             'razaoSocialPrestador'=>'Tecnospeed',
-            'codigoCidadePrestador'=>'3534401',
-            'descricaoCidadePrestador'=>'OSASCO',
-            'optantesSimplesNacional'=>2,
+            'codigoCidadePrestacao'=>'3534401',
+            'descricaoCidadePrestacao'=>'OSASCO',
+            'optanteSimplesNacional'=>2,
             'incentivadorCultural'=>2,
             'regimeEspecialTributacao'=>0,
             'naturezaTributacao'=>0,
@@ -98,7 +98,7 @@ class NFTest extends PHPUnit_Framework_TestCase
             'valorIss'=>0.05,
             'issRetido'=>'2',
             'valorISSRetido'=>0.00,
-            'valorLiquidoNFse'=>1.00,
+            'valorLiquidoNfse'=>1.00,
         );
     }
 

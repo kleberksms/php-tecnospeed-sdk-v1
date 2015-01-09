@@ -1,13 +1,15 @@
 <?php
 namespace Tecnospeed\Entity;
 
-use Tecnospeed\ManagerNf;
 use \InvalidArgumentException;
 
 
-class Send extends ManagerNf
+class Send
 {
 
+    private $formato;
+    private $padrao;
+    private $nomeCidade;
     /**
      * Dados padrão
      */
@@ -40,9 +42,9 @@ class Send extends ManagerNf
     private $cpfCnpjPrestador;
     private $inscricaoMunicipalPrestador;
     private $razaoSocialPrestador;
-    private $codigoCidadePrestador;
-    private $descricaoCidadePrestador;
-    private $optantesSimplesNacional;
+    private $codigoCidadePrestacao;
+    private $descricaoCidadePrestacao;
+    private $optanteSimplesNacional;
     private $incentivadorCultural;
     private $regimeEspecialTributacao;
     private $naturezaTributacao;
@@ -103,7 +105,56 @@ class Send extends ManagerNf
 
     private $issRetido;
     private $valorISSRetido;
-    private $valorLiquidoNFse;
+    private $valorLiquidoNfse;
+
+    /**
+     * @return mixed
+     */
+    public function getFormato()
+    {
+        return $this->formato;
+    }
+
+    /**
+     * @param mixed $formato
+     */
+    public function setFormato($formato)
+    {
+        $this->formato = $formato;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNomeCidade()
+    {
+        return $this->nomeCidade;
+    }
+
+    /**
+     * @param mixed $nomeCidade
+     */
+    public function setNomeCidade($nomeCidade)
+    {
+        $this->nomeCidade = $nomeCidade;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPadrao()
+    {
+        return $this->padrao;
+    }
+
+    /**
+     * @param mixed $padrao
+     */
+    public function setPadrao($padrao)
+    {
+        $this->padrao = $padrao;
+    }
+
 
 
     /**
@@ -253,17 +304,17 @@ class Send extends ManagerNf
     /**
      * @return mixed
      */
-    public function getCodigoCidadePrestador()
+    public function getCodigoCidadePrestacao()
     {
-        return $this->codigoCidadePrestador;
+        return $this->codigoCidadePrestacao;
     }
 
     /**
-     * @param mixed $codigoCidadePrestador
+     * @param mixed $codigoCidadePrestacao
      */
-    public function setCodigoCidadePrestador($codigoCidadePrestador)
+    public function setCodigoCidadePrestacao($codigoCidadePrestacao)
     {
-        $this->codigoCidadePrestador = $codigoCidadePrestador;
+        $this->codigoCidadePrestacao = $codigoCidadePrestacao;
     }
 
     /**
@@ -492,7 +543,7 @@ class Send extends ManagerNf
     public function setDddTomador($dddTomador)
     {
         if (strlen($dddTomador) != 2) {
-    throw new \InvalidArgumentException('Invalid ddd number');
+            throw new \InvalidArgumentException('Invalid ddd number');
         }
         $this->dddTomador = $dddTomador;
     }
@@ -532,17 +583,17 @@ class Send extends ManagerNf
     /**
      * @return mixed
      */
-    public function getDescricaoCidadePrestador()
+    public function getDescricaoCidadePrestacao()
     {
-        return $this->descricaoCidadePrestador;
+        return $this->descricaoCidadePrestacao;
     }
 
     /**
-     * @param mixed $descricaoCidadePrestador
+     * @param mixed $descricaoCidadePrestacao
      */
-    public function setDescricaoCidadePrestador($descricaoCidadePrestador)
+    public function setDescricaoCidadePrestador($descricaoCidadePrestacao)
     {
-        $this->descricaoCidadePrestador = $descricaoCidadePrestador;
+        $this->descricaoCidadePrestacao = $descricaoCidadePrestacao;
     }
 
     /**
@@ -909,9 +960,9 @@ class Send extends ManagerNf
     /**
      * @return mixed
      */
-    public function getOptantesSimplesNacional()
+    public function getOptanteSimplesNacional()
     {
-        return $this->optantesSimplesNacional;
+        return $this->optanteSimplesNacional;
     }
 
     /**
@@ -919,16 +970,16 @@ class Send extends ManagerNf
      * 1 - optante - valor padrão tecnospeed
      * 2 - não optante - valor padrão da tecnospeed
      */
-    public function setOptantesSimplesNacional($optantesSimplesNacional)
+    public function setOptanteSimplesNacional($optanteSimplesNacional)
     {
-        if ( !is_numeric($optantesSimplesNacional)) {
+        if ( !is_numeric($optanteSimplesNacional)) {
             throw new InvalidArgumentException('Invalid Argument');
         }
-        $condition = (1 == $optantesSimplesNacional || 2 == $optantesSimplesNacional);
+        $condition = (1 == $optanteSimplesNacional || 2 == $optanteSimplesNacional);
         if ( !$condition) {
             throw new InvalidArgumentException('Invalid Number');
         }
-        $this->optantesSimplesNacional = $optantesSimplesNacional;
+        $this->optanteSimplesNacional = $optanteSimplesNacional;
     }
 
     /**
@@ -1316,17 +1367,17 @@ class Send extends ManagerNf
     /**
      * @return mixed
      */
-    public function getValorLiquidoNFse()
+    public function getValorLiquidoNfse()
     {
-        return $this->valorLiquidoNFse;
+        return $this->valorLiquidoNfse;
     }
 
     /**
-     * @param mixed $valorLiquidoNFse
+     * @param mixed $valorLiquidoNfse
      */
-    public function setValorLiquidoNFse($valorLiquidoNFse)
+    public function setValorLiquidoNfse($valorLiquidoNfse)
     {
-        $this->valorLiquidoNFse = $valorLiquidoNFse;
+        $this->valorLiquidoNfse = $valorLiquidoNfse;
     }
 
     /**

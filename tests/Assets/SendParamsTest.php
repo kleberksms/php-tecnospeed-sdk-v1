@@ -7,9 +7,6 @@ class SendParamsTest extends  \PHPUnit_Framework_TestCase
     public function testParams()
     {
         $this->assertEquals(array(
-            'type'=>'',
-            'pattern'=>'',
-            'defaultCity'=>'',
             'formato'=>'',
             'padrao'=>'',
             'nomeCidade'=>'',
@@ -37,9 +34,9 @@ class SendParamsTest extends  \PHPUnit_Framework_TestCase
             'cpfCnpjPrestador'=>'',
             'inscricaoMunicipalPrestador'=>'',
             'razaoSocialPrestador'=>'',
-            'codigoCidadePrestador'=>'',
-            'descricaoCidadePrestador'=>'',
-            'optantesSimplesNacional'=>'',
+            'codigoCidadePrestacao'=>'',
+            'descricaoCidadePrestacao'=>'',
+            'optanteSimplesNacional'=>'',
             'incentivadorCultural'=>'',
             'regimeEspecialTributacao'=>'',
             'naturezaTributacao'=>'',
@@ -90,7 +87,7 @@ class SendParamsTest extends  \PHPUnit_Framework_TestCase
             'valorIss'=>'',
             'issRetido'=>'',
             'valorISSRetido'=>'',
-            'valorLiquidoNFse'=>''
+            'valorLiquidoNfse'=>''
         ),SendParams::params());
     }
 

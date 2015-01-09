@@ -14,9 +14,6 @@ class SendParams {
     public static function params()
     {
         return array(
-            'type'=>'',
-            'pattern'=>'',
-            'defaultCity'=>'',
             'formato'=>'',
             'padrao'=>'',
             'nomeCidade'=>'',
@@ -44,9 +41,9 @@ class SendParams {
             'cpfCnpjPrestador'=>'',
             'inscricaoMunicipalPrestador'=>'',
             'razaoSocialPrestador'=>'',
-            'codigoCidadePrestador'=>'',
-            'descricaoCidadePrestador'=>'',
-            'optantesSimplesNacional'=>'',
+            'codigoCidadePrestacao'=>'',
+            'descricaoCidadePrestacao'=>'',
+            'optanteSimplesNacional'=>'',
             'incentivadorCultural'=>'',
             'regimeEspecialTributacao'=>'',
             'naturezaTributacao'=>'',
@@ -97,7 +94,7 @@ class SendParams {
             'valorIss'=>'',
             'issRetido'=>'',
             'valorISSRetido'=>'',
-            'valorLiquidoNFse'=>''
+            'valorLiquidoNfse'=>''
         );
     }
 

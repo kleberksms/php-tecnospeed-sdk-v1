@@ -215,24 +215,24 @@ class SendTest extends \PHPUnit_Framework_TestCase{
     public function testExceptionSOptantesSimplesNacional()
     {
         $send = new Send();
-        $send->setOptantesSimplesNacional('String');
+        $send->setOptanteSimplesNacional('String');
     }
 
     /**
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Invalid Number
      */
-    public function testExceptionSetOptantesSimplesNacionalOneOrTwo()
+    public function testExceptionSetOptanteSimplesNacionalOneOrTwo()
     {
         $send = new Send();
-        $send->setOptantesSimplesNacional(3);
+        $send->setOptanteSimplesNacional(3);
     }
 
     public function testOptantesSimplesNacional()
     {
         $send = new Send();
-        $send->setOptantesSimplesNacional(1);
-        $this->assertEquals(1,$send->getOptantesSimplesNacional());
+        $send->setOptanteSimplesNacional(1);
+        $this->assertEquals(1,$send->getOptanteSimplesNacional());
     }
 
 
