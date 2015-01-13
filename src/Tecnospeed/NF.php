@@ -68,7 +68,7 @@ class NF {
 
         $stringTx2 = new ArrayToTx2($this->hydrator->extract($this->entity));
 
-        //$parameters =
+        //$parameters = array();
 
         //$send = new TecnospeedCurlHttpClient();
 
