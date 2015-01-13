@@ -182,7 +182,6 @@ class ArrayToTx2Test extends \PHPUnit_Framework_TestCase
 
     public function testIfConvertArrayToStringTx2Format()
     {
-
         $tx2 = new \Tecnospeed\Assets\Rps\Send\ArrayToTx2();
         $tx2->convert($this->array);
         $this->assertEquals($this->tx2, $tx2->getTx2());

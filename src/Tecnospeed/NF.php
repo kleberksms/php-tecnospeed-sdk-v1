@@ -2,8 +2,8 @@
 
 namespace Tecnospeed;
 
+use Tecnospeed\Assets\Rps\Send\ArrayToTx2;
 use Tecnospeed\Assets\SendParams;
-use Tecnospeed\HttpClient\TecnospeedCurlHttpClient;
 use Zend\Stdlib\Hydrator;
 
 
@@ -66,19 +66,14 @@ class NF {
             unset($config['method']);
         }
 
+        $stringTx2 = new ArrayToTx2($this->hydrator->extract($this->entity));
 
-        //$send = new TecnospeedCurlHttpClient();
+        $parameters =
 
-       // return $send->send($url, $method,$parameters);
+        $send = new TecnospeedCurlHttpClient();
+
+        return $send->send($url, $method,$parameters);
 
     }
-
-
-
-
-
-
-
-
 
 } 
