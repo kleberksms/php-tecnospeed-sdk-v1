@@ -28,8 +28,7 @@ class NF {
             throw new \InvalidArgumentException('Class do not exist');
         }
 
-        $this->configuration = include '\src\Tecnospeed\Config\Configuration.php';
-
+        $this->configuration = include __DIR__.'\tecnospeed-php-sdk-v1\src\Tecnospeed\Config\Configuration.php';
 
     }
 
