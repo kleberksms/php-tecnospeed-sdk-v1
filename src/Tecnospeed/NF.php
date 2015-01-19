@@ -4,6 +4,7 @@ namespace Tecnospeed;
 
 use Tecnospeed\Assets\Rps\Send\ArrayToTx2;
 use Tecnospeed\Assets\SendParams;
+use Tecnospeed\HttpClient\TecnospeedCurlHttpClient;
 use Zend\Stdlib\Hydrator;
 
 
@@ -14,6 +15,7 @@ class NF {
     public $config;
     public $hydratorClass;
     public $hydrator;
+    public $configuration;
 
     public function __construct($entityManager = null)
     {
@@ -25,9 +27,8 @@ class NF {
             throw new \InvalidArgumentException('Class do not exist');
         }
 
-        $this->entity = new $this->entityManager;
+        $this->configuration = include '\src\Tecnospeed\Config\Configuration.php';
 
-        $this->hydrator = new Hydrator\ClassMethods();
 
     }
 
@@ -46,6 +47,10 @@ class NF {
             throw new \InvalidArgumentException(sprintf("Invalid Arguments"));
         }
 
+        $this->entity = new $this->entityManager;
+
+        $this->hydrator = new Hydrator\ClassMethods();
+
         $this->hydrator->hydrate($content, $this->entity);
 
         return $this->entity;
@@ -54,7 +59,8 @@ class NF {
 
     public function send($config = array())
     {
-        $url = '';
+
+        $url = $this->configuration['url'].'/ManagerAPIWeb/nfse/envia ';
         if (isset($config['url'])) {
             $url = $config['url'];
             unset($config['url']);
@@ -68,11 +74,22 @@ class NF {
 
         $stringTx2 = new ArrayToTx2($this->hydrator->extract($this->entity));
 
-        //$parameters = array();
+        $parameters = array(
+            'CNPJ'=>$this->configuration['CNPJ'],
+            'senha'=>$this->configuration['senha'],
+            'usuario'=>$this->configuration['usuario'],
+            'grupo'=>$this->configuration['grupo'],
+            'arquivo'=>$stringTx2,
+        );
 
-        //$send = new TecnospeedCurlHttpClient();
+        $send = new TecnospeedCurlHttpClient();
 
-        //return $send->send($url, $method,$parameters);
+        return $send->send($url, $method,$parameters);
+
+    }
+
+    public function findAll()
+    {
 
     }
 
