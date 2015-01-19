@@ -31,14 +31,6 @@ class NF {
         $this->configuration = include __DIR__.'\Config\Configuration.php';
     }
 
-    public function testWorks()
-    {
-        print_r("Send Class\n\n");
-        print_r(new Send());
-        print_r("\n\nIts Works\n\n");
-        return;
-    }
-
     /**
      * @param array $content
      * @return mixed
@@ -89,13 +81,81 @@ class NF {
             'arquivo'=>$stringTx2,
         );
 
-        $send = new TecnospeedCurlHttpClient();
+        //$send = new TecnospeedCurlHttpClient();
 
-        return $send->send($url, $method,$parameters);
+        //return $send->send($url, $method,$parameters);
 
     }
 
-    public function findAll()
+    public function findAll($data = array())
+    {
+        $cnpj = $this->configuration['CNPJ'];
+        if ( isset($data['CNPJ'])) {
+            $cnpj = $data['CNPJ'];
+        }
+
+        $grupo = $this->configuration['grupo'];
+        if (isset($data['grupo'])) {
+            $grupo = $data['grupo'];
+        }
+
+        if ( is_array($data['campos'])) {
+            throw new \Exception(sprintf('Expected index "%s" an array','campos'));
+        }
+
+        $campos = strtolower(implode(',',$data['campos']));
+
+        $limite = '100';
+
+        if (isset($data['limite'])) {
+            $limite = $data['limite'];
+        }
+
+        if (!is_numeric($limite)) {
+            throw new \InvalidArgumentException(sprintf('Expected integer argument "%s"','limite'));
+        }
+
+        $inicio = 0;
+
+        if (isset($data['inicio'])) {
+            $inicio = $data['inicio'];
+        }
+
+        if (!is_numeric($inicio)) {
+            throw new \InvalidArgumentException(sprintf('Expected integer argument "%s"','inicio'));
+        }
+
+        $ordem = 'handle,desc';
+
+        if ( isset($data['ordem'])) {
+            $ordem = $data['ordem'];
+        }
+
+        $nomeCidade = '';
+
+        if (isset($data['nomeCidade'])) {
+            $nomeCidade = $data['nomeCidade'];
+        }
+
+        $parameters = array(
+            'CNPJ' => $cnpj,
+            'grupo' => $grupo,
+            'Campos' => $campos,
+            'limite' => $limite,
+            'Ordem' => $ordem,
+        );
+
+        if (0 < $inicio) {
+            $parameters = array_merge($parameters,array('Inicio'=>$inicio));
+        }
+
+        if (!empty($nomeCidade)) {
+            $parameters = array_merge($parameters,array('NomeCidade'=>$nomeCidade));
+        }
+
+    }
+
+    public function resolve()
     {
 
     }
