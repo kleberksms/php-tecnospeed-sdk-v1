@@ -87,7 +87,7 @@ class NF {
 
     }
 
-    public function findAll($data = array())
+    public function find($data = array())
     {
         $cnpj = $this->configuration['CNPJ'];
         if ( isset($data['CNPJ'])) {
