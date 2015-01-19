@@ -4,6 +4,7 @@ namespace Tecnospeed;
 
 use Tecnospeed\Assets\Rps\Send\ArrayToTx2;
 use Tecnospeed\Assets\SendParams;
+use Tecnospeed\Entity\Send;
 use Tecnospeed\HttpClient\TecnospeedCurlHttpClient;
 use Zend\Stdlib\Hydrator;
 
@@ -30,6 +31,14 @@ class NF {
         $this->configuration = include '\src\Tecnospeed\Config\Configuration.php';
 
 
+    }
+
+    public function testWorks()
+    {
+        print_r("Send Class\n\n");
+        print_r(new Send());
+        print_r("\n\nIts Works\n\n");
+        return;
     }
 
     /**
