@@ -1,5 +1,5 @@
 {
-    "name": "tecnospeed/php-sdk-v1",
+    "name": "tecnospeed/tecnospeed-sdk-v1",
     "description": "Tecnospeed Manager eDoc SDK for PHP",
     "keywords": ["Tecnospeed", "sdk"],
     "type": "library",
