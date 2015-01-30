@@ -37,22 +37,26 @@ class NF {
      */
     public function content($content = array())
     {
-        if ( empty($content)) {
-            throw new \InvalidArgumentException('Empty array');
+        try {
+            if (empty($content)) {
+                throw new \InvalidArgumentException('Empty array');
+            }
+
+            $haveDifferences = array_diff_key($content, SendParams::params());
+            if (!empty($haveDifferences)) {
+                throw new \InvalidArgumentException(sprintf("Invalid Arguments"));
+            }
+
+            $this->entity = new $this->entityManager;
+
+            $this->hydrator = new Hydrator\ClassMethods();
+
+            $this->hydrator->hydrate($content, $this->entity);
+
+            return $this->entity;
+        }catch (\InvalidArgumentException $e){
+            echo $e;
         }
-
-        $haveDifferences = array_diff_key($content,SendParams::params());
-        if( !empty($haveDifferences)) {
-            throw new \InvalidArgumentException(sprintf("Invalid Arguments"));
-        }
-
-        $this->entity = new $this->entityManager;
-
-        $this->hydrator = new Hydrator\ClassMethods();
-
-        $this->hydrator->hydrate($content, $this->entity);
-
-        return $this->entity;
 
     }
 
