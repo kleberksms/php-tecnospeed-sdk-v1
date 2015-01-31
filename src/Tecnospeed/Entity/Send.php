@@ -702,6 +702,10 @@ class Send
      */
     public function setIdLote($idLote = 1)
     {
+        if ( empty($idLote)) {
+            $idLote = 1;
+        }
+
         if (!is_numeric($idLote)) {
             throw new \InvalidArgumentException('Invalid Argument');
         }
@@ -723,6 +727,10 @@ class Send
      */
     public function setIdRps($idRps = 1)
     {
+        if ( empty($idLote)) {
+            $idLote = 1;
+        }
+
         if (!is_numeric($idRps)) {
             throw new \InvalidArgumentException('Invalid Argument');
         }
