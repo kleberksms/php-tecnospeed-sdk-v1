@@ -685,7 +685,9 @@ class Send
         if (!in_array( $exigibilidadeISS , range( 1 , 7 ) )) {
             throw new \InvalidArgumentException('Invalid Argument, choice between 1 and 7');
         }
+
         $this->exigibilidadeISS = $exigibilidadeISS;
+
     }
 
     /**
