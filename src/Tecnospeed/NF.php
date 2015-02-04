@@ -54,7 +54,7 @@ class NF {
             $this->hydrator->hydrate($content, $this->entity);
 
             return $this->entity;
-        }catch (\Exception $e){
+        }catch (Exception $e){
             echo $e;
         }
 
