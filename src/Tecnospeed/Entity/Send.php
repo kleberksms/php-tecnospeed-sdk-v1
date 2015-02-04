@@ -687,7 +687,6 @@ class Send
         }
 
         $this->exigibilidadeISS = $exigibilidadeISS;
-
     }
 
     /**
