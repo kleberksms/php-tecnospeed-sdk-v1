@@ -5,4 +5,5 @@ composer.phar
 .DS_Store
 .idea/
 tests/TecnospeedTestCredentials.php
+src/Tecnospeed/Config/Configuration.php
 

@@ -129,7 +129,7 @@ class TecnospeedCurlHttpClient implements TecnospeedHttpable
             CURLOPT_RETURNTRANSFER => true, // Follow 301 redirects
             CURLOPT_HEADER         => true, // Enable header processing
             //CURLOPT_SSL_VERIFYHOST => 2,
-            //CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_SSL_VERIFYPEER => false,
             //CURLOPT_CAINFO         => __DIR__ . '/certs/DigiCertHighAssuranceEVRootCA.pem',
         );
         if ($method !== "GET") {

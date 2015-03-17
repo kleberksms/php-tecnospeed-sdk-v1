@@ -1,0 +1,15 @@
+<?php
+
+namespace Tecnospeed\Config;
+
+/**
+ * @todo Remover isto deste path
+ */
+return array(
+    'url'=>'192.168.0.0:8081',
+    'CNPJ'=>'00000000000000',
+    'usuario'=>'admin',
+    'senha'=>'123mudar',
+    'grupo'=>'group',
+);
+

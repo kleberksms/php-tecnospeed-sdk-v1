@@ -60,20 +60,16 @@ class NF {
 
     }
 
-    public function send($config = array())
+
+    public function send($content = array())
     {
+        if ( ! empty($content)) {
+            $this->content($content);
+        }
 
         $url = $this->configuration['url'].'/ManagerAPIWeb/nfse/envia ';
-        if (isset($config['url'])) {
-            $url = $config['url'];
-            unset($config['url']);
-        }
 
         $method = 'POST';
-        if (isset($config['method'])) {
-            $method = $config['method'];
-            unset($config['method']);
-        }
 
         $stringTx2 = new ArrayToTx2($this->hydrator->extract($this->entity));
 
@@ -85,9 +81,15 @@ class NF {
             'arquivo'=>$stringTx2,
         );
 
-        //$send = new TecnospeedCurlHttpClient();
+        $encoded = base64_encode("{$parameters['usuario']}:{$parameters['senha']}");
 
-        //return $send->send($url, $method,$parameters);
+        $authorization = "Basic {$encoded}";
+
+        $send = new TecnospeedCurlHttpClient();
+
+        $send->addRequestHeader('Authorization',$authorization);
+
+        return $send->send($url, $method, $parameters);
 
     }
 
