@@ -75,8 +75,6 @@ class NF {
 
         $parameters = array(
             'CNPJ'=>$this->configuration['CNPJ'],
-            'senha'=>$this->configuration['senha'],
-            'usuario'=>$this->configuration['usuario'],
             'grupo'=>$this->configuration['grupo'],
             'arquivo'=>$stringTx2,
         );
