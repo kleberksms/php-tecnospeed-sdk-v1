@@ -172,10 +172,7 @@ class NFTest extends PHPUnit_Framework_TestCase
     {
         $nf = new NF();
         $nf->content($this->contentArray);
-        $nf->send(array(
-            'url'=>"127.0.0.1",
-            'method'=>'GET',
-        ));
+        $nf->send();
     }
 
 

@@ -1,7 +1,6 @@
 <?php
 
 use Tecnospeed\Assets\Rps\Send\ArrayToXml;
-use Tecnospeed\Assets\SendParams;
 
 class ArrayToXmlTest extends PHPUnit_Framework_TestCase{
 

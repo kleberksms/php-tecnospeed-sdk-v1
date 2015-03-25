@@ -4,9 +4,8 @@ namespace Tecnospeed;
 
 use Tecnospeed\Assets\Rps\Send\ArrayToTx2;
 use Tecnospeed\Assets\SendParams;
-use Tecnospeed\Entity\Send;
 use Tecnospeed\HttpClient\TecnospeedCurlHttpClient;
-use Zend\Stdlib\Hydrator;
+use Zend\Stdlib\Hydrator\ClassMethods;
 
 
 class NF {
@@ -49,7 +48,7 @@ class NF {
 
             $this->entity = new $this->entityManager;
 
-            $this->hydrator = new Hydrator\ClassMethods();
+            $this->hydrator = new ClassMethods();
 
             $this->hydrator->hydrate($content, $this->entity);
 
@@ -71,15 +70,17 @@ class NF {
 
         $method = 'POST';
 
-        $stringTx2 = new ArrayToTx2($this->hydrator->extract($this->entity));
+        $stringTx2 = new ArrayToTx2();
+        $stringTx2->convertToString($this->hydrator->extract($this->entity));
+
 
         $parameters = array(
             'CNPJ'=>$this->configuration['CNPJ'],
             'grupo'=>$this->configuration['grupo'],
-            'arquivo'=>$stringTx2,
+            'arquivo'=>$stringTx2->getTx2(),
         );
 
-        $encoded = base64_encode("{$parameters['usuario']}:{$parameters['senha']}");
+        $encoded = base64_encode("{$this->configuration['usuario']}:{$this->configuration['senha']}");
 
         $authorization = "Basic {$encoded}";
 
