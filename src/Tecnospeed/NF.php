@@ -58,6 +58,58 @@ class NF {
         }
 
     }
+    
+    public function sendWithSocket($content = array())
+    {
+
+        if ( ! empty($content)) {
+            $this->content($content);
+        }
+
+        $stringTx2 = new ArrayToTx2();
+        $stringTx2->convertToString($this->hydrator->extract($this->entity));
+        $tx2 = $stringTx2->getTx2();
+
+        $post_data['grupo']= $this->configuration['grupo'];
+        $post_data['cnpj']= $this->configuration['CNPJ'];
+        $post_data['arquivo']= $tx2;
+
+        $host = $this->configuration['url'];
+        $port = $this->configuration['port'];
+
+        $data=http_build_query($post_data);
+
+        $usuario = $this->configuration['usuario'];
+        $senha = $this->configuration['senha'];
+
+        $auth = base64_encode("$usuario:$senha");
+
+        $socket = fsockopen($host, $port, $errno, $errstr, 15);
+
+        $http  = "POST /ManagerAPIWeb/nfse/envia HTTP/1.1\r\n";
+        $http .= "Authorization: Basic ".$auth."\r\n";
+        $http .= "Host: ".$host.":8081\r\n";
+        $http .= "User-Agent: " . $_SERVER['HTTP_USER_AGENT'] . "\r\n";
+        $http .= "Content-Type: application/x-www-form-urlencoded\r\n";
+        $http .= "Content-length: " . strlen($data) . "\r\n";
+        $http .= "Connection: close\r\n\r\n";
+        $http .= $data."\r\n\r\n";
+        fwrite($socket, $http);
+
+        $result="";
+
+        //Lê todas as linhas do retorno
+        while (!feof($socket))
+        {
+            $result .= fgets($socket, 4096);
+        }
+        fclose($socket);
+
+        //Separa header do conteudo
+        list($header, $body) = preg_split("/\R\R/", $result, 2);
+
+        return $body;
+    }
 
 
     public function send($content = array())
@@ -66,7 +118,7 @@ class NF {
             $this->content($content);
         }
 
-        $url = $this->configuration['url'].'/ManagerAPIWeb/nfse/envia ';
+        $url = $this->configuration['url'].$this->configuration['port'].'/ManagerAPIWeb/nfse/envia ';
 
         $method = 'POST';
 
@@ -87,6 +139,11 @@ class NF {
         $send = new TecnospeedCurlHttpClient();
 
         $send->addRequestHeader('Authorization',$authorization);
+        $send->addRequestHeader('Host',$this->configuration['url']);
+        $send->addRequestHeader('User-Agent',$_SERVER['HTTP_USER_AGENT']);
+        $send->addRequestHeader('Content-Type','application/x-www-form-urlencoded');
+        $send->addRequestHeader('Connection','close');
+        $send->addRequestHeader('Content-Length',strlen(http_build_query($parameters)));
 
         return $send->send($url, $method, $parameters);
 
