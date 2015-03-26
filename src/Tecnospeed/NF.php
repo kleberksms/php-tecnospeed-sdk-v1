@@ -112,6 +112,11 @@ class NF {
     }
 
 
+    /**
+     * @todo não esta funcionando na prática
+     * @param array $content
+     * @return string
+     */
     public function send($content = array())
     {
         if ( ! empty($content)) {
@@ -140,10 +145,10 @@ class NF {
 
         $send->addRequestHeader('Authorization',$authorization);
         $send->addRequestHeader('Host',$this->configuration['url']);
-        $send->addRequestHeader('User-Agent',$_SERVER['HTTP_USER_AGENT']);
+        //$send->addRequestHeader('User-Agent',$_SERVER['HTTP_USER_AGENT']);
         $send->addRequestHeader('Content-Type','application/x-www-form-urlencoded');
-        $send->addRequestHeader('Connection','close');
         $send->addRequestHeader('Content-Length',strlen(http_build_query($parameters)));
+        $send->addRequestHeader('Connection','close');
 
         return $send->send($url, $method, $parameters);
 

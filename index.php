@@ -5,7 +5,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 $data = array(
     'formato'=>'tx2',
     'padrao'=>'TecnoNFSe',
-    'nomeCidade'=>'OSASCO',
+    'nomeCidade'=>'MARINGA',
     'idLote'=>'',
     'numeroLote'=>'1',
     'quantidadeRPS'=>'1',
