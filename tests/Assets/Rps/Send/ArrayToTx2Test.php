@@ -8,94 +8,7 @@ use Assets\Rps\Send\ArrayToTx2;
 class ArrayToTx2Test extends \PHPUnit_Framework_TestCase
 {
 
-    private $tx2 = "formato=tx2
-padrao=TecnoNFSe
-NomeCidade=OSASCO
-
-INLCUIR
-IDLote=
-NumeroLote=1
-QuantidadeRPS=1
-Transacao=true
-MetodoEnvio=WS
-CpfCnpjRemetente=08187168000160
-InscricaoMunicipalRemetente=1234
-RazaoSocialRemetente=Tecnospeed
-CodigoCidadeRemetente=3534401
-DataInicio=2014-11-17
-DataFim=2014-11-17
-ValorTotalServicos=1.00
-ValorTotalDeducoes=0.00
-ValorTotalBaseCalculo=1.00
-SALVAR
-
-INCLUIRRS
-IdRps=1
-SituacaoNota=1
-TipoRps=1
-SerieRps=1
-NumeroRps=1
-DataEmissao=2014-11-17T00:00:00
-Competencia=2014-11-17
-CpfCnpjPrestador=08187168000160
-InscricaoMunicipalPrestador=1234
-RazaoSocialPrestador=Tecnospeed
-CodigoCidadePrestacao=3534401
-DescricaoCidadePrestacao=OSASCO
-OptanteSimplesNacional=2
-IncentivadorCultural=2
-RegimeEspecialTributacao=0
-NaturezaTributacao=0
-IncentivoFiscal=2
-CpfCnpjTomador=08187168000160
-RazaoSocialTomador=TECNOSPEED TECNOLOGIA DA INFORMAÇÃO
-InscricaoEstadualTomador=9044016688
-TipoLogradouroTomador=AVENIDA
-EnderecoTomador=AVENIDA DUQUE DE CAXIAS
-NumeroTomador=882
-ComplementoTomador=SALA 909
-TipoBairroTomador=ZONA
-BairroTomador=ZONA 7
-CodigoCidadeTomador=4115200
-DescricaoCidadeTomador=MARINGA
-UfTomador=PR
-CepTomador=87020025
-PaisTomador=1058
-DDDTomador=44
-TelefoneTomador=30379500
-EmailTomador=erike@tecnospeed.com.br
-CodigoItemListaServico=15.10
-CodigoTributacaoMunicipio=661930200
-CodigoCnae=6619302
-DiscriminacaoServico=SERVICOS DE RECEBIMENTO DE FATURAS
-TipoTributacao=6
-ExigibilidadeISS=1
-Operacao=A
-MunicipioIncidencia=3534401
-ValorServicos=1.00
-AliquotaPIS=0.00
-AliquotaCOFINS=0.00
-AliquotaINSS=0.00
-AliquotaIR=0.00
-AliquotaCSLL=0.00
-ValorPIS=0.00
-ValorCOFINS=0.00
-ValorINSS=0.00
-ValorIR=0.00
-ValorCSLL=0.00
-OutrasRetencoes=0.00
-DescontoIncondicionado=0.00
-DescontoCondicionado=0.00
-ValorDeducoes=0.00
-BaseCalculo=1.00
-AliquotaISS=5.00
-ValorIss=0.05
-IssRetido=2
-ValorISSRetido=0.00
-ValorLiquidoNfse=1.00
-SALVARRPS
-        ";
-
+    private $tx2 = "formato=tx2\npadrao=TecnoNFSe\nNomeCidade=OSASCO\n\nINCLUIR\nIDLote=\nNumeroLote=1\nQuantidadeRPS=1\nTransacao=true\nMetodoEnvio=WS\nCpfCnpjRemetente=08187168000160\nInscricaoMunicipalRemetente=1234\nRazaoSocialRemetente=Tecnospeed\nCodigoCidadeRemetente=3534401\nDataInicio=2014-11-17\nDataFim=2014-11-17\nValorTotalServicos=1.00\nValorTotalDeducoes=0.00\nValorTotalBaseCalculo=1.00\nSALVAR\n\nINCLUIRPS\nIdRps=1\nSituacaoNota=1\nTipoRps=1\nSerieRps=1\nNumeroRps=1\nDataEmissao=2014-11-17T00:00:00\nCompetencia=2014-11-17\nCpfCnpjPrestador=08187168000160\nInscricaoMunicipalPrestador=1234\nRazaoSocialPrestador=Tecnospeed\nCodigoCidadePrestacao=3534401\nDescricaoCidadePrestacao=OSASCO\nOptanteSimplesNacional=2\nIncentivadorCultural=2\nRegimeEspecialTributacao=0\nNaturezaTributacao=0\nIncentivoFiscal=2\nCpfCnpjTomador=08187168000160\nRazaoSocialTomador=TECNOSPEED TECNOLOGIA DA INFORMAÇÃO\nInscricaoEstadualTomador=9044016688\nTipoLogradouroTomador=AVENIDA\nEnderecoTomador=AVENIDA DUQUE DE CAXIAS\nNumeroTomador=882\nComplementoTomador=SALA 909\nTipoBairroTomador=ZONA\nBairroTomador=ZONA 7\nCodigoCidadeTomador=4115200\nDescricaoCidadeTomador=MARINGA\nUfTomador=PR\nCepTomador=87020025\nPaisTomador=1058\nDDDTomador=44\nTelefoneTomador=30379500\nEmailTomador=erike@tecnospeed.com.br\nCodigoItemListaServico=15.10\nCodigoTributacaoMunicipio=661930200\nCodigoCnae=6619302\nDiscriminacaoServico=SERVICOS DE RECEBIMENTO DE FATURAS\nTipoTributacao=6\nExigibilidadeISS=1\nOperacao=A\nMunicipioIncidencia=3534401\nValorServicos=1.00\nAliquotaPIS=0.00\nAliquotaCOFINS=0.00\nAliquotaINSS=0.00\nAliquotaIR=0.00\nAliquotaCSLL=0.00\nValorPIS=0.00\nValorCOFINS=0.00\nValorINSS=0.00\nValorIR=0.00\nValorCSLL=0.00\nOutrasRetencoes=0.00\nDescontoIncondicionado=0.00\nDescontoCondicionado=0.00\nValorDeducoes=0.00\nBaseCalculo=1.00\nAliquotaISS=5.00\nValorIss=0.05\nIssRetido=2\nValorISSRetido=0.00\nValorLiquidoNfse=1.00\nSALVARRPS";
     public $array = array(
         'formato'=>'tx2',
         'padrao'=>'TecnoNFSe',
@@ -186,6 +99,6 @@ SALVARRPS
     {
         $tx2 = new \Tecnospeed\Assets\Rps\Send\ArrayToTx2();
         $tx2->convertToString($this->array);
-        //$this->assertEquals(trim($this->tx2), trim($tx2->getTx2()));
+        $this->assertEquals(trim($this->tx2), trim($tx2->getTx2()));
     }
 } 

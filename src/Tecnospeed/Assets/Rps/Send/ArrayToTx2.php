@@ -31,8 +31,12 @@ class ArrayToTx2 extends AbstractArray
         $string = "formato=".$array['Formato'];
         $string = $string."\npadrao=".$array['Padrao'];
         $string = $string."\nNomeCidade=".$array['NomeCidade'];
-        $string = $string."\n\nINLCUIR";
+        $string = $string."\n\nINCLUIR";
         $string = $string."\nIDLote=".$array['IdLote'];
+
+        //falta versao
+
+
         $string = $string."\nNumeroLote=".$array['NumeroLote'];
         $string = $string."\nQuantidadeRPS=".$array['QuantidadeRPS'];
         $string = $string."\nTransacao=".$array['Transacao'];
@@ -47,7 +51,8 @@ class ArrayToTx2 extends AbstractArray
         $string = $string."\nValorTotalDeducoes=".$array['ValorTotalDeducoes'];
         $string = $string."\nValorTotalBaseCalculo=".$array['ValorTotalBaseCalculo'];
         $string = $string."\nSALVAR";
-        $string = $string."\n\nINCLUIRRS";
+        $string = $string."\n\nINCLUIRPS";
+        //idIntegracao
         $string = $string."\nIdRps=".$array['IdRps'];
         $string = $string."\nSituacaoNota=".$array['SituacaoNota'];
         $string = $string."\nTipoRps=".$array['TipoRps'];

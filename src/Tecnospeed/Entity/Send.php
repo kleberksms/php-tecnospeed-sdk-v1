@@ -707,9 +707,6 @@ class Send
             $idLote = 1;
         }
 
-        if (!is_numeric($idLote)) {
-            throw new \InvalidArgumentException('Invalid Argument');
-        }
         $this->idLote = $idLote;
 
     }

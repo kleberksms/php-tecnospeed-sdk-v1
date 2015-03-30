@@ -68,8 +68,7 @@ class NF {
 
         $stringTx2 = new ArrayToTx2();
         $stringTx2->convertToString($this->hydrator->extract($this->entity));
-        $tx2 = $stringTx2->getTx2();
-
+        $tx2 = utf8_decode($stringTx2->getTx2());
         $post_data['grupo']= $this->configuration['grupo'];
         $post_data['cnpj']= $this->configuration['CNPJ'];
         $post_data['arquivo']= $tx2;
@@ -123,7 +122,7 @@ class NF {
             $this->content($content);
         }
 
-        $url = $this->configuration['url'].$this->configuration['port'].'/ManagerAPIWeb/nfse/envia ';
+        $url = $this->configuration['url'].":".$this->configuration['port'].'/ManagerAPIWeb/nfse/envia ';
 
         $method = 'POST';
 
