@@ -14,6 +14,8 @@ class Send
      * Dados padrão
      */
     private $idLote;
+    private $versao;
+
     private $numeroLote;
     private $quantidadeRPS;
     private $transacao;
@@ -27,10 +29,6 @@ class Send
     private $valorTotalServicos;
     private $valorTotalDeducoes;
     private $valorTotalBaseCalculo;
-
-    /**
-     * Dados do RPS
-     */
 
     private $idRps;
     private $situacaoNota;
@@ -46,9 +44,9 @@ class Send
     private $descricaoCidadePrestacao;
     private $optanteSimplesNacional;
     private $incentivadorCultural;
+    private $incentivoFiscal;
     private $regimeEspecialTributacao;
     private $naturezaTributacao;
-    private $incentivoFiscal;
 
     /**
      * Tomador
@@ -696,6 +694,30 @@ class Send
     {
         return $this->idLote;
     }
+
+
+    /**
+     * @return mixed
+     */
+    public function getVersao()
+    {
+        return $this->versao;
+    }
+
+    /**
+     * @param mixed $versao
+     */
+    public function setVersao($versao = null)
+    {
+        if(is_null($versao)) {
+            $versao = '2.01';
+            return $this;
+        }
+        $this->versao = $versao;
+    }
+
+
+
 
     /**
      * @param int $idLote
@@ -1464,6 +1486,28 @@ class Send
     public function setValorTotalServicos($valorTotalServicos)
     {
         $this->valorTotalServicos = $valorTotalServicos;
+    }
+
+
+    /**
+     * Dados do RPS
+     */
+    private $idIntegracao;
+
+    /**
+     * @return mixed
+     */
+    public function getIdIntegracao()
+    {
+        return $this->idIntegracao;
+    }
+
+    /**
+     * @param mixed $idIntegracao
+     */
+    public function setIdIntegracao($idIntegracao)
+    {
+        $this->idIntegracao = $idIntegracao;
     }
 
 } 
