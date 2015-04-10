@@ -43,7 +43,7 @@ class NF {
 
             $haveDifferences = array_diff_key($content, SendParams::params());
             if (!empty($haveDifferences)) {
-                throw new \InvalidArgumentException(sprintf("Invalid Arguments"));
+                throw new \InvalidArgumentException(sprintf("Invalid Arguments",var_dump($haveDifferences)));
             }
 
             $this->entity = new $this->entityManager;

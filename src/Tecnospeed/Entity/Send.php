@@ -1,8 +1,6 @@
 <?php
+
 namespace Tecnospeed\Entity;
-
-use \InvalidArgumentException;
-
 
 class Send
 {
@@ -114,10 +112,14 @@ class Send
     }
 
     /**
-     * @param mixed $formato
+     * @param null $formato
+     *
      */
     public function setFormato($formato)
     {
+        if(is_null($formato)){
+            $this->formato = 'tx2';
+        }
         $this->formato = $formato;
     }
 
@@ -132,8 +134,11 @@ class Send
     /**
      * @param mixed $nomeCidade
      */
-    public function setNomeCidade($nomeCidade)
+    public function setNomeCidade($nomeCidade =  null)
     {
+        if(is_null($nomeCidade)) {
+            throw new \InvalidArgumentException('Informe a Cidade');
+        }
         $this->nomeCidade = $nomeCidade;
     }
 
@@ -309,9 +314,14 @@ class Send
 
     /**
      * @param mixed $codigoCidadePrestacao
+     * Código do Município de
+     * Prestação.
      */
     public function setCodigoCidadePrestacao($codigoCidadePrestacao)
     {
+        if(is_null($codigoCidadePrestacao)) {
+            throw new InvalidArgumentException('Informe o CodigoCidadePrestacao');
+        }
         $this->codigoCidadePrestacao = $codigoCidadePrestacao;
     }
 
@@ -324,10 +334,16 @@ class Send
     }
 
     /**
+     * Código da cidade do
+     * emitente, presente na tabela
+     * IBGE.
      * @param mixed $codigoCidadeRemetente
      */
     public function setCodigoCidadeRemetente($codigoCidadeRemetente)
     {
+        if(!is_string($codigoCidadeRemetente)) {
+            throw new InvalidArgumentException('CodigoCidadeRemetende deve ser uma string');
+        }
         $this->codigoCidadeRemetente = $codigoCidadeRemetente;
     }
 
@@ -409,6 +425,9 @@ class Send
 
     /**
      * @param mixed $competencia
+     * Data de competência da  NFSe.
+     * Data no formato brasileiro (“DD/MM/AAAA”) ou no formato usado em arquivos XML
+     * (“AAAA-MM-DD”). Ex: “25/12/2011”, “2011-12-25”.
      */
     public function setCompetencia($competencia)
     {
@@ -441,9 +460,13 @@ class Send
 
     /**
      * @param mixed $cpfCnpjPrestador
+     * CPF ou CNPJ do prestador.
      */
     public function setCpfCnpjPrestador($cpfCnpjPrestador)
     {
+        if(is_null($cpfCnpjPrestador)) {
+            throw new InvalidArgumentException('Informe o campo cpfCnpjPrestador');
+        }
         $this->cpfCnpjPrestador = $cpfCnpjPrestador;
     }
 
@@ -460,6 +483,13 @@ class Send
      */
     public function setCpfCnpjRemetente($cpfCnpjRemetente)
     {
+        if(!is_string($cpfCnpjRemetente)) {
+            throw new InvalidArgumentException('CpfCnpjRemetende deve ser um string.');
+        }
+
+        if(is_null($cpfCnpjRemetente)) {
+            throw new InvalidArgumentException('CpfCnpjRemetende nao pode ser nulo.');
+        }
         $this->cpfCnpjRemetente = $cpfCnpjRemetente;
     }
 
@@ -473,9 +503,14 @@ class Send
 
     /**
      * @param mixed $cpfCnpjTomador
+     * CPF ou CNPJ do Tomador.
      */
     public function setCpfCnpjTomador($cpfCnpjTomador)
     {
+        if(is_null($cpfCnpjTomador)) {
+            throw new InvalidArgumentException('Informe o CpfCnpjTomador');
+        }
+
         $this->cpfCnpjTomador = $cpfCnpjTomador;
     }
 
@@ -488,10 +523,16 @@ class Send
     }
 
     /**
-     * @param mixed $dataEmissao
+     * @param mixed
+     * Data de emissão do RPS.
+     * Data e hora no formato brasileiro (“DD/MM/AAAA HH:MM:SS”) ou no formato usado
+     * em arquivos XML (“AAAA-MM-DDTHH:MM:SS”).
      */
     public function setDataEmissao($dataEmissao)
     {
+        if(is_null($dataEmissao)) {
+            throw new InvalidArgumentException('Informe a dataEmissao');
+        }
         $this->dataEmissao = $dataEmissao;
     }
 
@@ -504,10 +545,16 @@ class Send
     }
 
     /**
-     * @param mixed $dataFim
+     * @param mixed
+     * Data do último lote de RPS
+     * presente no lote.
+     * Padro de data = YYYY-mm-ddThh:mm:ss
      */
     public function setDataFim($dataFim)
     {
+        if(is_null($dataFim)) {
+            throw new InvalidArgumentException('Informe a DataFim');
+        }
         $this->dataFim = $dataFim;
     }
 
@@ -520,10 +567,16 @@ class Send
     }
 
     /**
-     * @param mixed $dataInicio
+     * @param mixed
+     * Data do primeiro lote de RPS
+     * presente no lote.
+     * Padro de data = YYYY-mm-ddThh:mm:ss
      */
     public function setDataInicio($dataInicio)
     {
+        if(is_null($dataInicio)) {
+            throw new \InvalidArgumentException('Informe a DataInicio');
+        }
         $this->dataInicio = $dataInicio;
     }
 
@@ -588,9 +641,14 @@ class Send
 
     /**
      * @param mixed $descricaoCidadePrestacao
+     * Descrição da cidade de Prestação.
      */
-    public function setDescricaoCidadePrestador($descricaoCidadePrestacao)
-    {
+    public function setDescricaoCidadePrestador($descricaoCidadePrestacao){
+
+        if(is_null($descricaoCidadePrestacao)) {
+            throw new \InvalidArgumentException('Informe a DescricaoCidadePrestacao');
+        }
+
         $this->descricaoCidadePrestacao = $descricaoCidadePrestacao;
     }
 
@@ -705,18 +763,17 @@ class Send
     }
 
     /**
-     * @param mixed $versao
+     *
+     * @param null $versao
+     *
      */
-    public function setVersao($versao = null)
+    public function setVersao($versao)
     {
         if(is_null($versao)) {
-            $versao = '2.01';
-            return $this;
+            $this->versao = '2.01';
         }
         $this->versao = $versao;
     }
-
-
 
 
     /**
@@ -748,13 +805,9 @@ class Send
     public function setIdRps($idRps = 1)
     {
         if ( empty($idLote)) {
-            $idLote = 1;
+            $this->idRps = 1;
         }
-
-        if (!is_numeric($idRps)) {
-            throw new \InvalidArgumentException('Invalid Argument');
-        }
-        $this->idRps = $idRps;
+        $this->idRps = (int)$idRps;
     }
 
     /**
@@ -771,16 +824,12 @@ class Send
      * 2 - para não
      * padrão tecnospeed
      */
-    public function setIncentivadorCultural($incentivadorCultural)
+    public function setIncentivadorCultural($incentivadorCultural = 2 )
     {
         if ( !is_numeric($incentivadorCultural)) {
-            throw new InvalidArgumentException('Invalid Argument');
+            throw new \InvalidArgumentException('IncentivadorCultural deve ser um inteiro.');
         }
 
-        $condition = (1 == $incentivadorCultural || 2 == $incentivadorCultural);
-        if ( !$condition) {
-            throw new InvalidArgumentException('Invalid Number');
-        }
         $this->incentivadorCultural = $incentivadorCultural;
     }
 
@@ -795,15 +844,10 @@ class Send
     /**
      * @param mixed $incentivoFiscal
      */
-    public function setIncentivoFiscal($incentivoFiscal)
+    public function setIncentivoFiscal($incentivoFiscal = 2)
     {
         if ( !is_numeric($incentivoFiscal)) {
-            throw new InvalidArgumentException('Invalid Argument');
-        }
-
-        $condition = (1 == $incentivoFiscal || 2 == $incentivoFiscal);
-        if ( !$condition) {
-            throw new InvalidArgumentException('Invalid Number');
+            throw new \InvalidArgumentException('IncentivoFiscal deve ser um inteiro');
         }
 
         $this->incentivoFiscal = $incentivoFiscal;
@@ -819,9 +863,13 @@ class Send
 
     /**
      * @param mixed $inscricaoEstadualTomador
+     * Inscrição Estadual do Tomador
      */
     public function setInscricaoEstadualTomador($inscricaoEstadualTomador)
     {
+        if(is_null($inscricaoEstadualTomador)) {
+            throw new \InvalidArgumentException('Informe a InscricaoEstadualTomador ');
+        }
         $this->inscricaoEstadualTomador = $inscricaoEstadualTomador;
     }
 
@@ -835,9 +883,14 @@ class Send
 
     /**
      * @param mixed $inscricaoMunicipalPrestador
+     * Número da inscrição Municipal do prestador.
+
      */
     public function setInscricaoMunicipalPrestador($inscricaoMunicipalPrestador)
     {
+        if(is_null($inscricaoMunicipalPrestador )) {
+            throw new \InvalidArgumentException('Informe a IncricaoMunicipalPrestador');
+        }
         $this->inscricaoMunicipalPrestador = $inscricaoMunicipalPrestador;
     }
 
@@ -854,6 +907,10 @@ class Send
      */
     public function setInscricaoMunicipalRemetente($inscricaoMunicipalRemetente)
     {
+        if(is_null($inscricaoMunicipalRemetente)) {
+            throw new \InvalidArgumentException('InscricaoMunicipalRemetente nao pode ser nulo');
+        }
+
         $this->inscricaoMunicipalRemetente = $inscricaoMunicipalRemetente;
     }
 
@@ -884,7 +941,7 @@ class Send
     /**
      * @param mixed $metodoEnvio
      */
-    public function setMetodoEnvio($metodoEnvio)
+    public function setMetodoEnvio($metodoEnvio = 'WS')
     {
         $this->metodoEnvio = $metodoEnvio;
     }
@@ -932,8 +989,11 @@ class Send
     /**
      * @param mixed $numeroLote
      */
-    public function setNumeroLote($numeroLote)
+    public function setNumeroLote($numeroLote = 1)
     {
+        if(!is_numeric($numeroLote)) {
+            throw new \InvalidArgumentException('Numero do lote deve ser um inteiro.');
+        }
         $this->numeroLote = $numeroLote;
     }
 
@@ -947,9 +1007,13 @@ class Send
 
     /**
      * @param mixed $numeroRps
+     * Numero do RPS.
      */
     public function setNumeroRps($numeroRps)
     {
+        if(!is_int($numeroRps)) {
+            throw new \InvalidArgumentException('Numero RPS deve ser inteiro.');
+        }
         $this->numeroRps = $numeroRps;
     }
 
@@ -994,19 +1058,16 @@ class Send
     }
 
     /**
-     * @param mixed $optantesSimplesNacional
+     * @param $optanteSimplesNacional
      * 1 - optante - valor padrão tecnospeed
      * 2 - não optante - valor padrão da tecnospeed
      */
-    public function setOptanteSimplesNacional($optanteSimplesNacional)
+    public function setOptanteSimplesNacional($optanteSimplesNacional = 2)
     {
         if ( !is_numeric($optanteSimplesNacional)) {
-            throw new InvalidArgumentException('Invalid Argument');
+            throw new \InvalidArgumentException('OptanteSimplesNacional deve ser um inteiro');
         }
-        $condition = (1 == $optanteSimplesNacional || 2 == $optanteSimplesNacional);
-        if ( !$condition) {
-            throw new InvalidArgumentException('Invalid Number');
-        }
+
         $this->optanteSimplesNacional = $optanteSimplesNacional;
     }
 
@@ -1052,9 +1113,13 @@ class Send
 
     /**
      * @param mixed $quantidadeRPS
+     * 0 - Calculado automaticamente.
      */
-    public function setQuantidadeRPS($quantidadeRPS)
+    public function setQuantidadeRPS($quantidadeRPS = 0)
     {
+        if(!is_numeric($quantidadeRPS)){
+            throw new \InvalidArgumentException('QuantidadeRps deve ser um inteiro');
+        }
         $this->quantidadeRPS = $quantidadeRPS;
     }
 
@@ -1068,9 +1133,13 @@ class Send
 
     /**
      * @param mixed $razaoSocialPrestador
+     * Razão social do prestador
      */
     public function setRazaoSocialPrestador($razaoSocialPrestador)
     {
+        if(is_null($razaoSocialPrestador)) {
+            throw new \InvalidArgumentException('Informe a RazaoSocialPrestador');
+        }
         $this->razaoSocialPrestador = $razaoSocialPrestador;
     }
 
@@ -1087,6 +1156,10 @@ class Send
      */
     public function setRazaoSocialRemetente($razaoSocialRemetente)
     {
+        if(!is_string($razaoSocialRemetente)) {
+            throw new \InvalidArgumentException('RazaoSocialRemetente deve ser um String');
+        }
+
         $this->razaoSocialRemetente = $razaoSocialRemetente;
     }
 
@@ -1100,9 +1173,13 @@ class Send
 
     /**
      * @param mixed $razaoSocialTomador
+     * Razão Social do Tomador.
      */
     public function setRazaoSocialTomador($razaoSocialTomador)
     {
+        if(is_null($razaoSocialTomador)) {
+            throw new \InvalidArgumentException('Informe a RazaoSocialTomador');
+        }
         $this->razaoSocialTomador = $razaoSocialTomador;
     }
 
@@ -1132,8 +1209,9 @@ class Send
 
     /**
      * @param mixed $serieRps
+     * Valor padrao 'U'
      */
-    public function setSerieRps($serieRps)
+    public function setSerieRps($serieRps = 'U')
     {
         $this->serieRps = $serieRps;
     }
@@ -1148,22 +1226,14 @@ class Send
 
     /**
      * @param mixed $situacaoNota
-     * 1 - situação normal - padrão da tecnospeed
+     * 1 - situação normal    - padrão da tecnospeed
      * 2 - situação cancelada - padrão da tecnospeed
      */
-    public function setSituacaoNota($situacaoNota)
+    public function setSituacaoNota($situacaoNota = 1)
     {
         if (!is_numeric($situacaoNota)) {
-            throw new InvalidArgumentException('Invalid Argument');
+            throw new \InvalidArgumentException('Situacao da nota de ver um inteiro : 1- situacao normal | 2 situacao cancela.');
         }
-
-        $condition = (1 == $situacaoNota || 2 == $situacaoNota);
-
-        if ( !$condition) {
-            throw new InvalidArgumentException('Invalid Number');
-        }
-
-
         $this->situacaoNota = $situacaoNota;
     }
 
@@ -1209,9 +1279,13 @@ class Send
 
     /**
      * @param mixed $tipoLogradouroTomador
+     * Exemplo: Rua, Avenida, etc.
      */
-    public function setTipoLogradouroTomador($tipoLogradouroTomador)
+    public function setTipoLogradouroTomador($tipoLogradouroTomador )
     {
+        if (is_null($tipoLogradouroTomador)) {
+            $tipoLogradouroTomador = '';
+        }
         $this->tipoLogradouroTomador = $tipoLogradouroTomador;
     }
 
@@ -1259,8 +1333,11 @@ class Send
     /**
      * @param mixed $transacao
      */
-    public function setTransacao($transacao)
+    public function setTransacao($transacao = true)
     {
+        if(!is_bool($transacao)){
+            throw new \InvalidArgumentException('Transacao deve ser um booleano');
+        }
         $this->transacao = $transacao;
     }
 
@@ -1450,10 +1527,12 @@ class Send
 
     /**
      * @param mixed $valorTotalBasseCalculo
+     * Valor total da base de cálculo do lote de RPS
      */
-    public function setValorTotalBaseCalculo($valorTotalBaseCalculo)
+    public function setValorTotalBaseCalculo($valorTotalBaseCalculo = 0)
     {
-        $this->valorTotalBaseCalculo = $valorTotalBaseCalculo;
+
+        $this->valorTotalBaseCalculo =(float)$valorTotalBaseCalculo;
     }
 
     /**
@@ -1466,10 +1545,11 @@ class Send
 
     /**
      * @param mixed $valorTotalDeducoes
+     * Valor total das deduções nos RPS
      */
-    public function setValorTotalDeducoes($valorTotalDeducoes)
+    public function setValorTotalDeducoes($valorTotalDeducoes = 0)
     {
-        $this->valorTotalDeducoes = $valorTotalDeducoes;
+          $this->valorTotalDeducoes = (float) $valorTotalDeducoes;
     }
 
     /**
@@ -1482,10 +1562,12 @@ class Send
 
     /**
      * @param mixed $valorTotalServicos
+     * Valor total dos serviços
+     * prestados nos RPS
      */
     public function setValorTotalServicos($valorTotalServicos)
     {
-        $this->valorTotalServicos = $valorTotalServicos;
+        $this->valorTotalServicos = (float)$valorTotalServicos ;
     }
 
 
@@ -1507,7 +1589,7 @@ class Send
      */
     public function setIdIntegracao($idIntegracao)
     {
-        $this->idIntegracao = $idIntegracao;
+        $this->idIntegracao = (int)$idIntegracao;
     }
 
-} 
+}

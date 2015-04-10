@@ -17,11 +17,13 @@ class SendParams {
             'formato'=>'',
             'padrao'=>'',
             'nomeCidade'=>'',
-            'idLote'=>'',
+            'IdLote'=>'',
             'numeroLote'=>'',
+            'versao'=>'',
             'quantidadeRPS'=>'',
             'transacao'=>'',
             'metodoEnvio'=>'',
+            'idIntegracao'=>'',
             'cpfCnpjRemetente'=>'',
             'razaoSocialRemetente' => '',
             'inscricaoMunicipalRemetente'=>'',
@@ -45,7 +47,6 @@ class SendParams {
             'descricaoCidadePrestacao'=>'',
             'optanteSimplesNacional'=>'',
             'incentivadorCultural'=>'',
-            'regimeEspecialTributacao'=>'',
             'naturezaTributacao'=>'',
             'incentivoFiscal'=>'',
             'incentivoFiscal'=>'',
@@ -94,7 +95,8 @@ class SendParams {
             'valorIss'=>'',
             'issRetido'=>'',
             'valorISSRetido'=>'',
-            'valorLiquidoNfse'=>''
+            'valorLiquidoNfse'=>'',
+            'regimeEspecialTributacao'=>''
         );
     }
 

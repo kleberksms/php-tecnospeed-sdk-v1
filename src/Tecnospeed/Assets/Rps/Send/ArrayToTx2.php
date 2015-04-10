@@ -27,19 +27,16 @@ class ArrayToTx2 extends AbstractArray
     public function convertToString(array $data)
     {
 
-        $array = $this->normalizeArray($data);
-        $string = "formato=".$array['Formato'];
-        $string = $string."\npadrao=".$array['Padrao'];
-        $string = $string."\nNomeCidade=".$array['NomeCidade'];
-        $string = $string."\n\nINCLUIR";
-        $string = $string."\nIDLote=".$array['IdLote'];
-
-        //falta versao
-
-
-        $string = $string."\nNumeroLote=".$array['NumeroLote'];
-        $string = $string."\nQuantidadeRPS=".$array['QuantidadeRPS'];
-        $string = $string."\nTransacao=".$array['Transacao'];
+        $array  = $this->normalizeArray($data);
+        $string  = "formato=".$array['Formato'];
+        $string .= "\npadrao=".$array['Padrao'];
+        $string .= "\nNomeCidade=".$array['NomeCidade'];
+        $string .= "\nINCLUIR";
+        $string .= "\nIDLote=".$array['IdLote'];
+        $string .= "\nVersao=".$array['Versao'];
+        $string .= "\nNumeroLote=".$array['NumeroLote'];
+        $string .= "\nQuantidadeRPS=".$array['QuantidadeRPS'];
+        $string .= ($array['Transacao'] === true) ? "\nTransacao=true" : "\nTransacao=false";
         $string = $string."\nMetodoEnvio=".$array['MetodoEnvio'];
         $string = $string."\nCpfCnpjRemetente=".$array['CpfCnpjRemetente'];
         $string = $string."\nInscricaoMunicipalRemetente=".$array['InscricaoMunicipalRemetente'];
@@ -51,8 +48,8 @@ class ArrayToTx2 extends AbstractArray
         $string = $string."\nValorTotalDeducoes=".$array['ValorTotalDeducoes'];
         $string = $string."\nValorTotalBaseCalculo=".$array['ValorTotalBaseCalculo'];
         $string = $string."\nSALVAR";
-        $string = $string."\n\nINCLUIRPS";
-        //idIntegracao
+        $string = $string."\nINCLUIRRPS";
+        $string = $string."\nIdIntegracao=".$array['IdIntegracao'];
         $string = $string."\nIdRps=".$array['IdRps'];
         $string = $string."\nSituacaoNota=".$array['SituacaoNota'];
         $string = $string."\nTipoRps=".$array['TipoRps'];
@@ -67,8 +64,6 @@ class ArrayToTx2 extends AbstractArray
         $string = $string."\nDescricaoCidadePrestacao=".$array['DescricaoCidadePrestacao'];
         $string = $string."\nOptanteSimplesNacional=".$array['OptanteSimplesNacional'];
         $string = $string."\nIncentivadorCultural=".$array['IncentivadorCultural'];
-        $string = $string."\nRegimeEspecialTributacao=".$array['RegimeEspecialTributacao'];
-        $string = $string."\nNaturezaTributacao=".$array['NaturezaTributacao'];
         $string = $string."\nIncentivoFiscal=".$array['IncentivoFiscal'];
         $string = $string."\nCpfCnpjTomador=".$array['CpfCnpjTomador'];
         $string = $string."\nRazaoSocialTomador=".$array['RazaoSocialTomador'];
@@ -77,11 +72,9 @@ class ArrayToTx2 extends AbstractArray
         $string = $string."\nEnderecoTomador=".$array['EnderecoTomador'];
         $string = $string."\nNumeroTomador=".$array['NumeroTomador'];
         $string = $string."\nComplementoTomador=".$array['ComplementoTomador'];
-        $string = $string."\nTipoBairroTomador=".$array['TipoBairroTomador'];
         $string = $string."\nBairroTomador=".$array['BairroTomador'];
         $string = $string."\nCodigoCidadeTomador=".$array['CodigoCidadeTomador'];
         $string = $string."\nDescricaoCidadeTomador=".$array['DescricaoCidadeTomador'];
-        $string = $string."\nUfTomador=".$array['UfTomador'];
         $string = $string."\nCepTomador=".$array['CepTomador'];
         $string = $string."\nPaisTomador=".$array['PaisTomador'];
         $string = $string."\nDDDTomador=".$array['DddTomador'];
@@ -95,6 +88,7 @@ class ArrayToTx2 extends AbstractArray
         $string = $string."\nExigibilidadeISS=".$array['ExigibilidadeISS'];
         $string = $string."\nOperacao=".$array['Operacao'];
         $string = $string."\nMunicipioIncidencia=".$array['MunicipioIncidencia'];
+
         $string = $string."\nValorServicos=".$array['ValorServicos'];
         $string = $string."\nAliquotaPIS=".$array['AliquotaPIS'];
         $string = $string."\nAliquotaCOFINS=".$array['AliquotaCOFINS'];
@@ -116,6 +110,8 @@ class ArrayToTx2 extends AbstractArray
         $string = $string."\nIssRetido=".$array['IssRetido'];
         $string = $string."\nValorISSRetido=".$array['ValorISSRetido'];
         $string = $string."\nValorLiquidoNfse=".$array['ValorLiquidoNfse'];
+        $string = $string."\nRegimeEspecialTributacao=".$array['RegimeEspecialTributacao'];
+        $string = $string."\nNaturezaTributacao=".$array['NaturezaTributacao'];
         $string = $string."\nSALVARRPS";
 
         $this->setTx2($string);
