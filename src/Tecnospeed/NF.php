@@ -2,6 +2,7 @@
 
 namespace Tecnospeed;
 
+use Mockery\Exception;
 use Tecnospeed\Assets\Rps\Send\ArrayToTx2;
 use Tecnospeed\Assets\SendParams;
 use Tecnospeed\HttpClient\TecnospeedCurlHttpClient;
@@ -16,6 +17,7 @@ class NF {
     public $hydratorClass;
     public $hydrator;
     public $configuration;
+    public $cities;
 
     public function __construct($entityManager = null)
     {
@@ -28,6 +30,7 @@ class NF {
         }
 
         $this->configuration = include __DIR__.'\Config\Configuration.php';
+        $this->cities        = include __DIR__.'\Config\Cities.php';
     }
 
     /**
@@ -67,23 +70,30 @@ class NF {
         }
 
         $stringTx2 = new ArrayToTx2();
-        $stringTx2->convertToString($this->hydrator->extract($this->entity));
+        $arrayNfse = $this->hydrator->extract($this->entity);
+        $stringTx2->convertToString($arrayNfse);
         $tx2 = utf8_decode($stringTx2->getTx2());
-        $post_data['grupo']= $this->configuration['grupo'];
-        $post_data['cnpj']= $this->configuration['CNPJ'];
-        $post_data['arquivo']= $tx2;
 
+        $post_data['grupo']= $this->cities[$arrayNfse['cpf_cnpj_remetente']]['grupo'];
+        $post_data['cnpj']= $this->cities[$arrayNfse['cpf_cnpj_remetente']]['CNPJ'];
+
+        $post_data['arquivo']= $tx2;
         $host = $this->configuration['url'];
         $port = $this->configuration['port'];
 
         $data=http_build_query($post_data);
 
         $usuario = $this->configuration['usuario'];
-        $senha = $this->configuration['senha'];
+        $senha   = $this->configuration['senha'];
 
         $auth = base64_encode("$usuario:$senha");
 
         $socket = fsockopen($host, $port, $errno, $errstr, 15);
+        if(!$socket) {
+            throw new Exception('Erro ao conectar no manager.<br>');
+            exit;
+        }
+
 
         $http  = "POST /ManagerAPIWeb/nfse/envia HTTP/1.1\r\n";
         $http .= "Authorization: Basic ".$auth."\r\n";
@@ -156,20 +166,33 @@ class NF {
     public function find($data = array())
     {
         $cnpj = $this->configuration['CNPJ'];
-        if ( isset($data['CNPJ'])) {
-            $cnpj = $data['CNPJ'];
-        }
 
         $grupo = $this->configuration['grupo'];
-        if (isset($data['grupo'])) {
-            $grupo = $data['grupo'];
-        }
-
-        if ( is_array($data['campos'])) {
-            throw new \Exception(sprintf('Expected index "%s" an array','campos'));
-        }
 
         $campos = strtolower(implode(',',$data['campos']));
+        $parameters['Campos'] = $campos;
+
+
+        $parameters = array(
+            'CNPJ'=>$this->configuration['CNPJ'],
+            'grupo'=>$this->configuration['grupo'],
+            'Campos'=>$campos,
+            'nrps'=>141
+        );
+
+        $find = new TecnospeedCurlHttpClient();
+        $encoded = base64_encode("{$this->configuration['usuario']}:{$this->configuration['senha']}");
+        $authorization = "Basic {$encoded}";
+        $find->addRequestHeader('Authorization',$authorization);
+
+        $url = $this->configuration['url'].":".$this->configuration['port'].'/ManagerAPIWeb/nfse/consulta? ';
+        $find->addRequestHeader('Host',$url);
+        $find->addRequestHeader('Content-Length',strlen(http_build_query($parameters)));
+        $find->addRequestHeader('Connection','close');
+        $method = 'GET';
+        $result = $find->send($url, $method, $parameters);
+
+        die($result);
 
         $limite = '100';
 
@@ -218,6 +241,9 @@ class NF {
         if (!empty($nomeCidade)) {
             $parameters = array_merge($parameters,array('NomeCidade'=>$nomeCidade));
         }
+
+
+        $data=http_build_query($parameters);
 
     }
 

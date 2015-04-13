@@ -153,8 +153,11 @@ class Send
     /**
      * @param mixed $padrao
      */
-    public function setPadrao($padrao)
+    public function setPadrao($padrao = null)
     {
+        if(is_null($padrao)){
+            throw new \InvalidArgumentException('Informe o Padrao');
+        }
         $this->padrao = $padrao;
     }
 
