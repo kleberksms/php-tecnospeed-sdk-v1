@@ -6,4 +6,5 @@ composer.phar
 .idea/
 tests/TecnospeedTestCredentials.php
 src/Tecnospeed/Config/Configuration.php
+src/Tecnospeed/Config/Cities.php
 

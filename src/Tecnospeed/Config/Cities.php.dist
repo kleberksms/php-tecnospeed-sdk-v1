@@ -1,0 +1,17 @@
+<?php
+
+namespace Tecnospeed\Config;
+
+/**
+ * Parametros variaveis de acordo com a cidade;
+ */
+return array(
+
+    'cnpj'=>array( // Maringa
+        'CNPJ'=>'00000000000000',
+        'grupo'=>'grupo',
+        'versao'=>'versaopadraodacidade'
+
+    ),
+
+);
