@@ -13,44 +13,43 @@ while($i > 0) {
         'padrao'=>'TecnoNFSe',
         'nomeCidade'=>'JOAOPESSOA',
         'IdLote'=>'L1',
-        'numeroLote'=>'4',
-        'versao'=>'2.01',
+        'numeroLote'=>'1',
+        'versao'=>'1',
         'quantidadeRPS'=>'1',
         'transacao'=>true,
         'metodoEnvio'=>'WS',
         'cpfCnpjRemetente'=>'03404018003081',
         'inscricaoMunicipalRemetente'=>'1050052',
         'razaoSocialRemetente'=>'Advocacia Bellinati Perez',
-        'codigoCidadeRemetente'=>'2507507',
-        'dataInicio'=>'2014-11-17T00:00:00',
-        'dataFim'=>'2014-11-17T00:00:00',
-        'valorTotalServicos'=>'46,82',
+        'codigoCidadeRemetente'=>'4115200',
+        'dataInicio'=>'2015-04-14T00:00:00',
+        'dataFim'=>'2015-04-14T00:00:00',
+        'valorTotalServicos'=>'46.82',
         'valorTotalDeducoes'=>'0',
-        'valorTotalBaseCalculo'=>1.00,
+        'valorTotalBaseCalculo'=>'1.00',
         'idIntegracao'=>367495,
         'idRps'=>'R1',
         'situacaoNota'=>'1',
         'tipoRps'=>'1',
         'serieRps'=>'U',
         'numeroRps'=>$rps,
-        'dataEmissao'=>'2015-04-09T00:00:00',
+        'dataEmissao'=>'2015-04-14T00:00:00',
         'competencia'=>'2015-04-09',
         'cpfCnpjPrestador'=>'03404018003081',
-        'inscricaoMunicipalPrestador'=>'1050052',
-        'razaoSocialPrestador'=>'Tecnospeed',
+        'inscricaoMunicipalPrestador'=>'1050052git st',
+        'razaoSocialPrestador'=>'Advocacia Bellinati Perez',
         'codigoCidadePrestacao'=>'4115200',
-        'descricaoCidadePrestacao'=>'Maringa',
+        'descricaoCidadePrestacao'=>'Joinville',
         'optanteSimplesNacional'=>'2',
         'incentivadorCultural'=>'2',
         'regimeEspecialTributacao'=>'0',
-        'valorTotalServicos'=>'0.0',
         'naturezaTributacao'=>'1',
         'incentivoFiscal'=>'2',
-        'cpfCnpjTomador'=>'08105202905',
-        'razaoSocialTomador'=>'TECNOSPEED TECNOLOGIA DA INFORMACAO',
+        'cpfCnpjTomador'=>'07207996000150',
+        'razaoSocialTomador'=>'BANCO BRADESCO FINANCIAMENTOS S.A.',
         'inscricaoEstadualTomador'=>'9044016688',
         'tipoLogradouroTomador'=>'AVENIDA',
-        'enderecoTomador'=>'AVENIDA DUQUE DE CAXIAS',
+        'enderecoTomador'=>'NUCLEO CIDADE DE DEUS S/N, PREDIO CINZA 1º ANDAR - VILA YARA',
         'numeroTomador'=>'99',
         'complementoTomador'=>'',
         'tipoBairroTomador'=>'ZONA',
@@ -62,16 +61,16 @@ while($i > 0) {
         'paisTomador'=>'1058',
         'dddTomador'=>'44',
         'telefoneTomador'=>'30379500',
-        'emailTomador'=>'erike@tecnospeed.com.br',
-        'codigoItemListaServico'=>1714,
-        'codigoTributacaoMunicipio'=>'4115200',
+        'emailTomador'=>'sistemas.tiago@bellinati.com.br',
+        'codigoItemListaServico'=>'1714',
+        'codigoTributacaoMunicipio'=>'',
         'codigoCnae'=>'6611801',
         'discriminacaoServico'=>'HONORARIOS ADVOCATICIOS',
         'tipoTributacao'=>7,
         'exigibilidadeISS'=>'1',
         'operacao'=>'',
-        'municipioIncidencia'=>'4115200',
-        'valorServicos'=>'50,00',
+        'municipioIncidencia'=>'2507507',
+        'valorServicos'=>'46.82',
         'aliquotaPIS'=>'0',
         'aliquotaCOFINS'=>'0.00',
         'aliquotaINSS'=>'0.00',
@@ -88,30 +87,32 @@ while($i > 0) {
         'valorDeducoes'=>'0.00',
         'baseCalculo'=>'0',
         'aliquotaISS'=>'0',
-        'valorIss'=>'2,34',
-        'issRetido'=>'2',
+        'valorIss'=>'0',
         'valorISSRetido'=>'0.00',
-        'valorLiquidoNfse'=>'1.00',
+        'issRetido'=>'2',
+        'valorLiquidoNfse'=>'46.82',
     );
 
-
-    $result = $nf->sendWithSocket($data);
-    $arrayResp[] = $result;
+    try {
+        $result = $nf->sendWithSocket($data);
+    }catch (Exception $e) {
+        echo 'Erro ao enviar Nf<br>'.$e->getMessage();
+    }
+    $arrayResp[] = isset($result) ? $result : false;
     $i --;
     $rps++;
 }
 
 $time_end = microtime(true);
-
-//dividing with 60 will give the execution time in minutes other wise seconds
 $execution_time = ($time_end - $time_start);
-
-//execution time of the script
-echo '<b>Tempo de execucao Envio Nf:</b> <br><i>'.$execution_time.' segs</i>'.'<br>Testando 2 notas<br>';
+echo '<b>Tempo de execucao Envio Nf:</b> <br><i>'.$execution_time.' segs</i>'.'<br>Testando 1 notas<br>';
 die(var_dump($arrayResp));
 
-$data = array();
-$data['campos'] = array('nrps','limite');
-$data['nrps']= 130;
-$retorno = $nf->find($data);
-var_dump($retorno);
+
+
+
+//$data = array();
+//$data['campos'] = array('nrps','limite');
+//$data['nrps']= 130;
+//$retorno = $nf->find($data);
+//var_dump($retorno);

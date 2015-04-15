@@ -411,9 +411,9 @@ class Send
      */
     public function setCodigoTributacaoMunicipio($codigoTributacaoMunicipio)
     {
-        if (!is_numeric($codigoTributacaoMunicipio)) {
-            throw new \InvalidArgumentException('this value is not a number');
-        }
+//        if (!is_numeric($codigoTributacaoMunicipio)) {
+//            throw new \InvalidArgumentException('this value is not a number');
+//        }
         $this->codigoTributacaoMunicipio = $codigoTributacaoMunicipio;
     }
 
@@ -768,7 +768,7 @@ class Send
     /**
      *
      * @param null $versao
-     *
+     * SaoPaulo A versao e diferente.
      */
     public function setVersao($versao)
     {

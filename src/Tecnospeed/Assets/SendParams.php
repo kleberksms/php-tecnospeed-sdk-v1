@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bellinati
- * Date: 18/12/2014
- * Time: 09:45
- */
 
 namespace Tecnospeed\Assets;
-
 
 class SendParams {
 
@@ -17,13 +10,13 @@ class SendParams {
             'formato'=>'',
             'padrao'=>'',
             'nomeCidade'=>'',
+            'idLote'=>'',
             'IdLote'=>'',
             'numeroLote'=>'',
-            'versao'=>'',
+            'versao'=>'2.01',
             'quantidadeRPS'=>'',
             'transacao'=>'',
             'metodoEnvio'=>'',
-            'idIntegracao'=>'',
             'cpfCnpjRemetente'=>'',
             'razaoSocialRemetente' => '',
             'inscricaoMunicipalRemetente'=>'',
@@ -31,6 +24,7 @@ class SendParams {
             'dataInicio'=>'',
             'dataFim'=>'',
             'valorTotalServicos'=>'',
+            'idIntegracao'=>'',
             'valorTotalBaseCalculo'=>'',
             'valorTotalDeducoes'=>'',
             'idRps'=>'',
@@ -47,6 +41,7 @@ class SendParams {
             'descricaoCidadePrestacao'=>'',
             'optanteSimplesNacional'=>'',
             'incentivadorCultural'=>'',
+            'regimeEspecialTributacao'=>'',
             'naturezaTributacao'=>'',
             'incentivoFiscal'=>'',
             'incentivoFiscal'=>'',
@@ -95,8 +90,7 @@ class SendParams {
             'valorIss'=>'',
             'issRetido'=>'',
             'valorISSRetido'=>'',
-            'valorLiquidoNfse'=>'',
-            'regimeEspecialTributacao'=>''
+            'valorLiquidoNfse'=>''
         );
     }
 

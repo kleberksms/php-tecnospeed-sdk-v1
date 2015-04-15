@@ -2,7 +2,6 @@
 
 namespace Tecnospeed;
 
-use Mockery\Exception;
 use Tecnospeed\Assets\Rps\Send\ArrayToTx2;
 use Tecnospeed\Assets\SendParams;
 use Tecnospeed\HttpClient\TecnospeedCurlHttpClient;
@@ -55,6 +54,8 @@ class NF {
 
             $this->hydrator->hydrate($content, $this->entity);
 
+            $this->entity->setVersao($this->cities[$this->entity->getCpfCnpjRemetente()]['versao']);
+
             return $this->entity;
         }catch (Exception $e){
             echo $e;
@@ -71,6 +72,8 @@ class NF {
 
         $stringTx2 = new ArrayToTx2();
         $arrayNfse = $this->hydrator->extract($this->entity);
+
+
         $stringTx2->convertToString($arrayNfse);
         $tx2 = utf8_decode($stringTx2->getTx2());
 
@@ -89,9 +92,9 @@ class NF {
         $auth = base64_encode("$usuario:$senha");
 
         $socket = fsockopen($host, $port, $errno, $errstr, 15);
+
         if(!$socket) {
-            throw new Exception('Erro ao conectar no manager.<br>');
-            exit;
+            throw new \Exception('Erro ao conectar no manager.<br>');
         }
 
 

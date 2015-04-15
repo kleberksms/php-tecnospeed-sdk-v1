@@ -33,7 +33,7 @@ class ArrayToTx2 extends AbstractArray
         $string .= "\nNomeCidade=".$array['NomeCidade'];
         $string .= "\nINCLUIR";
         $string .= "\nIDLote=".$array['IdLote'];
-        $string .= "\nVersao=".$array['Versao'];
+        $string .= "\nversao=".$array['Versao'];
         $string .= "\nNumeroLote=".$array['NumeroLote'];
         $string .= "\nQuantidadeRPS=".$array['QuantidadeRPS'];
         $string .= ($array['Transacao'] === true) ? "\nTransacao=true" : "\nTransacao=false";
@@ -80,6 +80,7 @@ class ArrayToTx2 extends AbstractArray
         $string = $string."\nDDDTomador=".$array['DddTomador'];
         $string = $string."\nTelefoneTomador=".$array['TelefoneTomador'];
         $string = $string."\nEmailTomador=".$array['EmailTomador'];
+        $string = $string."\nUFTomador=".$array['UfTomador'];
         $string = $string."\nCodigoItemListaServico=".$array['CodigoItemListaServico'];
         $string = $string."\nCodigoTributacaoMunicipio=".$array['CodigoTributacaoMunicipio'];
         $string = $string."\nCodigoCnae=".$array['CodigoCnae'];
