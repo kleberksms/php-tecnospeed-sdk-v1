@@ -73,12 +73,11 @@ class NF {
         $stringTx2 = new ArrayToTx2();
         $arrayNfse = $this->hydrator->extract($this->entity);
 
-
         $stringTx2->convertToString($arrayNfse);
         $tx2 = utf8_decode($stringTx2->getTx2());
 
-        $post_data['grupo']= $this->cities[$arrayNfse['cpf_cnpj_remetente']]['grupo'];
-        $post_data['cnpj']= $this->cities[$arrayNfse['cpf_cnpj_remetente']]['CNPJ'];
+        $post_data['grupo'] = $this->cities[$arrayNfse['cpf_cnpj_remetente']]['grupo'];
+        $post_data['cnpj']  = $this->cities[$arrayNfse['cpf_cnpj_remetente']]['CNPJ'];
 
         $post_data['arquivo']= $tx2;
         $host = $this->configuration['url'];
@@ -96,7 +95,6 @@ class NF {
         if(!$socket) {
             throw new \Exception('Erro ao conectar no manager.<br>');
         }
-
 
         $http  = "POST /ManagerAPIWeb/nfse/envia HTTP/1.1\r\n";
         $http .= "Authorization: Basic ".$auth."\r\n";
@@ -183,6 +181,7 @@ class NF {
             'nrps'=>141
         );
 
+
         $find = new TecnospeedCurlHttpClient();
         $encoded = base64_encode("{$this->configuration['usuario']}:{$this->configuration['senha']}");
         $authorization = "Basic {$encoded}";
@@ -194,8 +193,6 @@ class NF {
         $find->addRequestHeader('Connection','close');
         $method = 'GET';
         $result = $find->send($url, $method, $parameters);
-
-        die($result);
 
         $limite = '100';
 

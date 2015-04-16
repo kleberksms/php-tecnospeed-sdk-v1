@@ -102,6 +102,7 @@ class TecnospeedCurlHttpClient implements TecnospeedHttpable
      */
     public function send($url, $method = 'GET', $parameters = array())
     {
+
         $this->openConnection($url, $method, $parameters);
         $this->tryToSendRequest();
         if ($this->curlErrorCode) {
@@ -144,6 +145,7 @@ class TecnospeedCurlHttpClient implements TecnospeedHttpable
         if (self::$disableIPv6) {
             $options[CURLOPT_IPRESOLVE] = CURL_IPRESOLVE_V4;
         }
+
         self::$tecnospeedCurl->init();
         self::$tecnospeedCurl->setopt_array($options);
     }
