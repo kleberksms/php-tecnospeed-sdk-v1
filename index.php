@@ -13,11 +13,11 @@ $i   = 1;
 
 while($i > 0) {
 
-    $data = $arrayTx2['SaoPaulo'];
+    $data = $arrayTx2['ArrayBugadoMarrom'];
 
     try {
         $result = $nf->sendWithSocket($data);
-    }catch (Exception $e) {
+    } catch (Exception $e) {
         echo 'Erro ao enviar Nf<br>'.$e->getMessage();
     }
     $arrayResp[] = isset($result) ? $result : false;
@@ -37,4 +37,14 @@ die(var_dump($arrayResp));
 //$data['campos'] = array('nrps','limite');
 //$data['nrps']= 130;
 //$retorno = $nf->find($data);
-//var_dump($retorno);
+//die(var_dump($retorno));
+
+
+$c = new \Tecnospeed\HttpClient\TecnospeedCurlHttpClient();
+
+$encoded = base64_encode("admin:123mudar");
+$authorization = "Basic {$encoded}";
+$find->addRequestHeader('Authorization',$authorization);
+
+var_dump($c->send('localhost:9999','GET'));
+

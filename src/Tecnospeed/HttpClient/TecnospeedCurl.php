@@ -32,7 +32,6 @@ class TecnospeedCurl {
      */
     public function setopt_array(array $options)
     {
-        die(var_dump($options));
         curl_setopt_array($this->curl, $options);
     }
     /**
