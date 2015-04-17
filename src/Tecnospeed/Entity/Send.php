@@ -118,8 +118,8 @@ class Send
      */
     public function setFormato($formato)
     {
-        if(is_null($formato)) {
-            $this->formato = 'tx2';
+        if (empty($formato) || is_null($formato)) {
+            $formato = 'tx2';
         }
         $this->formato = $formato;
     }
@@ -138,7 +138,7 @@ class Send
     public function setNomeCidade($nomeCidade)
     {
         if(is_null($nomeCidade)) {
-            throw new \InvalidArgumentException('Informe o nome da Cidade');
+            throw new \InvalidArgumentException('Informe o nome da Cidade Texto');
         }
         $this->nomeCidade = $nomeCidade;
     }
@@ -157,7 +157,7 @@ class Send
      */
     public function setPadrao($padrao)
     {
-        if(is_null($padrao)){
+        if(is_null($padrao) || empty($padrao)) {
             $padrao = 'TecnoNFSe';
         }
         $this->padrao = $padrao;
@@ -177,7 +177,7 @@ class Send
     public function setAliquotaCOFINS($aliquotaCOFINS)
     {
         if (!is_numeric($aliquotaCOFINS)) {
-            throw new \InvalidArgumentException('AliquotaCOFINS deve ser numerico');
+            throw new \InvalidArgumentException('Informe a AliquotaCOFINS numerico');
         }
         $this->aliquotaCOFINS = $aliquotaCOFINS;
     }
@@ -196,7 +196,7 @@ class Send
     public function setAliquotaCSLL($aliquotaCSLL)
     {
         if (!is_numeric($aliquotaCSLL)) {
-            throw new \InvalidArgumentException('AliquotaCSLL deve ser numerico');
+            throw new \InvalidArgumentException('Informe a AliquotaCSLL numerico');
         }
         $this->aliquotaCSLL = $aliquotaCSLL;
     }
@@ -215,7 +215,7 @@ class Send
     public function setAliquotaINSS($aliquotaINSS)
     {
         if (!is_numeric($aliquotaINSS)) {
-            throw new \InvalidArgumentException('AliquotaINSS deve ser numerico');
+            throw new \InvalidArgumentException('Informe a AliquotaINSS numerico.');
         }
         $this->aliquotaINSS = $aliquotaINSS;
     }
@@ -234,7 +234,7 @@ class Send
     public function setAliquotaIR($aliquotaIR)
     {
         if (!is_numeric($aliquotaIR)) {
-            throw new \InvalidArgumentException('AliquotaIR deve ser numerico');
+            throw new \InvalidArgumentException('Informe a AliquotaIR numerico');
         }
         $this->aliquotaIR = $aliquotaIR;
     }
@@ -252,8 +252,8 @@ class Send
      */
     public function setAliquotaISS($aliquotaISS)
     {
-        if (!is_numeric($aliquotaISS)) {
-            throw new \InvalidArgumentException('aliquotaISS deve ser numerico');
+        if (!is_numeric($aliquotaISS) ) {
+            throw new \InvalidArgumentException('Informe a aliquotaISS numerico');
         }
         $this->aliquotaISS = $aliquotaISS;
     }
@@ -272,7 +272,7 @@ class Send
     public function setAliquotaPIS($aliquotaPIS)
     {
         if (!is_numeric($aliquotaPIS)) {
-            throw new \InvalidArgumentException('AliquotaPis deve ser numerico');
+            throw new \InvalidArgumentException('Informe a AliquotaPis numerico');
         }
         $this->aliquotaPIS = $aliquotaPIS;
     }
@@ -291,7 +291,7 @@ class Send
     public function setBairroTomador($bairroTomador)
     {
         if(is_null($bairroTomador)) {
-            $bairroTomador = '';
+            throw new \InvalidArgumentException('Informe o bairroTomador texto.');
         }
         $this->bairroTomador = $bairroTomador;
     }
@@ -310,7 +310,7 @@ class Send
     public function setBaseCalculo($baseCalculo)
     {
         if (!is_numeric($baseCalculo)) {
-            throw new \InvalidArgumentException('BaseCalculo deve ser numerico');
+            throw new \InvalidArgumentException('Informe a BaseCalculo numerico');
         }
         $this->baseCalculo = $baseCalculo;
     }
@@ -328,8 +328,8 @@ class Send
      */
     public function setCepTomador($cepTomador)
     {
-        if(is_null($cepTomador)) {
-            throw new \InvalidArgumentException('Informe o  CepTomador');
+        if(is_null($cepTomador) ) {
+            throw new \InvalidArgumentException('Informe o  CepTomador texto');
         }
         $this->cepTomador = $cepTomador;
     }
@@ -349,7 +349,7 @@ class Send
     public function setCodigoCidadePrestacao($codigoCidadePrestacao)
     {
         if(is_null($codigoCidadePrestacao)) {
-            throw new \InvalidArgumentException('Informe o  CodigoCidadePrestacao');
+            throw new \InvalidArgumentException('Informe o  CodigoCidadePrestacao texto');
         }
         $this->codigoCidadePrestacao = $codigoCidadePrestacao;
     }
@@ -369,7 +369,7 @@ class Send
     public function setCodigoCidadeRemetente($codigoCidadeRemetente)
     {
         if(is_null($codigoCidadeRemetente)) {
-            throw new \InvalidArgumentException('Informe o CodigoCidadeRemetente');
+            throw new \InvalidArgumentException('Informe o CodigoCidadeRemetente numerico');
         }
         $this->codigoCidadeRemetente = $codigoCidadeRemetente;
     }
@@ -387,8 +387,8 @@ class Send
      */
     public function setCodigoCidadeTomador($codigoCidadeTomador)
     {
-        if(is_null($codigoCidadeTomador)) {
-            throw new \InvalidArgumentException('Informe o CodigoCidadeTomador');
+        if(!is_numeric($codigoCidadeTomador)) {
+            throw new \InvalidArgumentException('Informe o CodigoCidadeTomador numerico');
         }
         $this->codigoCidadeTomador = $codigoCidadeTomador;
     }
@@ -406,8 +406,8 @@ class Send
      */
     public function setCodigoCnae($codigoCnae)
     {
-        if(is_null($codigoCnae)) {
-            throw new \InvalidArgumentException('Informe o CodigoCnae');
+        if(is_null($codigoCnae))  {
+            throw new \InvalidArgumentException('Informe o CodigoCnae numerico');
         }
         $this->codigoCnae = $codigoCnae;
     }
@@ -426,7 +426,7 @@ class Send
     public function setCodigoItemListaServico($codigoItemListaServico)
     {
         if(is_null($codigoItemListaServico)) {
-            throw new \InvalidArgumentException('Informe o CodigoItemListaServico');
+            throw new \InvalidArgumentException('Informe o CodigoItemListaServico numerico');
         }
         $this->codigoItemListaServico = $codigoItemListaServico;
     }
@@ -444,8 +444,8 @@ class Send
      */
     public function setCodigoTributacaoMunicipio($codigoTributacaoMunicipio)
     {
-        if (!is_null($codigoTributacaoMunicipio)) {
-           throw new \InvalidArgumentException('Informe o CodigoTributacaoMunicipio!');
+        if (is_null($codigoTributacaoMunicipio)) {
+            throw new \InvalidArgumentException('Informe o CodigoTributacaoMunicipio.');
         }
         $this->codigoTributacaoMunicipio = $codigoTributacaoMunicipio;
     }
@@ -506,7 +506,7 @@ class Send
      */
     public function setCpfCnpjPrestador($cpfCnpjPrestador)
     {
-        if(is_null($cpfCnpjPrestador)) {
+        if(is_null($cpfCnpjPrestador) ) {
             throw new \InvalidArgumentException('Informe o campo cpfCnpjPrestador');
         }
         $this->cpfCnpjPrestador = $cpfCnpjPrestador;
@@ -526,7 +526,7 @@ class Send
     public function setCpfCnpjRemetente($cpfCnpjRemetente)
     {
         if(is_null($cpfCnpjRemetente)) {
-            throw new \InvalidArgumentException('CpfCnpjRemetende nao pode ser nulo.');
+            throw new \InvalidArgumentException('Informe o CpfCnpjRemetende texto.');
         }
         $this->cpfCnpjRemetente = $cpfCnpjRemetente;
     }
@@ -546,7 +546,7 @@ class Send
     public function setCpfCnpjTomador($cpfCnpjTomador)
     {
         if(is_null($cpfCnpjTomador)) {
-            throw new \InvalidArgumentException('Informe o CpfCnpjTomador');
+            throw new \InvalidArgumentException('Informe o CpfCnpjTomador texto');
         }
 
         $this->cpfCnpjTomador = $cpfCnpjTomador;
@@ -568,7 +568,7 @@ class Send
      */
     public function setDataEmissao($dataEmissao)
     {
-        if(is_null($dataEmissao)) {
+        if(is_null($dataEmissao) ) {
             throw new \InvalidArgumentException('Informe a dataEmissao (“DD/MM/AAAA HH:MM:SS”)');
         }
         $this->dataEmissao = $dataEmissao;
@@ -690,7 +690,8 @@ class Send
      * @param mixed $descricaoCidadePrestacao
      * Descrição da cidade de Prestação.
      */
-    public function setDescricaoCidadePrestador($descricaoCidadePrestacao){
+    public function setDescricaoCidadePrestacao($descricaoCidadePrestacao)
+    {
 
         if(is_null($descricaoCidadePrestacao)) {
             throw new \InvalidArgumentException('Informe a DescricaoCidadePrestacao');
@@ -731,7 +732,7 @@ class Send
      */
     public function setDiscriminacaoServico($discriminacaoServico)
     {
-        if(is_null($discriminacaoServico)) {
+        if(is_null($discriminacaoServico) ) {
             throw new \InvalidArgumentException('Informe a discriminacaoServico');
         }
         $this->discriminacaoServico = $discriminacaoServico;
@@ -801,7 +802,6 @@ class Send
             throw new \InvalidArgumentException('Informe a ExigibilidadeIss deve ser entre em 1 e 7');
         }
 
-
         $this->exigibilidadeISS = $exigibilidadeISS;
     }
 
@@ -840,9 +840,9 @@ class Send
      * @param int $idLote
      * 1 - é um controle interno da tecnospeed
      */
-    public function setIdLote($idLote = 1)
+    public function setIdLote($idLote)
     {
-        if ( empty($idLote)) {
+        if ( empty($idLote) || is_null($idLote)) {
             $idLote = 1;
         }
 
@@ -862,12 +862,12 @@ class Send
      * @param mixed $idRps
      * 1 - controle interno da tecnospeed
      */
-    public function setIdRps($idRps = 1)
+    public function setIdRps($idRps)
     {
-        if ( empty($idLote)) {
-            $this->idRps = 1;
+        if ( empty($idRps) || is_null($idRps))  {
+            $idRps = 1;
         }
-        $this->idRps = (int)$idRps;
+        $this->idRps = $idRps;
     }
 
     /**
@@ -906,7 +906,7 @@ class Send
      */
     public function setIncentivoFiscal($incentivoFiscal)
     {
-        if ( !is_numeric($incentivoFiscal)) {
+        if ( !is_numeric($incentivoFiscal) ) {
             throw new \InvalidArgumentException('IncentivoFiscal deve ser um inteiro');
         }
 
@@ -1004,7 +1004,7 @@ class Send
      */
     public function setMetodoEnvio($metodoEnvio)
     {
-        if(is_null($metodoEnvio)) {
+        if(is_null($metodoEnvio) || empty($metodoEnvio)) {
             $metodoEnvio = 'WS';
         }
         $this->metodoEnvio = $metodoEnvio;
@@ -1110,6 +1110,9 @@ class Send
      */
     public function setNumeroTomador($numeroTomador)
     {
+        if(is_null($numeroTomador)){
+            throw new \InvalidArgumentException('Informe o numeroTomador');
+        }
         $this->numeroTomador = $numeroTomador;
     }
 
@@ -1176,7 +1179,7 @@ class Send
      */
     public function setOutrasRetencoes($outrasRetencoes)
     {
-        if(is_null($outrasRetencoes)) {
+        if(is_null($outrasRetencoes) || empty($outrasRetencoes)) {
             $outrasRetencoes = '0.00';
         }
         $this->outrasRetencoes = $outrasRetencoes;
@@ -1258,7 +1261,7 @@ class Send
      */
     public function setRazaoSocialRemetente($razaoSocialRemetente)
     {
-        if(!is_string($razaoSocialRemetente)) {
+        if(!is_string($razaoSocialRemetente) ) {
             throw new \InvalidArgumentException('RazaoSocialRemetente deve ser um String');
         }
 
@@ -1294,15 +1297,15 @@ class Send
     }
 
     /**
-    * @param mixed $regimeEspecialTributacao
-    * Código de identificação do regime especial de tributação.
-    * ‘1’ - Microempresa municipal
-    * ‘2’ - Estimativa
-    * ‘3’ - Sociedade de profissionais
-    * ‘4’ - Cooperativa
-    * ‘5’ - Microempresário Individual (MEI)
-    * ‘6’ - Microempresário e Empresa de Pequeno Porte, (ME EPP)
-    */
+     * @param mixed $regimeEspecialTributacao
+     * Código de identificação do regime especial de tributação.
+     * ‘1’ - Microempresa municipal
+     * ‘2’ - Estimativa
+     * ‘3’ - Sociedade de profissionais
+     * ‘4’ - Cooperativa
+     * ‘5’ - Microempresário Individual (MEI)
+     * ‘6’ - Microempresário e Empresa de Pequeno Porte, (ME EPP)
+     */
     public function setRegimeEspecialTributacao($regimeEspecialTributacao){
 
         if(is_null($regimeEspecialTributacao)) {
@@ -1325,7 +1328,7 @@ class Send
      */
     public function setSerieRps($serieRps)
     {
-        if(is_null($serieRps)) {
+        if(is_null($serieRps) || empty($serieRps)) {
             $serieRps = 'U';
         }
         $this->serieRps = $serieRps;
@@ -1405,7 +1408,7 @@ class Send
     public function setTipoLogradouroTomador($tipoLogradouroTomador )
     {
         if (is_null($tipoLogradouroTomador)) {
-            $tipoLogradouroTomador = '';
+            $tipoLogradouroTomador = 'Rua';
         }
         $this->tipoLogradouroTomador = $tipoLogradouroTomador;
     }
@@ -1424,7 +1427,7 @@ class Send
      */
     public function setTipoRps($tipoRps)
     {
-        if(is_null($tipoRps)) {
+        if(is_null($tipoRps) || empty($tipoRps)) {
             $tipoRps = 1;
         }
         $this->tipoRps = $tipoRps;
@@ -1460,11 +1463,8 @@ class Send
     /**
      * @param mixed $transacao
      */
-    public function setTransacao($transacao)
+    public function setTransacao($transacao = true)
     {
-        if(is_null($transacao)){
-            $transacao = true;
-        }
         $this->transacao = $transacao;
     }
 
@@ -1539,7 +1539,7 @@ class Send
     public function setValorDeducoes($valorDeducoes)
     {
         if(!is_numeric($valorDeducoes)) {
-            throw new \InvalidArgumentException('valorDeducoes deve ser numerico');
+            throw new \InvalidArgumentException('Informe a ValorDeducoes numerico');
         }
         $this->valorDeducoes = $valorDeducoes;
     }
@@ -1558,7 +1558,7 @@ class Send
     public function setValorINSS($valorINSS)
     {
         if(!is_numeric($valorINSS)) {
-            throw new \InvalidArgumentException('valorINSS deve ser numerico');
+            throw new \InvalidArgumentException('Informe o valorINSS numerico');
         }
         $this->valorINSS = $valorINSS;
     }
@@ -1577,7 +1577,7 @@ class Send
     public function setValorIR($valorIR)
     {
         if(!is_numeric($valorIR)) {
-            throw new \InvalidArgumentException('valorIR deve ser numerico');
+            throw new \InvalidArgumentException('Informe o valorIR numerico');
         }
         $this->valorIR = $valorIR;
     }
@@ -1596,7 +1596,7 @@ class Send
     public function setValorIss($valorIss)
     {
         if(!is_numeric($valorIss)) {
-            throw new \InvalidArgumentException('valorIss deve ser numerico');
+            throw new \InvalidArgumentException('Informe o valorIss numerico');
         }
         $this->valorIss = $valorIss;
     }
@@ -1614,8 +1614,9 @@ class Send
      */
     public function setValorISSRetido($valorISSRetido)
     {
+
         if(!is_numeric($valorISSRetido)) {
-            throw new \InvalidArgumentException('valorISSRetido deve ser numerico');
+            throw new \InvalidArgumentException('valorISSRetido deve ser informado(numerico)');
         }
         $this->valorISSRetido = $valorISSRetido;
     }
@@ -1652,8 +1653,9 @@ class Send
      */
     public function setValorPIS($valorPIS)
     {
+        $valorPIS = 0;
         if(!is_numeric($valorPIS)) {
-            throw new \InvalidArgumentException('valorPIS deve ser numerico');
+            throw new \InvalidArgumentException('Informe o valorPIS (numerico)');
         }
         $this->valorPIS = $valorPIS;
     }
@@ -1672,7 +1674,7 @@ class Send
     public function setValorServicos($valorServicos)
     {
         if(!is_numeric($valorServicos)) {
-            throw new \InvalidArgumentException('valorServicos deve ser numerico');
+            throw new \InvalidArgumentException('Informar o valorServicos numerico');
         }
         $this->valorServicos = $valorServicos;
     }
@@ -1692,7 +1694,7 @@ class Send
     public function setValorTotalBaseCalculo($valorTotalBaseCalculo)
     {
         if(!is_numeric($valorTotalBaseCalculo)) {
-            throw new \InvalidArgumentException('valorTotalBaseCalculo deve ser numerico');
+            throw new \InvalidArgumentException('Informe o valorTotalBaseCalculo deve ser numerico');
         }
 
         $this->valorTotalBaseCalculo =(float)$valorTotalBaseCalculo;
@@ -1712,10 +1714,7 @@ class Send
      */
     public function setValorTotalDeducoes($valorTotalDeducoes = 0)
     {
-        if(!is_numeric($valorTotalDeducoes)) {
-            throw new \InvalidArgumentException('valorTotalDeducoes deve ser numerico');
-        }
-          $this->valorTotalDeducoes = $valorTotalDeducoes;
+        $this->valorTotalDeducoes = $valorTotalDeducoes;
     }
 
     /**
@@ -1754,7 +1753,7 @@ class Send
         if(!is_numeric($idIntegracao)) {
             throw new \InvalidArgumentException('Informe o idIntegracao');
         }
-        $this->idIntegracao = (int)$idIntegracao;
+        $this->idIntegracao = $idIntegracao;
     }
 
 }
