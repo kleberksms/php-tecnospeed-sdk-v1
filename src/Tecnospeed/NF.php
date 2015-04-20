@@ -80,6 +80,7 @@ class NF {
         $post_data['cnpj']  = $this->cities[$arrayNfse['cpf_cnpj_remetente']]['CNPJ'];
 
         $post_data['arquivo']= $tx2;
+
         $host = $this->configuration['url'];
         $port = $this->configuration['port'];
 

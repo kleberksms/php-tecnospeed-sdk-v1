@@ -2,6 +2,8 @@
 
 namespace Tecnospeed\Entity;
 
+use Tecnospeed\Assets\Filter\Filter;
+
 class Send
 {
 
@@ -140,7 +142,7 @@ class Send
         if(is_null($nomeCidade)) {
             throw new \InvalidArgumentException('Informe o nome da Cidade Texto');
         }
-        $this->nomeCidade = $nomeCidade;
+        $this->nomeCidade = Filter::returnOnlyString( $nomeCidade );
     }
 
     /**
@@ -293,7 +295,7 @@ class Send
         if(is_null($bairroTomador)) {
             throw new \InvalidArgumentException('Informe o bairroTomador texto.');
         }
-        $this->bairroTomador = $bairroTomador;
+        $this->bairroTomador = Filter::returnOnlyString($bairroTomador);
     }
 
     /**
@@ -331,7 +333,7 @@ class Send
         if(is_null($cepTomador) ) {
             throw new \InvalidArgumentException('Informe o  CepTomador texto');
         }
-        $this->cepTomador = $cepTomador;
+        $this->cepTomador = Filter::returnOnlyNumbers( $cepTomador );
     }
 
     /**
@@ -509,7 +511,7 @@ class Send
         if(is_null($cpfCnpjPrestador) ) {
             throw new \InvalidArgumentException('Informe o campo cpfCnpjPrestador');
         }
-        $this->cpfCnpjPrestador = $cpfCnpjPrestador;
+        $this->cpfCnpjPrestador = Filter::returnOnlyNumbers( $cpfCnpjPrestador );
     }
 
     /**
@@ -528,7 +530,7 @@ class Send
         if(is_null($cpfCnpjRemetente)) {
             throw new \InvalidArgumentException('Informe o CpfCnpjRemetende texto.');
         }
-        $this->cpfCnpjRemetente = $cpfCnpjRemetente;
+        $this->cpfCnpjRemetente = Filter::returnOnlyNumbers( $cpfCnpjRemetente );
     }
 
     /**
@@ -549,7 +551,7 @@ class Send
             throw new \InvalidArgumentException('Informe o CpfCnpjTomador texto');
         }
 
-        $this->cpfCnpjTomador = $cpfCnpjTomador;
+        $this->cpfCnpjTomador = Filter::returnOnlyNumbers($cpfCnpjTomador);
     }
 
     /**
@@ -697,7 +699,7 @@ class Send
             throw new \InvalidArgumentException('Informe a DescricaoCidadePrestacao');
         }
 
-        $this->descricaoCidadePrestacao = $descricaoCidadePrestacao;
+        $this->descricaoCidadePrestacao = Filter::returnOnlyString($descricaoCidadePrestacao);
     }
 
     /**
@@ -716,7 +718,7 @@ class Send
         if(is_null($descricaoCidadeTomador)) {
             throw new \InvalidArgumentException('Informe a descricaoCidadeTomador');
         }
-        $this->descricaoCidadeTomador = $descricaoCidadeTomador;
+        $this->descricaoCidadeTomador = Filter::returnOnlyString($descricaoCidadeTomador);
     }
 
     /**
@@ -735,7 +737,7 @@ class Send
         if(is_null($discriminacaoServico) ) {
             throw new \InvalidArgumentException('Informe a discriminacaoServico');
         }
-        $this->discriminacaoServico = $discriminacaoServico;
+        $this->discriminacaoServico = Filter::returnOnlyString( $discriminacaoServico );
     }
 
     /**
@@ -773,7 +775,7 @@ class Send
         if(is_null($enderecoTomador)) {
             throw new \InvalidArgumentException('Informe o EnderecoTomador');
         }
-        $this->enderecoTomador = $enderecoTomador;
+        $this->enderecoTomador = Filter::returnOnlyString( $enderecoTomador );
     }
 
     /**
@@ -1113,7 +1115,7 @@ class Send
         if(is_null($numeroTomador)){
             throw new \InvalidArgumentException('Informe o numeroTomador');
         }
-        $this->numeroTomador = $numeroTomador;
+        $this->numeroTomador = Filter::returnOnlyNumbers( $numeroTomador );
     }
 
     /**
@@ -1245,7 +1247,7 @@ class Send
         if(is_null($razaoSocialPrestador)) {
             throw new \InvalidArgumentException('Informe a RazaoSocialPrestador');
         }
-        $this->razaoSocialPrestador = $razaoSocialPrestador;
+        $this->razaoSocialPrestador = Filter::returnOnlyString($razaoSocialPrestador);
     }
 
     /**
@@ -1265,7 +1267,7 @@ class Send
             throw new \InvalidArgumentException('RazaoSocialRemetente deve ser um String');
         }
 
-        $this->razaoSocialRemetente = $razaoSocialRemetente;
+        $this->razaoSocialRemetente =  Filter::returnOnlyString($razaoSocialRemetente);
     }
 
     /**
@@ -1285,7 +1287,7 @@ class Send
         if(is_null($razaoSocialTomador)) {
             throw new \InvalidArgumentException('Informe a RazaoSocialTomador');
         }
-        $this->razaoSocialTomador = $razaoSocialTomador;
+        $this->razaoSocialTomador = Filter::returnOnlyString( $razaoSocialTomador );
     }
 
     /**
