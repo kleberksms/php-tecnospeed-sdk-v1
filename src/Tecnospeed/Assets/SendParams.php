@@ -44,7 +44,6 @@ class SendParams {
             'regimeEspecialTributacao'=>'',
             'naturezaTributacao'=>'',
             'incentivoFiscal'=>'',
-            'incentivoFiscal'=>'',
             'cpfCnpjTomador'=>'',
             'razaoSocialTomador'=>'',
             'inscricaoEstadualTomador'=>'',
