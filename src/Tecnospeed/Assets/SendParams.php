@@ -90,7 +90,8 @@ class SendParams {
             'valorIss'=>'',
             'issRetido'=>'',
             'valorISSRetido'=>'',
-            'valorLiquidoNfse'=>''
+            'valorLiquidoNfse'=>'',
+            'responsavelRetencao'=>''
         );
     }
 

@@ -113,6 +113,7 @@ class ArrayToTx2 extends AbstractArray
         $string = $string."\nValorLiquidoNfse=".$array['ValorLiquidoNfse'];
         $string = $string."\nRegimeEspecialTributacao=".$array['RegimeEspecialTributacao'];
         $string = $string."\nNaturezaTributacao=".$array['NaturezaTributacao'];
+        $string = $string."\nResponsavelRetencao=".$array['ResponsavelRetencao'];
         $string = $string."\nSALVARRPS";
 
         $this->setTx2($string);

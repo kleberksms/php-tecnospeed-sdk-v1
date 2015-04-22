@@ -105,6 +105,26 @@ class Send
     private $issRetido;
     private $valorISSRetido;
     private $valorLiquidoNfse;
+    private $responsavelRetencao;
+
+    /**
+     * @return mixed
+     */
+    public function getResponsavelRetencao()
+    {
+        return $this->responsavelRetencao;
+    }
+
+    /**
+     * @param mixed $responsavelRetencao
+     */
+    public function setResponsavelRetencao($responsavelRetencao)
+    {
+        if(is_null($responsavelRetencao)) {
+            $responsavelRetencao = '';
+        }
+        $this->responsavelRetencao = $responsavelRetencao;
+    }
 
     /**
      * @return mixed
