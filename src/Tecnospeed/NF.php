@@ -55,6 +55,7 @@ class NF {
             $this->hydrator->hydrate($content, $this->entity);
 
             $this->entity->setVersao($this->cities[$this->entity->getCpfCnpjRemetente()]['versao']);
+            $this->entity->setNomeCidade($this->cities[$this->entity->getCpfCnpjRemetente()]['grupo']);
 
             return $this->entity;
         }catch (Exception $e){
