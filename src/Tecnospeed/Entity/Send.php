@@ -1675,6 +1675,7 @@ class Send
      */
     public function setValorPIS($valorPIS)
     {
+
         if(!is_numeric($valorPIS)) {
             throw new \InvalidArgumentException('Informe o valorPIS (numerico)');
         }
