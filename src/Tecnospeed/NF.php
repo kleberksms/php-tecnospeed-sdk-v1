@@ -83,6 +83,13 @@ class NF
         $post_data['grupo'] = $this->cities[$arrayNfse['cpf_cnpj_remetente']]['grupo'];
         $post_data['cnpj'] = $this->cities[$arrayNfse['cpf_cnpj_remetente']]['CNPJ'];
 
+
+        //        if($cnpj == 'maringa') {
+        //            $api->descarta($cnpj);
+        //        }
+
+
+
         $post_data['arquivo'] = $tx2;
 
         $host = $this->configuration['url'];

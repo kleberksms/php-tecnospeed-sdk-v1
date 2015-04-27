@@ -6,13 +6,29 @@ require_once __DIR__ . '/vendor/autoload.php';
 $nf  = new \Tecnospeed\NF();
 $api = new \Tecnospeed\HttpClient\TecnospeedApi();
 
+$pdf = $api->pdf('03404018000147', false);
+die(var_dump($pdf));
+
+echo    "<script> window.open({$pdf},'Download')</script>";
+exit;
 
 
 $parameters = array(
-    'filtro'  => 'situacao=REJEITADA',
+    'filtro'  => 'nrps=156',
+    'campos' => 'handle'
 );
+$result = $api->find('03404018000147',$parameters);
+
+
+
+
+
+$nfseRejeitadas = $api->descartaNf('03404018000147');
+die(var_dump($nfseRejeitadas));
 
 $result = $api->find('03404018000147',$parameters);
+die(var_dump($result));
+
 
 $cod = ((urlencode($result)));
 $result = explode('%0D%0A',$cod);

@@ -57,23 +57,71 @@ class TecnospeedApi {
             'ordem'      => $this->api[$this->method]['ordem'],
         );
 
-        $this->generateUrl($paran);
-        $this->curlConfig();
-        $result = $this->getData();
+        $result = $this->generateUrl($paran)
+                       ->curlConfig()
+                       ->getData();
+        return $result;
+    }
+
+    public function descartaNf($cnpj)
+    {
+        if(is_null($cnpj)) {
+            throw new \InvalidArgumentException ('Informe o Cnpj da Filial das notas a serem canceladas!');
+        }
+        $this->method     = 'descarta';
+        $this->cnpjFilial = $cnpj;
+
+//        return $this->getReject($cnpj);
+//
+//        foreach($this->getReject($this->cnpjFilial) as $nfeRejected) {
+//            $nfToRejecte['nrps'] = $nfeRejected;
+//        }
+
+        $parameters = array(
+            'CNPJ'       => $this->cnpjFilial,
+            'grupo'      => $this->cities[$this->cnpjFilial]['grupo'],
+            'NomeCidade' => $this->cities[$this->cnpjFilial]['grupo'],
+        );
+
+        $this->generateUrl($parameters);
+
+        $postFields = array(
+            'NumRPS'     =>  '160',
+            'SerieRPS'   =>  'U',
+            'tiporps'    =>  '1',
+        );
+
+        $result = $this->curlConfigPost($postFields)->getData();
         $this->closeCurl();
         return $result;
+
     }
 
     /**
      * @todo implementar a funcionalidade
      */
-    public function pdf($nnfse)
+    public function pdf($cnpj,$nnfse)
     {
         if(is_null($nnfse)) {
             throw new \InvalidArgumentException('Informe o Nº da nota para a pesquisa');
         }
 
-        $this->method = 'imprime';
+        $this->method    = 'imprime';
+        $this->cnpjFilial = $cnpj;
+
+        $paran = array(
+            'CNPJ'       => $this->cnpjFilial,
+            'grupo'      => $this->cities[$this->cnpjFilial]['grupo'],
+            'NomeCidade' => $this->cities[$this->cnpjFilial]['grupo'],
+            'Handle'     => '869',
+            'URL'        => '1'
+        );
+
+        $result = $this->generateUrl($paran)
+                       ->curlConfig()
+                       ->getData();
+        return $result;
+
     }
 
     private function getData()
@@ -81,31 +129,26 @@ class TecnospeedApi {
         return curl_exec($this->curl);
     }
 
-    public function descartaNf($cnpj,$handle)
+
+
+    private function explodeArray($array = array())
     {
-        if(is_null($handle)) {
-            throw new \InvalidArgumentException ('Informe o Handle da nota a ser cancelada!');
-        }
 
-        if(is_null($cnpj)) {
-            throw new \InvalidArgumentException ('Informe o Cnpj da Filia da nota a ser cancelada!');
-        }
-        $this->method = 'descarta';
-        $this->cnpjFilial = $cnpj;
+    }
 
-        $parameters = array(
-            'NomeCidade' => $this->cities[$this->cnpjFilial]['grupo'],
-            'Handle' => $handle,
+
+    /**
+     * Retorna as notas rejeitadas.
+     * @param $cnpj
+     * @return mixed
+     */
+    public function getReject($cnpj)
+    {
+        $parameter = array(
+            'filtro' => 'situacao=REJEITADA',
+            'campos' => 'nrps',
         );
-
-        $this->generateUrl($parameters);
-        $result = $this->getData();
-        $this->closeCurl();
-        return $result;
-
-
-
-
+        return $this->find($cnpj,$parameter);
     }
 
 
@@ -121,6 +164,26 @@ class TecnospeedApi {
         curl_setopt($this->curl, CURLOPT_URL, $this->url);
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($this->curl, CURLOPT_USERPWD, $user.':'.$password);
+        return $this;
+    }
+
+    /**
+     * @todo Fazer funcionar
+     * @param array $postFilds
+     * @return $this
+     */
+    private function curlConfigPost($postFilds = array())
+    {
+        $user     = $this->api[$this->method]['user'];
+        $password = $this->api[$this->method]['passoword'];
+
+        $this->curl = curl_init();
+        curl_setopt($this->curl, CURLOPT_URL, $this->url);
+        curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($this->curl, CURLOPT_POSTFIELDS, $postFilds);
+        curl_setopt($this->curl, CURLOPT_USERPWD, $user.':'.$password);
+        return $this;
+
     }
 
 
