@@ -33,13 +33,12 @@ class Filter {
 
     public static function normalizeResultApi($array = array())
     {
-        if(empty($array) || is_null($array)) {
+        if(empty($array[0]) || is_null($array)) {
             throw new \InvalidArgumentException('Informe o Array a ser normalizado');
         }
 
-        die(var_dump($array));
 
-        foreach ($array AS $result) {
+        foreach ($array as $result) {
 
             list(
                 $idIntegracao

@@ -60,12 +60,12 @@ class TecnospeedApi {
             'Ordem'      => isset($parameters['ordem'])  ? $parameters['ordem'] : $this->api['consulta']['ordem'],
             'Limite'     => isset($parameters['limite']) ? $parameters['limite']: $this->api['consulta']['limite'],
         );
-        //die(var_dump($paran));
 
         $result = $this->generateUrl($paran)
                        ->curlConfig()
                        ->getData();
-        return Filter::normalizeResultApi( $result );
+
+        return ( $result );
     }
 
     /**
@@ -80,10 +80,10 @@ class TecnospeedApi {
         }
 
         $result = array();
-        $this->method     = 'descarta';
         $this->cnpjFilial = $cnpj;
 
         $nfRejected = Filter::separeDataResult ( $this->getReject($cnpj) );
+        $this->method     = 'descarta';
 
         foreach($nfRejected as $numRPS) {
 
@@ -97,8 +97,7 @@ class TecnospeedApi {
             );
 
             $this->generateUrl($postFields);
-            $result[] = $this->curlConfigPost($postFields)->getData();
-
+            $result[] = $this->curlConfigPost($postFields)->generateUrl($postFields)->getData();
         }
 
         $this->closeCurl();
@@ -148,8 +147,8 @@ class TecnospeedApi {
             'CNPJ'       => $this->cnpjFilial,
             'grupo'      => $this->cities[$this->cnpjFilial]['grupo'],
             'NomeCidade' => $this->cities[$this->cnpjFilial]['grupo'],
-            'Handle'     => '869',
-            'URL'        => '1'
+            'Handle'     => $nnfse,
+            'URL'        => '1',
         );
 
         $result = $this->generateUrl($paran)
@@ -165,7 +164,7 @@ class TecnospeedApi {
      */
     private function getData()
     {
-        return curl_exec($this->curl);
+        return Filter::normalizeResultApi(curl_exec($this->curl));
     }
 
     /**

@@ -3,25 +3,15 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 $nf  = new \Tecnospeed\NF();
 $api = new \Tecnospeed\HttpClient\TecnospeedApi();
-//
-//$notaCancela = $api->descartaNf('03404018000147');
-//die(var_dump($notaCancela));
-
-
-
-//die(var_dump($pdf));
-//
-//echo    "<script> window.open({$pdf},'Download')</script>";
-//exit;
 
 $time_start = microtime(true);
 $parameters = array(
-    'filtro'  => 'nrps=156',
+    'filtro'  => 'situacao=AUTORIZADA',
 );
-//$pdf = $api->pdf('03404018000147', false);
-$result = $api->find('03404018000147',$parameters);
+////$pdf = $api->pdf('03404018000147', false);
+//$result = $api->find('03404018000147',$parameters);
 //$notaCancela = $api->descartaNf('03404018000147');
-//$result = $api->getLastRps('03404018000147');
+$result = $api->getLastRps('03404018000147');
 $time_end = microtime(true);
 var_dump($result.'<br>'.'<hr>');
 $execution_time = ($time_end - $time_start);
