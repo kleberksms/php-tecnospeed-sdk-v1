@@ -38,6 +38,8 @@ class Filter {
             throw new \InvalidArgumentException('Informe o Array a ser normalizado');
         }
 
+        $result_array = array();
+
         foreach ($array as $result) {
 
             list(
@@ -87,6 +89,20 @@ class Filter {
 
         }
         return $result_array;
+    }
+
+
+    /**
+     * Valida o formato do email.
+     * @param $mail
+     * @return bool
+     */
+    public static function validateEmail($mail)
+    {
+        if (preg_match('/^[^0-9][a-zA-Z0-9_\-]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/',$mail))
+            return(true);
+        else
+            return(false);
     }
 
 

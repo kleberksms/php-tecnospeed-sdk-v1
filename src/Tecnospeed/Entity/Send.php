@@ -773,7 +773,10 @@ class Send
      */
     public function setEmailTomador($emailTomador)
     {
-        if(is_null($emailTomador)) {
+        $emailTomador = Filter::validateEmail($emailTomador);
+
+
+        if(is_null($emailTomador) || !$emailTomador) {
             $emailTomador = '';
         }
         $this->emailTomador = $emailTomador;

@@ -117,6 +117,7 @@ class TecnospeedApi {
      */
     public function getLastRps($cnpj)
     {
+        $cnpj = Filter::returnOnlyNumbers($cnpj);
         if(is_null($cnpj)) {
             throw new \InvalidArgumentException ('Informe o cnpj da filial.');
         }
