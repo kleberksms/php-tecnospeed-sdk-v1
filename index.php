@@ -1,24 +1,33 @@
 <?php
-$time_start = microtime(true);
-
 require_once __DIR__ . '/vendor/autoload.php';
 
 $nf  = new \Tecnospeed\NF();
 $api = new \Tecnospeed\HttpClient\TecnospeedApi();
-
-$pdf = $api->pdf('03404018000147', false);
-die(var_dump($pdf));
-
-echo    "<script> window.open({$pdf},'Download')</script>";
-exit;
+//
+//$notaCancela = $api->descartaNf('03404018000147');
+//die(var_dump($notaCancela));
 
 
-$parameters = array(
-    'filtro'  => 'nrps=156',
-    'campos' => 'handle'
-);
-$result = $api->find('03404018000147',$parameters);
 
+//die(var_dump($pdf));
+//
+//echo    "<script> window.open({$pdf},'Download')</script>";
+//exit;
+
+$time_start = microtime(true);
+//$parameters = array(
+//    'filtro'  => 'nrps=156',
+//    'campos' => 'handle'
+//);
+//$pdf = $api->pdf('03404018000147', false);
+//$result = $api->find('03404018000147',$parameters);
+//$notaCancela = $api->descartaNf('03404018000147');
+$result = $api->getLastRps('03404018000147');
+$time_end = microtime(true);
+var_dump($result.'<br>'.'<hr>');
+$execution_time = ($time_end - $time_start);
+echo '<b>Tempo de consutlta Nf:</b> <br><i>'.$execution_time.' segs</i>'.'<br>Testando 1 notas(s)<br>';
+die();
 
 
 

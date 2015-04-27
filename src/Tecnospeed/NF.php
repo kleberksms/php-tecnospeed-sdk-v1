@@ -4,8 +4,8 @@ namespace Tecnospeed;
 
 use Tecnospeed\Assets\Rps\Send\ArrayToTx2;
 use Tecnospeed\Assets\SendParams;
-use Tecnospeed\HttpClient\TecnospeedCurlHttpClient;
 use Zend\Stdlib\Hydrator\ClassMethods;
+use Tecnospeed\HttpClient\TecnospeedApi;
 
 
 class NF
@@ -65,6 +65,9 @@ class NF
 
     }
 
+
+
+
     public function sendWithSocket($content = array())
     {
 
@@ -75,20 +78,21 @@ class NF
         $stringTx2 = new ArrayToTx2();
         $arrayNfse = $this->hydrator->extract($this->entity);
 
-
         $stringTx2->convertToString($arrayNfse);
         $tx2 = utf8_decode($stringTx2->getTx2());
 
 
         $post_data['grupo'] = $this->cities[$arrayNfse['cpf_cnpj_remetente']]['grupo'];
-        $post_data['cnpj'] = $this->cities[$arrayNfse['cpf_cnpj_remetente']]['CNPJ'];
+        $post_data['cnpj'] =  $this->cities[$arrayNfse['cpf_cnpj_remetente']]['CNPJ'];
 
 
-        //        if($cnpj == 'maringa') {
-        //            $api->descarta($cnpj);
-        //        }
-
-
+        /**
+         * Descarta as notas REJEITADAS antes de enviar conforme cidade parametrizadas no arquivo Config\Cities.php
+         * parametro -> ExcludeAfterSend.
+         */
+        if( $this->cities[$arrayNfse['cpf_cnpj_remetente']]['ExcludeAfterSend'] ) {
+                $this->discardAfterSend( $post_data['cnpj'] );
+        }
 
         $post_data['arquivo'] = $tx2;
 
@@ -130,6 +134,18 @@ class NF
         list($header, $body) = preg_split("/\R\R/", $result, 2);
 
         return $body;
+    }
+
+    /**
+     * @param $cnpjToDiscard
+     * @return $this
+     * Descarta as notas rejeitadas.
+     */
+    private function discardAfterSend($cnpjToDiscard)
+    {
+        $api = new TecnospeedApi();
+        $api->descartaNf($cnpjToDiscard);
+        return $this;
     }
 
 }

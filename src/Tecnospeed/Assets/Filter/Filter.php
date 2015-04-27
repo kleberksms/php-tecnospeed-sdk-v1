@@ -24,4 +24,12 @@ class Filter {
        return preg_replace( '/[`^~\'"]/', null, iconv( 'UTF-8', 'ASCII//TRANSLIT', $string ) );
     }
 
+    public static function separeDataResult($data)
+    {
+        $data = ((urlencode($data)));
+        return explode('%0D%0A',$data);
+
+    }
+
+
 }

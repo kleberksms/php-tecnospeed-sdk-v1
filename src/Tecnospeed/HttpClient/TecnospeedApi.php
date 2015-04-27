@@ -3,18 +3,16 @@
 
 namespace Tecnospeed\HttpClient;
 
+use Tecnospeed\Assets\Filter\Filter;
+
 
 class TecnospeedApi {
 
     private $method;
     private $url;
-
-
     private $curl;
-    private $config;
     private $cities;
     private $cnpjFilial;
-
 
     public function __construct()
     {
@@ -24,7 +22,7 @@ class TecnospeedApi {
     }
 
     /**
-     * Create Url
+     * Gera a Url.
      * @param $parameters
      * @return $this
      */
@@ -35,9 +33,14 @@ class TecnospeedApi {
         return $this;
     }
 
+    /**
+     * Consulta as notas conforme os parametros.
+     * @param $cnpj
+     * @param array $parameters
+     * @return mixed
+     */
     public function find($cnpj, $parameters = array())
     {
-
         if(is_null($cnpj)) {
             throw new \InvalidArgumentException('Informe o cnpj da filial.');
         }
@@ -53,8 +56,9 @@ class TecnospeedApi {
             'grupo'      => $this->cities[$this->cnpjFilial]['grupo'],
             'NomeCidade' => $this->cities[$this->cnpjFilial]['grupo'],
             'filtro'     => $parameters['filtro'],
-            'campos'     => isset($parameters['campos']) ? $parameters['campos']: $this->api[$this->method]['campos'],
-            'ordem'      => $this->api[$this->method]['ordem'],
+            'campos'     => isset($parameters['campos']) ? $parameters['campos']: $this->api['consulta']['campos'],
+            'Ordem'      => isset($parameters['ordem'])  ? $parameters['ordem'] : $this->api['consulta']['ordem'],
+            'Limite'     => isset($parameters['limite']) ? $parameters['limite']: $this->api['consulta']['limite'],
         );
 
         $result = $this->generateUrl($paran)
@@ -63,42 +67,72 @@ class TecnospeedApi {
         return $result;
     }
 
+    /**
+     * Descarta as notas Rejeitas do Cnpj informado.
+     * @param $cnpj
+     * @return array
+     */
     public function descartaNf($cnpj)
     {
         if(is_null($cnpj)) {
             throw new \InvalidArgumentException ('Informe o Cnpj da Filial das notas a serem canceladas!');
         }
+
+        $result = array();
         $this->method     = 'descarta';
         $this->cnpjFilial = $cnpj;
 
-//        return $this->getReject($cnpj);
-//
-//        foreach($this->getReject($this->cnpjFilial) as $nfeRejected) {
-//            $nfToRejecte['nrps'] = $nfeRejected;
-//        }
+        $nfRejected = Filter::separeDataResult ( $this->getReject($cnpj) );
 
-        $parameters = array(
-            'CNPJ'       => $this->cnpjFilial,
-            'grupo'      => $this->cities[$this->cnpjFilial]['grupo'],
-            'NomeCidade' => $this->cities[$this->cnpjFilial]['grupo'],
-        );
+        foreach($nfRejected as $numRPS) {
 
-        $this->generateUrl($parameters);
+            $postFields = array(
+                'CNPJ'       => $this->cnpjFilial,
+                'grupo'      => $this->cities[$this->cnpjFilial]['grupo'],
+                'NomeCidade' => $this->cities[$this->cnpjFilial]['grupo'],
+                'NumRPS'     => $numRPS,
+                'SerieRPS'   =>  'U',
+                'tiporps'    =>  '1',
+            );
 
-        $postFields = array(
-            'NumRPS'     =>  '160',
-            'SerieRPS'   =>  'U',
-            'tiporps'    =>  '1',
-        );
+            $this->generateUrl($postFields);
+            $result[] = $this->curlConfigPost($postFields)->getData();
 
-        $result = $this->curlConfigPost($postFields)->getData();
+        }
+
         $this->closeCurl();
         return $result;
 
     }
 
     /**
-     * @todo implementar a funcionalidade
+     * Consulta o ultimo Rps Autorizado
+     * @param $cnpj
+     * @return mixed
+     */
+    public function getLastRps($cnpj)
+    {
+        if(is_null($cnpj)) {
+            throw new \InvalidArgumentException ('Informe o cnpj da filial.');
+        }
+
+        $parameters = array(
+                'filtro' => 'situacao=AUTORIZADA',
+                'campos' => 'nrps',
+                'ordem'  => 'Handle desc',
+                'limite' =>  '1',
+        );
+
+        $result = $this->find($cnpj,$parameters);
+        return $result;
+
+    }
+
+    /**
+     * Metodo para consulta dos Pdf's.
+     * @param $cnpj
+     * @param $nnfse
+     * @return mixed
      */
     public function pdf($cnpj,$nnfse)
     {
@@ -124,18 +158,14 @@ class TecnospeedApi {
 
     }
 
+    /**
+     * Retorna os dados do Curl.
+     * @return mixed
+     */
     private function getData()
     {
         return curl_exec($this->curl);
     }
-
-
-
-    private function explodeArray($array = array())
-    {
-
-    }
-
 
     /**
      * Retorna as notas rejeitadas.
@@ -168,22 +198,36 @@ class TecnospeedApi {
     }
 
     /**
-     * @todo Fazer funcionar
-     * @param array $postFilds
+     * * @param array $postFilds
      * @return $this
      */
     private function curlConfigPost($postFilds = array())
     {
-        $user     = $this->api[$this->method]['user'];
-        $password = $this->api[$this->method]['passoword'];
+        $user        = $this->api[$this->method]['user'];
+        $password    = $this->api[$this->method]['passoword'];
+        $credentials = "$user".':'."$password";
+
+        $headers = array(
+            "Content-type: text/xml;charset=\"utf-8\"",
+            "Content-length: ".@strlen($postFilds),
+            "Authorization: Basic " . base64_encode($credentials)
+        );
 
         $this->curl = curl_init();
         curl_setopt($this->curl, CURLOPT_URL, $this->url);
+        curl_setopt($this->curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_setopt($this->curl, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($this->curl, CURLOPT_HEADER, 1);
+        curl_setopt($this->curl, CURLINFO_HEADER_OUT, true);
         curl_setopt($this->curl, CURLOPT_POSTFIELDS, $postFilds);
-        curl_setopt($this->curl, CURLOPT_USERPWD, $user.':'.$password);
-        return $this;
 
+        return $this;
+    }
+
+    private function getHeaders()
+    {
+        return curl_getinfo($this->curl);
     }
 
 
@@ -195,7 +239,6 @@ class TecnospeedApi {
 
     public function setMethod($method)
     {
-
         if(!is_string($method)) {
             throw new \InvalidArgumentException('O metodo informado deve ser um string');
         }
