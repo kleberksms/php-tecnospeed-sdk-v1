@@ -12,7 +12,7 @@ return array(
         'url'       =>  '192.168.200.199:8081/ManagerAPIWeb/nfse/consulta?',
         'campos'    =>  'idintegracao,situacao,nrps,nlote,nprotocolo,dtemissao,email,handle,dtautorizacao,dtcancelamento,cnpj,cidade,idgrupo,serie,tipo,cnpjtomador,nometomador,nnfse,serieprestacao',
         'ordem'     =>  'nnfse asc',
-        'ordem'     =>  'limit 100',
+        'limite'     => (int) 1000,
     ),
 
     'imprime'  => array(

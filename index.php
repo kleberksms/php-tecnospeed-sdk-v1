@@ -15,14 +15,13 @@ $api = new \Tecnospeed\HttpClient\TecnospeedApi();
 //exit;
 
 $time_start = microtime(true);
-//$parameters = array(
-//    'filtro'  => 'nrps=156',
-//    'campos' => 'handle'
-//);
+$parameters = array(
+    'filtro'  => 'nrps=156',
+);
 //$pdf = $api->pdf('03404018000147', false);
-//$result = $api->find('03404018000147',$parameters);
+$result = $api->find('03404018000147',$parameters);
 //$notaCancela = $api->descartaNf('03404018000147');
-$result = $api->getLastRps('03404018000147');
+//$result = $api->getLastRps('03404018000147');
 $time_end = microtime(true);
 var_dump($result.'<br>'.'<hr>');
 $execution_time = ($time_end - $time_start);

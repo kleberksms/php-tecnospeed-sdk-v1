@@ -60,11 +60,12 @@ class TecnospeedApi {
             'Ordem'      => isset($parameters['ordem'])  ? $parameters['ordem'] : $this->api['consulta']['ordem'],
             'Limite'     => isset($parameters['limite']) ? $parameters['limite']: $this->api['consulta']['limite'],
         );
+        //die(var_dump($paran));
 
         $result = $this->generateUrl($paran)
                        ->curlConfig()
                        ->getData();
-        return $result;
+        return Filter::normalizeResultApi( $result );
     }
 
     /**

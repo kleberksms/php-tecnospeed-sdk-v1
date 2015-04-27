@@ -31,5 +31,63 @@ class Filter {
 
     }
 
+    public static function normalizeResultApi($array = array())
+    {
+        if(empty($array) || is_null($array)) {
+            throw new \InvalidArgumentException('Informe o Array a ser normalizado');
+        }
+
+        die(var_dump($array));
+
+        foreach ($array AS $result) {
+
+            list(
+                $idIntegracao
+                , $situacao
+                , $nrps
+                , $nLote
+                , $nProtocolo
+                , $dtEmissao
+                , $email
+                , $handle
+                , $dtAutorizacao
+                , $dtCancelamento
+                , $cnpj
+                , $cidade
+                , $idGrupo
+                , $serie
+                , $tipo
+                , $cnpjTomador
+                , $nomeTomador
+                , $nnfse
+                , $seriePrestacao
+                ) = explode(',', urldecode($result));
+
+            $result_array[] = array(
+                'idintegracao' => $idIntegracao,
+                'situacao' => $situacao,
+                'nrps' => $nrps,
+                'nlote' => $nLote,
+                'nprotocolo' => $nProtocolo,
+                'dtemissao' => $dtEmissao,
+                'email' => $email,
+                'handle' => $handle,
+                'dtautorizacao' => $dtAutorizacao,
+                'dtcancelamento' => $dtCancelamento,
+                'cnpj' => $cnpj,
+                'cidade' => $cidade,
+                'idgrupo' => $idGrupo,
+                'serie' => $serie,
+                'tipo' => $tipo,
+                'cnpjtomador' => $cnpjTomador,
+                'nometomador' => $nomeTomador,
+                'nnfse' => $nnfse,
+                'serieprestacao' => $seriePrestacao
+            );
+
+            return $result_array;
+        }
+    }
+
 
 }
