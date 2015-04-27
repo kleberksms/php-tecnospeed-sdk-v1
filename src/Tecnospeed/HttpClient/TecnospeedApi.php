@@ -37,9 +37,10 @@ class TecnospeedApi {
      * Consulta as notas conforme os parametros.
      * @param $cnpj
      * @param array $parameters
-     * @return mixed
+     * @param bool $normalizeArray
+     * @return array|mixed
      */
-    public function find($cnpj, $parameters = array())
+    public function find($cnpj, $parameters = array(), $normalizeArray = false)
     {
         if(is_null($cnpj)) {
             throw new \InvalidArgumentException('Informe o cnpj da filial.');
@@ -65,7 +66,11 @@ class TecnospeedApi {
                        ->curlConfig()
                        ->getData();
 
-        return ( $result );
+        if( $normalizeArray ) {
+            return Filter::normalizeResultApi( (Filter::separeDataResult($result)) );
+        }
+        return ($result);
+
     }
 
     /**
@@ -123,7 +128,7 @@ class TecnospeedApi {
                 'limite' =>  '1',
         );
 
-        $result = $this->find($cnpj,$parameters);
+        $result = $this->find($cnpj,$parameters, false);
         return $result;
 
     }
@@ -164,7 +169,7 @@ class TecnospeedApi {
      */
     private function getData()
     {
-        return Filter::normalizeResultApi(curl_exec($this->curl));
+        return curl_exec($this->curl);
     }
 
     /**
@@ -178,7 +183,7 @@ class TecnospeedApi {
             'filtro' => 'situacao=REJEITADA',
             'campos' => 'nrps',
         );
-        return $this->find($cnpj,$parameter);
+        return $this->find($cnpj,$parameter, false);
     }
 
 

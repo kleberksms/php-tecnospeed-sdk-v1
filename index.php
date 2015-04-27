@@ -8,12 +8,12 @@ $time_start = microtime(true);
 $parameters = array(
     'filtro'  => 'situacao=AUTORIZADA',
 );
-////$pdf = $api->pdf('03404018000147', false);
+//$pdf = $api->pdf('03404018000147', false);
 //$result = $api->find('03404018000147',$parameters);
 //$notaCancela = $api->descartaNf('03404018000147');
 $result = $api->getLastRps('03404018000147');
 $time_end = microtime(true);
-var_dump($result.'<br>'.'<hr>');
+die(var_dump($result));
 $execution_time = ($time_end - $time_start);
 echo '<b>Tempo de consutlta Nf:</b> <br><i>'.$execution_time.' segs</i>'.'<br>Testando 1 notas(s)<br>';
 die();

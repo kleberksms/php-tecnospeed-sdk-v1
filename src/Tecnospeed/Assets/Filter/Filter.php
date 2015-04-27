@@ -37,11 +37,10 @@ class Filter {
             throw new \InvalidArgumentException('Informe o Array a ser normalizado');
         }
 
-
         foreach ($array as $result) {
 
             list(
-                $idIntegracao
+                  $idIntegracao
                 , $situacao
                 , $nrps
                 , $nLote
@@ -63,29 +62,30 @@ class Filter {
                 ) = explode(',', urldecode($result));
 
             $result_array[] = array(
-                'idintegracao' => $idIntegracao,
-                'situacao' => $situacao,
-                'nrps' => $nrps,
-                'nlote' => $nLote,
-                'nprotocolo' => $nProtocolo,
-                'dtemissao' => $dtEmissao,
-                'email' => $email,
-                'handle' => $handle,
-                'dtautorizacao' => $dtAutorizacao,
+                'idintegracao'   => $idIntegracao,
+                'situacao'       => $situacao,
+                'nrps'           => $nrps,
+                'nlote'          => $nLote,
+                'nprotocolo'     => $nProtocolo,
+                'dtemissao'      => $dtEmissao,
+                'email'          => $email,
+                'handle'         => $handle,
+                'dtautorizacao'  => $dtAutorizacao,
                 'dtcancelamento' => $dtCancelamento,
-                'cnpj' => $cnpj,
-                'cidade' => $cidade,
-                'idgrupo' => $idGrupo,
-                'serie' => $serie,
-                'tipo' => $tipo,
-                'cnpjtomador' => $cnpjTomador,
-                'nometomador' => $nomeTomador,
-                'nnfse' => $nnfse,
+                'cnpj'           => $cnpj,
+                'cidade'         => $cidade,
+                'idgrupo'        => $idGrupo,
+                'serie'          => $serie,
+                'tipo'           => $tipo,
+                'cnpjtomador'    => $cnpjTomador,
+                'nometomador'    => $nomeTomador,
+                'nnfse'          => $nnfse,
                 'serieprestacao' => $seriePrestacao
             );
 
-            return $result_array;
+
         }
+        return $result_array;
     }
 
 
