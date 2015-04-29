@@ -131,7 +131,30 @@ class TecnospeedApi {
 
         $result = $this->find($cnpj,$parameters, false);
         return $result;
+    }
 
+    /**
+     * Retorna o Handle da nota conforme paramentros.
+     * @param $cnpj
+     * @param $idIntegracao
+     * @return array|mixed
+     */
+    private function getHandle($cnpj,$idIntegracao)
+    {
+        if(is_null($idIntegracao)) {
+            throw new \InvalidArgumentException ('Informe o idIntegracao');
+        }
+
+        $this->cnpjFilial = $cnpj;
+
+        $parametersFind = array(
+            'CNPJ'       => $this->cnpjFilial,
+            'grupo'      => $this->cities[$this->cnpjFilial]['grupo'],
+            'campos'     => 'Handle',
+            'filtro'     => 'idIntegracao = '.$idIntegracao,
+        );
+
+        return $this->find($cnpj,$parametersFind);
     }
 
     /**
@@ -147,16 +170,7 @@ class TecnospeedApi {
         }
 
        $this->cnpjFilial = $cnpj;
-
-        $parametersFind = array(
-            'CNPJ'       => $this->cnpjFilial,
-            'grupo'      => $this->cities[$this->cnpjFilial]['grupo'],
-            'campos'     => 'Handle',
-            'filtro'     => 'idIntegracao = '.$nnfse,
-        );
-
-
-        $pdf = $this->find($cnpj,$parametersFind);
+       $pdf = $this->getHandle($cnpj,$nnfse);
 
         $paran = array(
             'CNPJ'       => $this->cnpjFilial,
@@ -166,9 +180,6 @@ class TecnospeedApi {
             'URL'        => '1',
         );
         $this->method    = 'imprime';
-
-
-
 
         $result = $this->generateUrl($paran)
                        ->curlConfig()
