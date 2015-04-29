@@ -22,7 +22,7 @@ class Filter {
     public static function returnOnlyString($string)
     {
        $string = utf8_encode($string);
-       return preg_replace( '/[`^~\'"]/', null,iconv('UTF-8', "ISO-8859-1//IGNORE", $string) );
+       return preg_replace( '/[`^~\'"]/', null,iconv('UTF-8', "ISO-8859-1//IGNORE", $string));
     }
 
     public static function separeDataResult($data)
