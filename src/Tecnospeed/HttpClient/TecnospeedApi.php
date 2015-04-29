@@ -146,16 +146,29 @@ class TecnospeedApi {
             throw new \InvalidArgumentException('Informe o Nº da nota para a pesquisa');
         }
 
-        $this->method    = 'imprime';
-        $this->cnpjFilial = $cnpj;
+       $this->cnpjFilial = $cnpj;
+
+        $parametersFind = array(
+            'CNPJ'       => $this->cnpjFilial,
+            'grupo'      => $this->cities[$this->cnpjFilial]['grupo'],
+            'campos'     => 'Handle',
+            'filtro'     => 'idIntegracao = '.$nnfse,
+        );
+
+
+        $pdf = $this->find($cnpj,$parametersFind);
 
         $paran = array(
             'CNPJ'       => $this->cnpjFilial,
             'grupo'      => $this->cities[$this->cnpjFilial]['grupo'],
             'NomeCidade' => $this->cities[$this->cnpjFilial]['grupo'],
-            'Handle'     => $nnfse,
+            'Handle'     => $pdf,
             'URL'        => '1',
         );
+        $this->method    = 'imprime';
+
+
+
 
         $result = $this->generateUrl($paran)
                        ->curlConfig()

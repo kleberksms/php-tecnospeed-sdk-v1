@@ -8,7 +8,8 @@ $time_start = microtime(true);
 $parameters = array(
     'filtro'  => 'situacao=AUTORIZADA',
 );
-//$pdf = $api->pdf('03404018000147', false);
+$pdf = $api->pdf('03404018000147', 519735);
+die(var_dump($pdf));
 //$result = $api->find('03404018000147',$parameters);
 //$notaCancela = $api->descartaNf('03404018000147');
 $result = $api->getLastRps('03404018000147');
