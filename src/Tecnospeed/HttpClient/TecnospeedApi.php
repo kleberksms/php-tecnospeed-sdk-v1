@@ -16,8 +16,8 @@ class TecnospeedApi {
 
     public function __construct()
     {
-        $this->api           = include __DIR__.'..\..\Config\API.php';
-        $this->cities        = include __DIR__.'..\..\Config\Cities.php';
+        $this->api           = include __DIR__.'/../Config/API.php';
+        $this->cities        = include __DIR__.'/../Config/Cities.php';
         return $this;
     }
 

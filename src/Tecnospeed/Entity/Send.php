@@ -1,8 +1,8 @@
 <?php
 
 namespace Tecnospeed\Entity;
-
 use Tecnospeed\Assets\Filter\Filter;
+
 
 class Send
 {
@@ -106,6 +106,8 @@ class Send
     private $valorISSRetido;
     private $valorLiquidoNfse;
     private $responsavelRetencao;
+
+
 
     /**
      * @return mixed
@@ -526,12 +528,19 @@ class Send
      * @param mixed $cpfCnpjPrestador
      * CPF ou CNPJ do prestador.
      */
-    public function setCpfCnpjPrestador($cpfCnpjPrestador)
+    public function setCpfCnpjPrestador( $cpfCnpjPrestador )
     {
         if(is_null($cpfCnpjPrestador) ) {
             throw new \InvalidArgumentException('Informe o campo cpfCnpjPrestador');
         }
-        $this->cpfCnpjPrestador = Filter::returnOnlyNumbers( $cpfCnpjPrestador );
+
+        $validateCpfCnpj = Filter::validateCpfCnpj( $cpfCnpjPrestador );
+
+        if( !$validateCpfCnpj ) {
+            throw new \InvalidArgumentException ('Cpf ou Cnpj do Prestador não é valido');
+        }
+
+        $this->cpfCnpjPrestador = $validateCpfCnpj;
     }
 
     /**
@@ -545,12 +554,20 @@ class Send
     /**
      * @param mixed $cpfCnpjRemetente
      */
-    public function setCpfCnpjRemetente($cpfCnpjRemetente)
+    public function setCpfCnpjRemetente( $cpfCnpjRemetente )
     {
         if(is_null($cpfCnpjRemetente)) {
             throw new \InvalidArgumentException('Informe o CpfCnpjRemetende texto.');
         }
-        $this->cpfCnpjRemetente = Filter::returnOnlyNumbers( $cpfCnpjRemetente );
+
+        $validateCpfCnpj = Filter::validateCpfCnpj( $cpfCnpjRemetente );
+
+        if( !$validateCpfCnpj ) {
+            throw new \InvalidArgumentException ('Cpf ou Cnpj do Remetente não é valido');
+        }
+
+        $this->cpfCnpjPrestador = $validateCpfCnpj;
+
     }
 
     /**
@@ -571,7 +588,14 @@ class Send
             throw new \InvalidArgumentException('Informe o CpfCnpjTomador texto');
         }
 
-        $this->cpfCnpjTomador = Filter::returnOnlyNumbers($cpfCnpjTomador);
+        $validateCpfCnpj = Filter::validateCpfCnpj( $cpfCnpjTomador );
+
+        if( !$validateCpfCnpj ) {
+            throw new \InvalidArgumentException ('Cpf ou Cnpj do Tomador não é valido');
+        }
+
+        $this->cpfCnpjPrestador = $validateCpfCnpj;
+
     }
 
     /**

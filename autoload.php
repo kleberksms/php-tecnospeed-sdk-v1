@@ -5,6 +5,7 @@
  * Why are you not using composer?
  * https://getcomposer.org/
  */
+define('DS',DIRECTORY_SEPARATOR);
 
 if (version_compare(PHP_VERSION, '5.3.3', '<')) {
   throw new Exception('The tecnospeed SDK v1 requires PHP version 5.3.3 or higher.');

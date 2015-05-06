@@ -29,8 +29,8 @@ class NF
             throw new \InvalidArgumentException('Class do not exist');
         }
 
-        $this->configuration = include __DIR__ . '\Config\Configuration.php';
-        $this->cities = include __DIR__ . '\Config\Cities.php';
+        $this->configuration = include __DIR__ . '/Config/Configuration.php';
+        $this->cities        = include __DIR__ . '/Config/Cities.php';
     }
 
     /**

@@ -4,6 +4,13 @@ require_once __DIR__ . '/vendor/autoload.php';
 $nf  = new \Tecnospeed\NF();
 $api = new \Tecnospeed\HttpClient\TecnospeedApi();
 
+
+
+
+$cpf = '34040180001/47';
+$result = Tecnospeed\Assets\Filter\Filter::validateCpfCnpj($cpf);
+die(var_dump($result))  ;
+
 $time_start = microtime(true);
 $parameters = array(
     'filtro'  => 'situacao=AUTORIZADA',
