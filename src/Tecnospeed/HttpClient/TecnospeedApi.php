@@ -67,8 +67,11 @@ class TecnospeedApi {
                        ->getData();
 
         if( $normalizeArray ) {
-            return Filter::normalizeResultApi( (Filter::separeDataResult($result)) );
+            $separate  = Filter::separeDataResult($result);
+            $nomalized = Filter::normalizeResultApi($separate);
+            return $nomalized;
         }
+
         return ($result);
 
     }
