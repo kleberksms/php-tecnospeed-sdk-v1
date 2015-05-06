@@ -52,7 +52,7 @@ class TecnospeedApi {
         $this->cnpjFilial = $cnpj;
         $this->setMethod('consulta');
 
-        $paran = array(
+        $param = array(
             'CNPJ'       => $this->cnpjFilial,
             'grupo'      => $this->cities[$this->cnpjFilial]['grupo'],
             'NomeCidade' => $this->cities[$this->cnpjFilial]['grupo'],
@@ -62,7 +62,7 @@ class TecnospeedApi {
             'Limite'     => isset($parameters['limite']) ? $parameters['limite']: $this->api['consulta']['limite'],
         );
 
-        $result = $this->generateUrl($paran)
+        $result = $this->generateUrl($param)
                        ->curlConfig()
                        ->getData();
 
