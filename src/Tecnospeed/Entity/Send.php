@@ -1829,6 +1829,8 @@ class Send
             $this->setAliquotaCOFINS('0');
             $this->setAliquotaCSLL('0');
             $this->setAliquotaPIS('0');
+            $this->setValorIR('0.00');
+            $this->setAliquotaIR('0');
         }
         return $this;
     }
