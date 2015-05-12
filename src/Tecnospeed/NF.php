@@ -57,9 +57,15 @@ class NF
 
             $this->entity->setVersao($this->cities[$this->entity->getCpfCnpjRemetente()]['versao']);
             $this->entity->setNomeCidade($this->cities[$this->entity->getCpfCnpjRemetente()]['grupo']);
+            $validateMoneraty = $this->cities[$this->entity->getCpfCnpjRemetente()]['validateMonetary'];
+
+            if( $validateMoneraty ) {
+                $this->entity->setAliquotasCpf($this->entity->getCpfCnpjTomador());
+            }
 
             return $this->entity;
-        } catch (Exception $e) {
+
+        } catch ( Exception $e ) {
             echo $e;
         }
 

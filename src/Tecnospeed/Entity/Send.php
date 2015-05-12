@@ -1805,4 +1805,32 @@ class Send
         $this->idIntegracao = $idIntegracao;
     }
 
+    /**
+     * Seta aliquotas com 0.00
+     * para cidades parametrizadas no arquivo Cities.php
+     * se o tomador for pessoa juridica;
+     */
+
+
+    /**
+     * Seta aliquotas com 0.00
+     * para cidades parametrizadas no arquivo Cities.php
+     * se o tomador for pessoa juridica;
+     *
+     * @param $cpf
+     * @return $this
+     */
+    public function setAliquotasCpf( $cpf )
+    {
+        if(11 == strlen( $cpf )) {
+            $this->setValorCOFINS('0.00');
+            $this->setValorCSLL('0.00');
+            $this->setValorPIS('0.00');
+            $this->setAliquotaCOFINS('0');
+            $this->setAliquotaCSLL('0');
+            $this->setAliquotaPIS('0');
+        }
+        return $this;
+    }
+
 }
