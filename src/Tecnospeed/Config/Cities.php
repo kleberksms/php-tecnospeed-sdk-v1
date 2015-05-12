@@ -11,21 +11,24 @@ return array(
         'CNPJ'=>'03404018000147',
         'grupo'=>'Maringa',
         'versao'=>'2.01',
-        'ExcludeAfterSend'=>true
+        'ExcludeAfterSend'=>true,
+        'validateMonetary'=>false
     ),
 
     '03404018003081'=>array( // JoaoPessoa
         'CNPJ'=>'03404018003081',
         'grupo'=>'JoaoPessoa',
         'versao'=>'2.01',
-        'ExcludeAfterSend'=>false
+        'ExcludeAfterSend'=>false,
+        'validateMonetary'=>true
     ),
 
     '03404018002603'=>array( //SaoPaulo
         'CNPJ'=>'03404018002603',
         'grupo'=>'SaoPaulo',
         'versao'=>'1',
-        'ExcludeAfterSend'=>false
+        'ExcludeAfterSend'=>false,
+        'validateMonetary'=>false
     ),
 
     '03404018000813'=>array( //Joinville
@@ -33,13 +36,15 @@ return array(
             'grupo'=>'Joinville',
             'versao'=>'1',
             'ExcludeAfterSend'=>false,
-     ),
+            'validateMonetary'=>false
+    ),
 
     '03404018003677' => array( // CuritibaBatel
         'CNPJ'=>'03404018000813',
         'grupo'=>'CuritibaBatel',
         'versao'=>'1',
         'ExcludeAfterSend'=>false,
+        'validateMonetary'=>false
     ),
 
     '03404018001542' => array( //CuritibaMarechal
@@ -47,6 +52,7 @@ return array(
         'grupo'=>'CuritibaMarechal',
         'versao'=>'1',
         'ExcludeAfterSend'=>false,
+        'validateMonetary'=>false
      ),
 
     '03404018004568' => array( //CtbaCebp
@@ -54,6 +60,7 @@ return array(
         'grupo'=>'CtbaCebp',
         'versao'=>'1',
         'ExcludeAfterSend'=>false,
+        'validateMonetary'=>false
     ),
 
     '03404018002000' => array( //PortoAlegre
@@ -61,6 +68,7 @@ return array(
         'grupo'=>'PortoAlegre',
         'versao'=>'1',
         'ExcludeAfterSend'=>false,
+        'validateMonetary'=>false
     ),
 
     '03404018001208' => array( //PassoFundo
@@ -68,6 +76,7 @@ return array(
         'grupo'=>'PassoFundo',
         'versao'=>'1',
         'ExcludeAfterSend'=>false,
+        'validateMonetary'=>false
     ),
 
     '03404018004304' => array( //PresidentePrudente
@@ -75,6 +84,7 @@ return array(
         'grupo'=>'PresidentePrudente',
         'versao'=>'1',
         'ExcludeAfterSend'=>false,
+        'validateMonetary'=>false
     ),
 
     '03404018001623' => array( //BeloHorizonte
@@ -82,6 +92,7 @@ return array(
         'grupo'=>'BeloHorizonte',
         'versao'=>'1',
         'ExcludeAfterSend'=>false,
+        'validateMonetary'=>false
     ),
 
     '03404018000902' => array( //Divinopolis
@@ -89,6 +100,7 @@ return array(
         'grupo'=>'Divinopolis',
         'versao'=>'1',
         'ExcludeAfterSend'=>false,
+        'validateMonetary'=>false
     ),
 
     '03404018002271' => array( //CampoGrande
@@ -96,6 +108,7 @@ return array(
         'grupo'=>'CampoGrande',
         'versao'=>'1',
         'ExcludeAfterSend'=>false,
+        'validateMonetary'=>false
     ),
 
     '03404018002514' => array( //Belem
@@ -103,6 +116,7 @@ return array(
         'grupo'=>'Belem',
         'versao'=>'1',
         'ExcludeAfterSend'=>false,
+        'validateMonetary'=>false
    ),
 
     '03404018001461' => array(//Maceio
@@ -110,6 +124,7 @@ return array(
         'grupo'=>'Maceio',
         'versao'=>'1',
         'ExcludeAfterSend'=>false,
+        'validateMonetary'=>false
     ),
 
     '03404018001976' => array(//Recife
@@ -117,6 +132,7 @@ return array(
         'grupo'=>'Recife',
         'versao'=>'1',
         'ExcludeAfterSend'=>false,
+        'validateMonetary'=>false
     ),
 
     '03404018002867' => array(//Fortaleza
@@ -124,6 +140,7 @@ return array(
         'grupo'=>'Fortaleza',
         'versao'=>'1',
         'ExcludeAfterSend'=>false,
+        'validateMonetary'=>false
     )
 
 
