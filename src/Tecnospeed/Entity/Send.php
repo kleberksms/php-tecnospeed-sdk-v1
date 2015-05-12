@@ -566,7 +566,7 @@ class Send
             throw new \InvalidArgumentException ('Cpf ou Cnpj do Remetente não é valido');
         }
 
-        $this->cpfCnpjPrestador = $validateCpfCnpj;
+        $this->cpfCnpjRemetente = $validateCpfCnpj;
 
     }
 
@@ -594,7 +594,7 @@ class Send
             throw new \InvalidArgumentException ('Cpf ou Cnpj do Tomador não é valido');
         }
 
-        $this->cpfCnpjPrestador = $validateCpfCnpj;
+        $this->cpfCnpjTomador = $validateCpfCnpj;
 
     }
 
