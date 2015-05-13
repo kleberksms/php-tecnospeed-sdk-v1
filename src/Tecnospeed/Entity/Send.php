@@ -700,7 +700,7 @@ class Send
     public function setDescontoCondicionado($descontoCondicionado)
     {
         if(is_null($descontoCondicionado) || !is_int($descontoCondicionado)) {
-            throw new \InvalidArgumentException("Informe o desconto condificonado (numerico)");
+            throw new \InvalidArgumentException("Informe o desconto condicionado (numerico)");
         }
         $this->descontoCondicionado = $descontoCondicionado;
     }
