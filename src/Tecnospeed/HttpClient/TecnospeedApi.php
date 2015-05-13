@@ -121,6 +121,15 @@ class TecnospeedApi {
     public function getLastRps($cnpj)
     {
         $cnpj = Filter::returnOnlyNumbers($cnpj);
+
+        /**
+         * So retorna o ultimo rps para cidades
+         * parametrizadas no arquivo Cities no atributo getLastRps.
+         */
+        if ( !$this->cities[$cnpj]['getLastRps'] ) {
+            return 1;
+        }
+
         if(is_null($cnpj)) {
             throw new \InvalidArgumentException ('Informe o cnpj da filial.');
         }
