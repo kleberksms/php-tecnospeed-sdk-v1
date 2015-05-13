@@ -82,7 +82,14 @@ class NF
         }
 
         $stringTx2 = new ArrayToTx2();
-        $arrayNfse = $this->hydrator->extract($this->entity);
+
+        try {
+            $arrayNfse = $this->hydrator->extract($this->entity);
+        } catch (\Exception $e) {
+            die ($e->getMessage());
+
+        }
+
 
         $stringTx2->convertToString($arrayNfse);
         $tx2 = utf8_decode($stringTx2->getTx2());
