@@ -718,8 +718,8 @@ class Send
      */
     public function setDescontoIncondicionado($descontoIncondicionado)
     {
-        if(is_null($descontoIncondicionado)) {
-            $descontoIncondicionado = '0.00';
+        if(is_null($descontoIncondicionado) || !is_int($descontoIncondicionado)) {
+            throw new \InvalidArgumentException("Informe o desconto condificonado (numerico)");
         }
         $this->descontoIncondicionado = $descontoIncondicionado;
     }
