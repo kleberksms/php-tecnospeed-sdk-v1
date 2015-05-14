@@ -4,7 +4,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 $nf  = new \Tecnospeed\NF();
 $api = new \Tecnospeed\HttpClient\TecnospeedApi();
 
-
+$result = $api->exportaXML('03404018000147', '520095');
+die(var_dump($result));
 
 
 $cpf = '34040180001/47';

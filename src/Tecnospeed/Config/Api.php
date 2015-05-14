@@ -27,6 +27,12 @@ return array(
         'passoword' =>  '123mudar',
     ),
 
+    'exportaxml' => array(
+        'url'       =>  '192.168.200.199:8081/ManagerAPIWeb/nfse/exportaxml?',
+        'user'      =>  'admin',
+        'passoword' =>  '123mudar',
+    ),
+
 
 
 

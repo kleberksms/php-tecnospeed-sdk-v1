@@ -200,6 +200,46 @@ class TecnospeedApi {
 
     }
 
+    public function exportaXML($cnpj, $codIntegracao)
+    {
+        if(!isset($cnpj)) {
+            throw new \InvalidArgumentException('Cnpj não pode ser nulo');
+        }
+
+        if(empty($parameters)) {
+            throw new \InvalidArgumentException('Informe os parametros');
+        }
+
+        $this->cnpjFilial = $cnpj;
+
+        $parameters = array(
+            'campos'       => 'nnfse',
+            'filtro'       => "idintegracao={$codIntegracao} AND situacao=AUTORIZADA",
+
+        );
+
+        $nnfse = $this->find( $this->cnpjFilial, $parameters, false);
+
+        $this->setMethod('exportaxml');
+
+        $param = array(
+            'CNPJ'      => $this->cnpjFilial,
+            'Tipo'      => 'AUTORIZACAO',
+            'DtInicial' => '01/01/2015',
+            'DtFinal'   => '01/01/2099',
+            'Ninicial'  => $nnfse,
+            'Nfinal'    => $nnfse,
+            'URL'       => 1
+        );
+
+        $result = $this ->curlConfigPost($param)
+                        ->generateUrl($param)
+                        ->getData();
+
+        $this->closeCurl();
+
+        return $result;
+    }
     /**
      * Retorna os dados do Curl.
      * @return mixed
