@@ -7,4 +7,6 @@ composer.phar
 tests/TecnospeedTestCredentials.php
 src/Tecnospeed/Config/Configuration.php
 src/Tecnospeed/Config/Cities.php
+src/Tecnospeed/Config/Api.php
+index.php
 
