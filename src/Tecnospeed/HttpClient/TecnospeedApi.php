@@ -317,6 +317,50 @@ class TecnospeedApi {
         return $this;
     }
 
+    private function getWithSocket($post_data)
+    {
+        $user        	= $this->api[$this->method]['user'];
+        $password    	= $this->api[$this->method]['password'];
+        $credentials 	= "$user".':'."$password";
+
+        $host 			= '192.168.200.199';
+        $port 			= '8081';
+
+        $data = http_build_query($post_data);
+
+        $auth = base64_encode($credentials);
+
+        $socket = fsockopen($host, $port, $errno, $errstr, 15);
+
+        if (!$socket) {
+            throw new \Exception('Erro ao conectar no manager.<br>');
+        }
+
+        $http = "POST /ManagerAPIWeb/nfse/exportaxml HTTP/1.1\r\n";
+        $http .= "Authorization: Basic " . $auth . "\r\n";
+        $http .= "Host: " . $host . ":".$port."\r\n";
+        $http .= "User-Agent: " . $_SERVER['HTTP_USER_AGENT'] . "\r\n";
+        $http .= "Content-Type: application/x-www-form-urlencoded\r\n";
+        $http .= "Content-length: " . strlen($data) . "\r\n";
+        $http .= "Connection: close\r\n\r\n";
+        $http .= $data . "\r\n\r\n";
+        fwrite($socket, $http);
+
+        $result = "";
+
+        //Lê todas as linhas do retorno
+        while (!feof($socket)) {
+            $result .= fgets($socket, 4096);
+        }
+        fclose($socket);
+
+        //Separa header do conteudo
+        list($header, $body) = preg_split("/\R\R/", $result, 2);
+
+        return $body;
+
+    }
+
     private function getHeaders()
     {
         return curl_getinfo($this->curl);
