@@ -242,11 +242,7 @@ class TecnospeedApi {
             'URL'           => 1
         );
 
-        $this->generateUrl($postFields);
-
-        $result = $this->curlConfigPost($postFields)->generateUrl($postFields)->getData();
-
-        $this->closeCurl();
+        $result = $this->getWithSocket($postFields);
 
         return $result;
     }
