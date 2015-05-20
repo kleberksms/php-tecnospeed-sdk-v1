@@ -200,41 +200,51 @@ class TecnospeedApi {
 
     }
 
-    public function exportaXML($cnpj, $codIntegracao)
+    public function exportaXML($data)
     {
-        if(!isset($cnpj)) {
-            throw new \InvalidArgumentException('Cnpj não pode ser nulo');
+        if(!is_array($data)) {
+            throw new \InvalidArgumentException ('Dados não informados!');
         }
 
-        if(empty($parameters)) {
-            throw new \InvalidArgumentException('Informe os parametros');
+        if(!isset($data['cnpj'])) {
+            throw new \InvalidArgumentException ('Informe o Cnpj da Filial!');
         }
 
-        $this->cnpjFilial = $cnpj;
+        if(is_null($data['codIntegracao'])) {
+            throw new \InvalidArgumentException('Informe o codigo de integração');
+        }
+
+        $codIntegracao      = $data['codIntegracao'];
+        $dtinicial          = (isset($data['Dtinicial']))   ? $data['Dtinicial']    : '01/01/2015';
+        $dtfinal            = (isset($data['Dtfinal']))     ? $data['Dtfinal']      : '01/01/2099';;
+        $this->cnpjFilial   = $data['cnpj'];
 
         $parameters = array(
-            'campos'       => 'nnfse',
-            'filtro'       => "idintegracao={$codIntegracao} AND situacao=AUTORIZADA",
-
+            'campos'    => 'nnfse',
+            'filtro'    => "idintegracao={$codIntegracao} AND situacao=AUTORIZADA",
+            'ordem'     => 'dtautorizacao desc',
+            'limite'    => 1
         );
 
         $nnfse = $this->find( $this->cnpjFilial, $parameters, false);
 
-        $this->setMethod('exportaxml');
+        $this->method= 'exportaxml';
 
-        $param = array(
-            'CNPJ'      => $this->cnpjFilial,
-            'Tipo'      => 'AUTORIZACAO',
-            'DtInicial' => '01/01/2015',
-            'DtFinal'   => '01/01/2099',
-            'Ninicial'  => $nnfse,
-            'Nfinal'    => $nnfse,
-            'URL'       => 1
+        $postFields = array(
+            'CNPJ'          => $this->cnpjFilial,
+            'grupo'         => $this->cities[$this->cnpjFilial]['grupo'],
+            'NomeCidade'    => $this->cities[$this->cnpjFilial]['grupo'],
+            'Tipo'          => 'AUTORIZACAO',
+            'Dtinicial'     => $dtinicial,
+            'Dtfinal'       => $dtfinal,
+            'Ninicial'      => $nnfse,
+            'Nfinal'        => $nnfse,
+            'URL'           => 1
         );
 
-        $result = $this ->curlConfigPost($param)
-                        ->generateUrl($param)
-                        ->getData();
+        $this->generateUrl($postFields);
+
+        $result = $this->curlConfigPost($postFields)->generateUrl($postFields)->getData();
 
         $this->closeCurl();
 
@@ -270,7 +280,7 @@ class TecnospeedApi {
     private function curlConfig()
     {
         $user     = $this->api[$this->method]['user'];
-        $password = $this->api[$this->method]['passoword'];
+        $password = $this->api[$this->method]['password'];
 
         $this->curl = curl_init();
         curl_setopt($this->curl, CURLOPT_URL, $this->url);
@@ -286,7 +296,7 @@ class TecnospeedApi {
     private function curlConfigPost($postFilds = array())
     {
         $user        = $this->api[$this->method]['user'];
-        $password    = $this->api[$this->method]['passoword'];
+        $password    = $this->api[$this->method]['password'];
         $credentials = "$user".':'."$password";
 
         $headers = array(
@@ -300,8 +310,8 @@ class TecnospeedApi {
         curl_setopt($this->curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($this->curl, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($this->curl, CURLOPT_HEADER, 1);
-        curl_setopt($this->curl, CURLINFO_HEADER_OUT, true);
+        curl_setopt($this->curl, CURLOPT_HEADER, 0);
+        curl_setopt($this->curl, CURLINFO_HEADER_OUT, false);
         curl_setopt($this->curl, CURLOPT_POSTFIELDS, $postFilds);
 
         return $this;

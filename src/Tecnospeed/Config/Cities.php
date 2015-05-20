@@ -23,7 +23,7 @@ return array(
         'versao'=>'2.01',
         'ExcludeAfterSend'=>false,
         'validateMonetary'=>true,
-        'getLastRps'      =>false,
+        'getLastRps'      =>true,
     ),
 
     '03404018002603'=>array( //SaoPaulo
@@ -123,7 +123,6 @@ return array(
         'ExcludeAfterSend'=>false,
         'validateMonetary'=>false,
         'getLastRps'      =>false,
-        'getLastRps'      =>false,
     ),
 
     '03404018002514' => array( //Belem
@@ -161,17 +160,4 @@ return array(
         'validateMonetary'=>false,
         'getLastRps'      =>false,
     )
-
-
-
-
-
-
-
-
-
-
-
-
-
 );

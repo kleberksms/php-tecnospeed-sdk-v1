@@ -6,36 +6,30 @@
 
 return array(
 
-    'consulta' => array(
+    'consulta'  => array(
         'user'      =>  'admin' ,
-        'passoword' =>  '123mudar',
+        'password'  =>  '123mudar',
         'url'       =>  '192.168.200.199:8081/ManagerAPIWeb/nfse/consulta?',
         'campos'    =>  'idintegracao,situacao,nrps,nlote,nprotocolo,dtemissao,email,handle,dtautorizacao,dtcancelamento,cnpj,cidade,idgrupo,serie,tipo,cnpjtomador,nometomador,nnfse,serieprestacao',
         'ordem'     =>  'nnfse asc',
-        'limite'     => (int) 1000,
+        'limite'    => (int) 1000,
     ),
 
-    'imprime'  => array(
+    'imprime'   => array(
+        'user'      =>  'admin',
+        'password'  =>  '123mudar',
         'url'       =>  '192.168.200.199:8081/ManagerAPIWeb/nfse/imprime?',
-        'user'      =>  'admin',
-        'passoword' =>  '123mudar',
     ),
 
-    'descarta' => array(
+    'descarta'  => array(
+        'user'      =>  'admin',
+        'password'  =>  '123mudar',
         'url'       =>  '192.168.200.199:8081/ManagerAPIWeb/nfse/descarta?',
-        'user'      =>  'admin',
-        'passoword' =>  '123mudar',
     ),
 
-    'exportaxml' => array(
+    'exportaxml'    => array(
+        'password'  =>  '123mudar',
+        'user'      =>  'admin',
         'url'       =>  '192.168.200.199:8081/ManagerAPIWeb/nfse/exportaxml?',
-        'user'      =>  'admin',
-        'passoword' =>  '123mudar',
     ),
-
-
-
-
-
-
 );

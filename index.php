@@ -4,7 +4,21 @@ require_once __DIR__ . '/vendor/autoload.php';
 $nf  = new \Tecnospeed\NF();
 $api = new \Tecnospeed\HttpClient\TecnospeedApi();
 
-$result = $api->exportaXML('03404018000147', '520095');
+
+$data = array(
+    'cnpj'              => '03404018000147',
+    'codIntegracao'     => '519767',
+    'Dtinicial'         => '05/05/2015',
+    'Dtfinal'           => '05/05/2015'
+);
+
+try {
+    $result = $api->exportaXML($data);
+}catch (Exception $e) {
+    die($e->getMessage());
+}
+
+echo('result');
 die(var_dump($result));
 
 
