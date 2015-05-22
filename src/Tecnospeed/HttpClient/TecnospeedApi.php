@@ -200,6 +200,11 @@ class TecnospeedApi {
 
     }
 
+    /**
+     * @param $data
+     * @return mixed
+     * @throws \Exception
+     */
     public function exportaXML($data)
     {
         if(!is_array($data)) {
@@ -216,7 +221,7 @@ class TecnospeedApi {
 
         $codIntegracao      = $data['codIntegracao'];
         $dtinicial          = (isset($data['Dtinicial']))   ? $data['Dtinicial']    : '01/01/2015';
-        $dtfinal            = (isset($data['Dtfinal']))     ? $data['Dtfinal']      : '01/01/2099';;
+        $dtfinal            = (isset($data['Dtfinal']))     ? $data['Dtfinal']      : '01/01/2099';
         $this->cnpjFilial   = $data['cnpj'];
 
         $parameters = array(
@@ -239,6 +244,47 @@ class TecnospeedApi {
             'Dtfinal'       => $dtfinal,
             'Ninicial'      => $nnfse,
             'Nfinal'        => $nnfse,
+            'URL'           => 1
+        );
+
+        $result = $this->getWithSocket($postFields);
+
+        return $result;
+    }
+
+    /**
+     * @param $data
+     * $data = array(
+        'cnpj'              => '03404018000147',
+        'Dtinicial'         => '01/04/2015',
+        'Dtfinal'           => '05/05/2015'
+    );
+     * @return mixed
+     * @throws \Exception
+     */
+    public function exportaXML_byDate($data)
+    {
+        if(!is_array($data)) {
+            throw new \InvalidArgumentException ('Dados não informados!');
+        }
+
+        if(!isset($data['cnpj'])) {
+            throw new \InvalidArgumentException ('Informe o Cnpj da Filial!');
+        }
+
+        $dtinicial          = $data['Dtinicial'];
+        $dtfinal            = $data['Dtfinal'];
+        $this->cnpjFilial   = $data['cnpj'];
+
+        $this->method= 'exportaxml';
+
+        $postFields = array(
+            'CNPJ'          => $this->cnpjFilial,
+            'grupo'         => $this->cities[$this->cnpjFilial]['grupo'],
+            'NomeCidade'    => $this->cities[$this->cnpjFilial]['grupo'],
+            'Tipo'          => 'AUTORIZACAO',
+            'Dtinicial'     => $dtinicial,
+            'Dtfinal'       => $dtfinal,
             'URL'           => 1
         );
 
