@@ -104,11 +104,9 @@ class TecnospeedApi {
                 'tiporps'    =>  '1',
             );
 
-            $this->generateUrl($postFields);
-            $result[] = $this->curlConfigPost($postFields)->generateUrl($postFields)->getData();
+            $result[] = $this->getWithSocket($postFields);
         }
 
-        $this->closeCurl();
         return $result;
 
     }
@@ -378,7 +376,7 @@ class TecnospeedApi {
             throw new \Exception('Erro ao conectar no manager.<br>');
         }
 
-        $http = "POST /ManagerAPIWeb/nfse/exportaxml HTTP/1.1\r\n";
+        $http  = "POST /ManagerAPIWeb/nfse/".$this->method ." HTTP/1.1\r\n";
         $http .= "Authorization: Basic " . $auth . "\r\n";
         $http .= "Host: " . $host . ":".$port."\r\n";
         $http .= "User-Agent: " . $_SERVER['HTTP_USER_AGENT'] . "\r\n";
