@@ -272,7 +272,7 @@ class TecnospeedApi {
 
         $dtinicial          = $data['Dtinicial'];
         $dtfinal            = $data['Dtfinal'];
-        $this->cnpjFilial   = $data['cnpj'];
+        $this->cnpjFilial   = Filter::returnOnlyNumbers($data['cnpj']);
 
         $this->method= 'exportaxml';
 
