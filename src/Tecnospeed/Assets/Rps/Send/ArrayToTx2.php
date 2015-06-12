@@ -89,7 +89,6 @@ class ArrayToTx2 extends AbstractArray
         $string = $string."\nExigibilidadeISS=".$array['ExigibilidadeISS'];
         $string = $string."\nOperacao=".$array['Operacao'];
         $string = $string."\nMunicipioIncidencia=".$array['MunicipioIncidencia'];
-
         $string = $string."\nValorServicos=".$array['ValorServicos'];
         $string = $string."\nAliquotaPIS=".$array['AliquotaPIS'];
         $string = $string."\nAliquotaCOFINS=".$array['AliquotaCOFINS'];

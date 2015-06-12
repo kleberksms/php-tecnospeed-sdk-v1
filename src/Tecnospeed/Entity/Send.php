@@ -1000,7 +1000,7 @@ class Send
         if(is_null($inscricaoMunicipalPrestador )) {
             throw new \InvalidArgumentException('Informe a IncricaoMunicipalPrestador');
         }
-        $this->inscricaoMunicipalPrestador = $inscricaoMunicipalPrestador;
+        $this->inscricaoMunicipalPrestador = Filter::returnOnlyNumbers($inscricaoMunicipalPrestador);
     }
 
     /**
@@ -1020,7 +1020,7 @@ class Send
             throw new \InvalidArgumentException('Informe InscricaoMunicipalRemetente.');
         }
 
-        $this->inscricaoMunicipalRemetente = $inscricaoMunicipalRemetente;
+        $this->inscricaoMunicipalRemetente = Filter::returnOnlyNumbers($inscricaoMunicipalRemetente);
     }
 
     /**
@@ -1420,7 +1420,8 @@ class Send
         if(is_null($telefoneTomador)) {
             throw new \InvalidArgumentException('Informe telefoneTomador');
         }
-        $this->telefoneTomador = $telefoneTomador;
+
+        $this->telefoneTomador = substr(Filter::returnOnlyNumbers($telefoneTomador),-9);
     }
 
     /**
