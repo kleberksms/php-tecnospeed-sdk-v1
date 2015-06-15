@@ -13,10 +13,10 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zend-filter": "2.*",
-        "zendframework/zend-i18n": "2.*",
-        "zendframework/zend-validator": "2.*",
-        "zendframework/zend-crypt": "2.*",
+        "zendframework/zend-filter": "2.4",
+        "zendframework/zend-i18n": "2.4",
+        "zendframework/zend-validator": "2.4",
+        "zendframework/zend-crypt": "2.4",
         "respect/validation": "0.10.*@dev"
     },
     "minimum-stability":"dev",
