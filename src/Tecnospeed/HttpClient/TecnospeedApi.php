@@ -55,7 +55,7 @@ class TecnospeedApi {
         $param = array(
             'CNPJ'       => $this->cnpjFilial,
             'grupo'      => $this->cities[$this->cnpjFilial]['grupo'],
-            'NomeCidade' => $this->cities[$this->cnpjFilial]['grupo'],
+            'NomeCidade' => $this->cities[$this->cnpjFilial]['nomeCidade'],
             'filtro'     => $parameters['filtro'],
             'campos'     => isset($parameters['campos']) ? $parameters['campos']: $this->api['consulta']['campos'],
             'Ordem'      => isset($parameters['ordem'])  ? $parameters['ordem'] : $this->api['consulta']['ordem'],
@@ -98,7 +98,7 @@ class TecnospeedApi {
             $postFields = array(
                 'CNPJ'       => $this->cnpjFilial,
                 'grupo'      => $this->cities[$this->cnpjFilial]['grupo'],
-                'NomeCidade' => $this->cities[$this->cnpjFilial]['grupo'],
+                'NomeCidade' => $this->cities[$this->cnpjFilial]['nomeCidade'],
                 'NumRPS'     => $numRPS,
                 'SerieRPS'   =>  'U',
                 'tiporps'    =>  '1',
@@ -185,7 +185,7 @@ class TecnospeedApi {
         $paran = array(
             'CNPJ'       => $this->cnpjFilial,
             'grupo'      => $this->cities[$this->cnpjFilial]['grupo'],
-            'NomeCidade' => $this->cities[$this->cnpjFilial]['grupo'],
+            'NomeCidade' => $this->cities[$this->cnpjFilial]['nomeCidade'],
             'Handle'     => $pdf,
             'URL'        => '1',
         );
@@ -236,7 +236,7 @@ class TecnospeedApi {
         $postFields = array(
             'CNPJ'          => $this->cnpjFilial,
             'grupo'         => $this->cities[$this->cnpjFilial]['grupo'],
-            'NomeCidade'    => $this->cities[$this->cnpjFilial]['grupo'],
+            'NomeCidade'    => $this->cities[$this->cnpjFilial]['nomeCidade'],
             'Tipo'          => 'AUTORIZACAO',
             'Dtinicial'     => $dtinicial,
             'Dtfinal'       => $dtfinal,
@@ -279,7 +279,7 @@ class TecnospeedApi {
         $postFields = array(
             'CNPJ'          => $this->cnpjFilial,
             'grupo'         => $this->cities[$this->cnpjFilial]['grupo'],
-            'NomeCidade'    => $this->cities[$this->cnpjFilial]['grupo'],
+            'NomeCidade'    => $this->cities[$this->cnpjFilial]['nomeCidade'],
             'Tipo'          => 'AUTORIZACAO',
             'Dtinicial'     => $dtinicial,
             'Dtfinal'       => $dtfinal,
