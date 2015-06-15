@@ -56,7 +56,7 @@ class NF
             $this->hydrator->hydrate($content, $this->entity);
 
             $this->entity->setVersao($this->cities[$this->entity->getCpfCnpjRemetente()]['versao']);
-            $this->entity->setNomeCidade($this->cities[$this->entity->getCpfCnpjRemetente()]['grupo']);
+            $this->entity->setNomeCidade($this->cities[$this->entity->getCpfCnpjRemetente()]['nomeCidade']);
             $validateMoneraty = $this->cities[$this->entity->getCpfCnpjRemetente()]['validateMonetary'];
 
             if( $validateMoneraty ) {
