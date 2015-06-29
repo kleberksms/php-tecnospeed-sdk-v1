@@ -781,6 +781,10 @@ class Send
         if(is_null($discriminacaoServico) ) {
             throw new \InvalidArgumentException('Informe a discriminacaoServico');
         }
+
+        $find = array("\r\n","\r","\t","\v","\n","<br>","<br />","<br/>");
+        $discriminacaoServico  = str_replace($find, "|", $discriminacaoServico );
+
         $this->discriminacaoServico = Filter::returnOnlyString( $discriminacaoServico );
     }
 
@@ -1645,11 +1649,19 @@ class Send
      */
     public function setValorIss($valorIss)
     {
-        if(!is_numeric($valorIss)) {
-            throw new \InvalidArgumentException('Informe o valorIss numerico');
+        if((!isset($valorIss)) || (empty($valorIss)) || (0 == (int)$valorIss)) {
+
+            if(!isset($this->valorServicos) && !isset($this->aliquotaISS)) {
+                throw new \InvalidArgumentException('ValorIss não informado');
+            }
+            $valorIss = (($this->valorServicos * $this->aliquotaISS) / 100);
         }
+
+        $valorIss = round($valorIss, 2, PHP_ROUND_HALF_DOWN);
+
         $this->valorIss = $valorIss;
     }
+
 
     /**
      * @return mixed
