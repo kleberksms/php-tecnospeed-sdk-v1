@@ -39,6 +39,7 @@ class TecnospeedApi {
      * @param array $parameters
      * @param bool $normalizeArray
      * @return array|mixed
+     * @link https://ciranda.me/tsdn/base-de-conhecimento/post/manual-manager-edoc-nfse-consulta
      */
     public function find($cnpj, $parameters = array(), $normalizeArray = false)
     {
@@ -144,12 +145,13 @@ class TecnospeedApi {
     }
 
     /**
-     * Retorna o Handle da nota conforme paramentros.
+     * Retorna o Handle da nota conforme parametros.
+     *  <p> Handle - Numero da sequencia dentro do manager </p>
      * @param $cnpj
      * @param $idIntegracao
      * @return array|mixed
      */
-    private function getHandle($cnpj,$idIntegracao)
+    private function getHandle($cnpj, $idIntegracao)
     {
         if(is_null($idIntegracao)) {
             throw new \InvalidArgumentException ('Informe o idIntegracao');
@@ -164,34 +166,61 @@ class TecnospeedApi {
             'filtro'     => 'idIntegracao = '.$idIntegracao,
         );
 
-        return $this->find($cnpj,$parametersFind);
+        return $this->find($cnpj, $parametersFind);
     }
 
+
+    /**
+     * Retorna o Numero da NFse, (nnfse), da nota conforme parametros.
+     * @param $cnpj
+     * @param $idIntegracao
+     * @return array|mixed
+     */
+    private function getNumNFse($cnpj, $idIntegracao)
+    {
+        if(is_null($idIntegracao)) {
+            throw new \InvalidArgumentException ('Informe o idIntegracao');
+        }
+
+        $this->cnpjFilial = $cnpj;
+
+        $parametersFind = array(
+            'CNPJ'       => $this->cnpjFilial,
+            'grupo'      => $this->cities[$this->cnpjFilial]['grupo'],
+            'campos'     => 'nnfse',
+            'filtro'     => "idIntegracao={$idIntegracao} AND situacao=AUTORIZADA"
+        );
+
+        return $this->find($cnpj, $parametersFind);
+    }
     /**
      * Metodo para consulta dos Pdf's.
      * @param $cnpj
+     * @param $idIntegracao
      * @param $nnfse
      * @return mixed
+     * @link http://ciranda.me/tsdn/base-de-conhecimento/post/manual-manager-edoc-nfse-http-imprime-pdf
      */
-    public function pdf($cnpj,$nnfse)
+    public function pdf($cnpj, $idIntegracao)
     {
-        if(is_null($nnfse)) {
-            throw new \InvalidArgumentException('Informe o Nº da nota para a pesquisa');
+        if(is_null($idIntegracao)) {
+            throw new \InvalidArgumentException('Informe o codigo de integracao para a pesquisa');
         }
 
        $this->cnpjFilial = $cnpj;
-       $pdf = $this->getHandle($cnpj,$nnfse);
+       $nnfse   = $this->getNumNFse($cnpj, $idIntegracao);
 
-        $paran = array(
+        $parameters = array(
             'CNPJ'       => $this->cnpjFilial,
             'grupo'      => $this->cities[$this->cnpjFilial]['grupo'],
             'NomeCidade' => $this->cities[$this->cnpjFilial]['nomeCidade'],
-            'Handle'     => $pdf,
+            'NumNFSe'    => $nnfse,
             'URL'        => '1',
         );
+
         $this->method    = 'imprime';
 
-        $result = $this->generateUrl($paran)
+        $result = $this->generateUrl($parameters)
                        ->curlConfig()
                        ->getData();
         return $result;
@@ -199,9 +228,11 @@ class TecnospeedApi {
     }
 
     /**
-     * @param $data
+     * Metodo para exportação de arquivos em xml
+     * @param $data array
      * @return mixed
      * @throws \Exception
+     * @link https://ciranda.me/tsdn/base-de-conhecimento/post/manual-manager-edoc-nfse-http-exporta
      */
     public function exportaXML($data)
     {
@@ -217,14 +248,14 @@ class TecnospeedApi {
             throw new \InvalidArgumentException('Informe o codigo de integração');
         }
 
-        $codIntegracao      = $data['codIntegracao'];
+        $idIntegracao       = $data['codIntegracao'];
         $dtinicial          = (isset($data['Dtinicial']))   ? $data['Dtinicial']    : '01/01/2015';
         $dtfinal            = (isset($data['Dtfinal']))     ? $data['Dtfinal']      : '01/01/2099';
         $this->cnpjFilial   = $data['cnpj'];
 
         $parameters = array(
             'campos'    => 'nnfse',
-            'filtro'    => "idintegracao={$codIntegracao} AND situacao=AUTORIZADA",
+            'filtro'    => "idIntegracao={$idIntegracao} AND situacao=AUTORIZADA",
             'ordem'     => 'dtautorizacao desc',
             'limite'    => 1
         );
@@ -251,14 +282,16 @@ class TecnospeedApi {
     }
 
     /**
-     * @param $data
+     * Metodo para exportação de arquivos em xml por periodo
+     * @param $data array
+     * @return mixed
+     * @throws \Exception
+     * @link https://ciranda.me/tsdn/base-de-conhecimento/post/manual-manager-edoc-nfse-http-exporta
      * $data = array(
         'cnpj'              => '03404018000147',
         'Dtinicial'         => '01/04/2015',
         'Dtfinal'           => '05/05/2015'
-    );
-     * @return mixed
-     * @throws \Exception
+        );
      */
     public function exportaXML_byDate($data)
     {
@@ -290,6 +323,7 @@ class TecnospeedApi {
 
         return $result;
     }
+
     /**
      * Retorna os dados do Curl.
      * @return mixed
