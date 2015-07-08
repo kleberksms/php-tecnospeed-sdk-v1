@@ -81,6 +81,7 @@ class TecnospeedApi {
      * Descarta as notas Rejeitas do Cnpj informado.
      * @param $cnpj
      * @return array
+     * @link https://ciranda.me/tsdn/base-de-conhecimento/post/manual-manager-edoc-nfse-http-descarta
      */
     public function descartaNf($cnpj)
     {
