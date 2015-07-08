@@ -89,18 +89,21 @@ class TecnospeedApi {
         }
 
         $result = array();
-        $this->cnpjFilial = $cnpj;
 
-        $nfRejected = Filter::separeDataResult ( $this->getReject($cnpj) );
-        $this->method     = 'descarta';
+        $this->cnpjFilial   = $cnpj;
 
-        foreach($nfRejected as $numRPS) {
+        $nfRejected         = Filter::separeDataResult($this->getReject($cnpj));
+
+        $this->method       = 'descarta';
+
+        foreach($nfRejected as $handle) {
 
             $postFields = array(
                 'CNPJ'       => $this->cnpjFilial,
                 'grupo'      => $this->cities[$this->cnpjFilial]['grupo'],
                 'NomeCidade' => $this->cities[$this->cnpjFilial]['nomeCidade'],
-                'NumRPS'     => $numRPS,
+                'handle'     => $handle,
+                'situacao'   =>  'REJEITADA',
                 'SerieRPS'   =>  'U',
                 'tiporps'    =>  '1',
             );
@@ -342,9 +345,9 @@ class TecnospeedApi {
     {
         $parameter = array(
             'filtro' => 'situacao=REJEITADA',
-            'campos' => 'nrps',
+            'campos' => 'handle',
         );
-        return $this->find($cnpj,$parameter, false);
+        return $this->find($cnpj, $parameter, false);
     }
 
 
@@ -418,6 +421,7 @@ class TecnospeedApi {
         $http .= "Content-length: " . strlen($data) . "\r\n";
         $http .= "Connection: close\r\n\r\n";
         $http .= $data . "\r\n\r\n";
+
         fwrite($socket, $http);
 
         $result = "";
