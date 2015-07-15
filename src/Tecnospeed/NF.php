@@ -127,7 +127,7 @@ class NF
 
         $http = "POST /ManagerAPIWeb/nfse/envia HTTP/1.1\r\n";
         $http .= "Authorization: Basic " . $auth . "\r\n";
-        $http .= "Host: " . $host . ":8081\r\n";
+        $http .= "Host: " . $host . ":" . $port . "\r\n";
         $http .= "User-Agent: " . $_SERVER['HTTP_USER_AGENT'] . "\r\n";
         $http .= "Content-Type: application/x-www-form-urlencoded\r\n";
         $http .= "Content-length: " . strlen($data) . "\r\n";
