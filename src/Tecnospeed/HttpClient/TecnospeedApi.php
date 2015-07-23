@@ -180,7 +180,7 @@ class TecnospeedApi {
      * @param $idIntegracao
      * @return array|mixed
      */
-    private function getNumNFse($cnpj, $idIntegracao)
+    public function getNumNFse($cnpj, $idIntegracao)
     {
         if(is_null($idIntegracao)) {
             throw new \InvalidArgumentException ('Informe o idIntegracao');

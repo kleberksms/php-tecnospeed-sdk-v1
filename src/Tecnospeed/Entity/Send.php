@@ -1164,7 +1164,8 @@ class Send
     public function setNumeroTomador($numeroTomador)
     {
         if(is_null($numeroTomador)){
-            throw new \InvalidArgumentException('Informe o numeroTomador');
+            $numeroTomador = 0;
+//            throw new \InvalidArgumentException('Informe o numeroTomador');
         }
         $this->numeroTomador = Filter::returnOnlyNumbers( $numeroTomador );
     }
