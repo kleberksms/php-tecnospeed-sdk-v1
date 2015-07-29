@@ -57,7 +57,12 @@ class NF
 
             $this->entity->setVersao($this->cities[$this->entity->getCpfCnpjRemetente()]['versao']);
             $this->entity->setNomeCidade($this->cities[$this->entity->getCpfCnpjRemetente()]['nomeCidade']);
+            $this->entity->setIdLote($this->cities[$this->entity->getCpfCnpjRemetente()]['idLote']);
             $validateMoneraty = $this->cities[$this->entity->getCpfCnpjRemetente()]['validateMonetary'];
+
+            if(isset($this->cities[$this->entity->getCpfCnpjRemetente()]['ddd'])){
+                $this->entity->setDddTomador($this->cities[$this->entity->getCpfCnpjRemetente()]['ddd']);
+            }
 
             if( $validateMoneraty ) {
                 $this->entity->setAliquotasCpf($this->entity->getCpfCnpjTomador());

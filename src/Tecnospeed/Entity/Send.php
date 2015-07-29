@@ -677,9 +677,6 @@ class Send
      */
     public function setDddTomador($dddTomador)
     {
-        if (strlen($dddTomador) != 2) {
-            throw new \InvalidArgumentException('Ddd deve ter 2 numeros.');
-        }
         if(is_null($dddTomador)) {
             $dddTomador = '';
         }
@@ -893,14 +890,9 @@ class Send
      * @param int $idLote
      * 1 - é um controle interno da tecnospeed
      */
-    public function setIdLote($idLote)
+    public function setIdLote($idLote = 1)
     {
-        if ( empty($idLote) || is_null($idLote)) {
-            $idLote = 1;
-        }
-
         $this->idLote = $idLote;
-
     }
 
     /**
