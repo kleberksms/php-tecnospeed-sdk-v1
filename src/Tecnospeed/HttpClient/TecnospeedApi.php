@@ -329,6 +329,43 @@ class TecnospeedApi {
     }
 
     /**
+     * Metodo para resolver as notas em estado Pendente no Manager E-doc
+     * @param $data array
+     * @return mixed
+     * @throws \Exception
+     * @link http://ciranda.me/tsdn/base-de-conhecimento/post/manual-manager-edoc-nfse-http-resolve
+     * $data = array(
+    'cnpj'      => '03404018004568',
+    'idManager' => '1017935',
+    );
+     */
+    public function resolve($data)
+    {
+        if(!is_array($data)) {
+            throw new \InvalidArgumentException ('Dados não informados!');
+        }
+
+        if(!isset($data['cnpj'])) {
+            throw new \InvalidArgumentException ('Informe o Cnpj da Filial!');
+        }
+
+        $this->cnpjFilial   = Filter::returnOnlyNumbers($data['cnpj']);
+
+        $this->method       = 'resolve';
+
+        $postFields = array(
+            'CNPJ'          => $this->cnpjFilial,
+            'grupo'         => $this->cities[$this->cnpjFilial]['grupo'],
+            'NomeCidade'    => $this->cities[$this->cnpjFilial]['nomeCidade'],
+            'Handle'        => $data['idManager'],
+        );
+
+        $result = $this->getWithSocket($postFields);
+
+        return $result;
+    }
+
+    /**
      * Retorna os dados do Curl.
      * @return mixed
      */

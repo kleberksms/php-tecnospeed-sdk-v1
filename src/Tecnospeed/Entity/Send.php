@@ -412,7 +412,7 @@ class Send
     public function setCodigoCidadeTomador($codigoCidadeTomador)
     {
         if(!is_numeric($codigoCidadeTomador)) {
-            throw new \InvalidArgumentException('Informe o CodigoCidadeTomador numerico');
+            throw new \InvalidArgumentException('Informe o CodigoCidadeTomador');
         }
         $this->codigoCidadeTomador = $codigoCidadeTomador;
     }
@@ -1418,7 +1418,7 @@ class Send
             throw new \InvalidArgumentException('Informe telefoneTomador');
         }
 
-        $this->telefoneTomador = substr(Filter::returnOnlyNumbers($telefoneTomador),-9);
+        $this->telefoneTomador = Filter::returnOnlyNumbers($telefoneTomador);
     }
 
     /**
