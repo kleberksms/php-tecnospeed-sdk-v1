@@ -365,6 +365,48 @@ class TecnospeedApi {
         return $result;
     }
 
+
+    /**
+     * Metodo para Cancelar notas em estado AUTORIZADA no Manager E-doc
+     * @param $data array
+     * @return mixed
+     * @throws \Exception
+     * @link http://ciranda.me/tsdn/base-de-conhecimento/post/manual-manager-edoc-nfse-http-cancela
+     * $data = array(
+            'cnpj'      => '03404018002867',
+            'idManager' => '72236',
+            'nrps'      => '3451',
+        );
+     * @exemple 1 $result = $api->cancela($data));
+     * @exemple 2 $result = $api->cancela(array('cnpj'=> '03404018002867','idManager'=>72236,'nrps'=>3451));
+     */
+    public function cancela($data)
+    {
+        if(!is_array($data)) {
+            throw new \InvalidArgumentException ('Dados não informados!');
+        }
+
+        if(!isset($data['cnpj'])) {
+            throw new \InvalidArgumentException ('Informe o Cnpj da Filial!');
+        }
+
+        $this->cnpjFilial   = Filter::returnOnlyNumbers($data['cnpj']);
+
+        $this->method       = 'cancela';
+
+        $postFields = array(
+            'CNPJ'          => $this->cnpjFilial,
+            'grupo'         => $this->cities[$this->cnpjFilial]['grupo'],
+            'NomeCidade'    => $this->cities[$this->cnpjFilial]['nomeCidade'],
+            'Handle'        => $data['idManager'],
+            'nrps'          => $data['nrps'],
+        );
+
+        $result = $this->getWithSocket($postFields);
+
+        return $result;
+    }
+
     /**
      * Retorna os dados do Curl.
      * @return mixed
