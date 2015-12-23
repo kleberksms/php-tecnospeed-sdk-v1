@@ -314,6 +314,11 @@ class Send
      */
     public function setBairroTomador($bairroTomador)
     {
+        $bairroTomador = trim($bairroTomador);
+        if(empty($bairroTomador)) {
+            $bairroTomador = 'Centro';
+        }
+
         if(is_null($bairroTomador)) {
             throw new \InvalidArgumentException('Informe o bairroTomador texto.');
         }
