@@ -64,8 +64,8 @@ class TecnospeedApi {
         );
 
         $result = $this->generateUrl($param)
-                       ->curlConfig()
-                       ->getData();
+            ->curlConfig()
+            ->getData();
 
         if( $normalizeArray ) {
             $separate  = Filter::separeDataResult($result);
@@ -138,10 +138,10 @@ class TecnospeedApi {
         }
 
         $parameters = array(
-                'filtro' => 'situacao=AUTORIZADA',
-                'campos' => 'nrps',
-                'ordem'  => 'Handle desc',
-                'limite' =>  '1',
+            'filtro' => 'situacao=AUTORIZADA',
+            'campos' => 'nrps',
+            'ordem'  => 'Handle desc',
+            'limite' =>  '1',
         );
 
         $result = $this->find($cnpj,$parameters, false);
@@ -295,10 +295,10 @@ class TecnospeedApi {
      * @throws \Exception
      * @link https://ciranda.me/tsdn/base-de-conhecimento/post/manual-manager-edoc-nfse-http-exporta
      * $data = array(
-        'cnpj'              => '03404018000147',
-        'Dtinicial'         => '01/04/2015',
-        'Dtfinal'           => '05/05/2015'
-        );
+    'cnpj'              => '03404018000147',
+    'Dtinicial'         => '01/04/2015',
+    'Dtfinal'           => '05/05/2015'
+    );
      */
     public function exportaXML_byDate($data)
     {
@@ -330,7 +330,6 @@ class TecnospeedApi {
 
         return $result;
     }
-
     /**
      * Metodo para resolver as notas em estado Pendente no Manager E-doc
      * @param $data array
@@ -360,13 +359,14 @@ class TecnospeedApi {
             'CNPJ'          => $this->cnpjFilial,
             'grupo'         => $this->cities[$this->cnpjFilial]['grupo'],
             'NomeCidade'    => $this->cities[$this->cnpjFilial]['nomeCidade'],
-            'Handle'        => $data['idManager'],
+            'Handle'        => (int)$data['idManager'],
         );
 
         $result = $this->getWithSocket($postFields);
 
         return $result;
     }
+
 
     /**
      * Metodo para Cancelar notas em estado AUTORIZADA no Manager E-doc
@@ -406,6 +406,65 @@ class TecnospeedApi {
         return $result;
     }
 
+    /**
+     * Consulta O Status da filial
+     * @param $cnpj
+     * @param visao=TspdEmpresa
+     * @param array $parameters
+     * @return array|mixed
+     * @link https://ciranda.me/tsdn/base-de-conhecimento/post/manual-manager-edoc-nfse-consulta
+     */
+    public function getStatusFilial($cnpj, $parameters = array())
+    {
+        if(is_null($cnpj)) {
+            throw new \InvalidArgumentException('Informe o cnpj da filial.');
+        }
+        if(empty($parameters)) {
+            throw new \InvalidArgumentException('Informe os parametros para a pesquisa');
+        }
+
+        $this->cnpjFilial = $cnpj;
+        $this->setMethod('consulta');
+
+        $param = array(
+            'CNPJ'       => $this->cnpjFilial,
+            'grupo'      => $this->cities[$this->cnpjFilial]['grupo'],
+            'NomeCidade' => $this->cities[$this->cnpjFilial]['nomeCidade'],
+            'visao'      => 'TspdEmpresa',
+            'campos'     => 'standby',
+        );
+
+        $result = $this->generateUrl($param)
+            ->curlConfig()
+            ->getData();
+
+        return ($result);
+    }
+
+    /**
+     * @return array com todas filiais que estão offline - (codFilialADM)
+     */
+    public function getFiliaisOffline() {
+
+        $cities     = $this->cities;
+
+        $parameters = array(
+            'visao'     => 'TspdEmpresa',
+            'campos'    => 'standby',
+        );
+
+        $filiaisOffline[] = 0;
+        foreach($cities AS $cnpj => $city) {
+
+            $result = $this->getStatusFilial($cnpj, $parameters);
+
+            if(!empty($result)) {
+                $filiaisOffline[] = (int)$city['codFilialADM'];
+            }
+        }
+
+        return($filiaisOffline);
+    }
     /**
      * Retorna os dados do Curl.
      * @return mixed
