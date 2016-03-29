@@ -117,7 +117,7 @@ class TecnospeedApi {
     }
 
     /**
-     * Consulta o ultimo Rps Autorizado
+     * Consulta o ultimo Rps Autorizado ou Cancelado
      * @param $cnpj
      * @return mixed
      */
@@ -138,7 +138,7 @@ class TecnospeedApi {
         }
 
         $parameters = array(
-            'filtro' => 'situacao=AUTORIZADA',
+            'filtro' => '(situacao=AUTORIZADA or situacao=CANCELADA)',
             'campos' => 'nrps',
             'ordem'  => 'Handle desc',
             'limite' =>  '1',
