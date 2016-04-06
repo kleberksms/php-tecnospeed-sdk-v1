@@ -288,6 +288,7 @@ class TecnospeedApi {
         return $result;
     }
 
+
     /**
      * Metodo para exportação de arquivos em xml por periodo
      * @param $data array
@@ -298,6 +299,8 @@ class TecnospeedApi {
     'cnpj'              => '03404018000147',
     'Dtinicial'         => '01/04/2015',
     'Dtfinal'           => '05/05/2015'
+    'nInicial'          => '123456'
+    'nFinal'            => '125456'
     );
      */
     public function exportaXML_byDate($data)
@@ -312,6 +315,9 @@ class TecnospeedApi {
 
         $dtinicial          = $data['Dtinicial'];
         $dtfinal            = $data['Dtfinal'];
+
+        $nInicial           = $data['nInicial'];
+        $nFinal             = $data['nFinal'];
         $this->cnpjFilial   = Filter::returnOnlyNumbers($data['cnpj']);
 
         $this->method= 'exportaxml';
@@ -326,6 +332,13 @@ class TecnospeedApi {
             'URL'           => 1
         );
 
+        if(!empty($nInicial) && !empty($nFinal)) {
+
+            $postFields +=  array(
+                'nInicial'=> $nInicial,
+                'nFinal'  => $nFinal
+            );
+        }
         $result = $this->getWithSocket($postFields);
 
         return $result;
