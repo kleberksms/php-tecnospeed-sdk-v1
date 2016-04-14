@@ -471,7 +471,7 @@ class TecnospeedApi {
 
             $result = $this->getStatusFilial($cnpj, $parameters);
 
-            if(!empty($result)) {
+            if(!empty($result) || (is_bool($result) && false == $result)) {
                 $filiaisOffline[] = (int)$city['codFilialADM'];
             }
         }
